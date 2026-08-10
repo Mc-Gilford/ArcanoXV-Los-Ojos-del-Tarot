@@ -60,3 +60,24 @@ cordura y "sonidos aleatorios que mantendrán al usuario en alta alerta").
 Los sonidos de susto (`nearSounds`/`farSounds`) aún no existen como AudioClips. Puedes usar efectos
 gratuitos tipo *scary ambience*, y más adelante este sistema se integra con la **barra de cordura**
 (por ejemplo: más sustos a menor cordura).
+
+## 🧩 Prefabs listos (Assets/Prefabs/Ambience)
+
+Ya hay **prefabs listos para instanciar**, para que el armado sea "arrastrar y usar":
+
+| Prefab | Qué incluye | Cómo usarlo |
+|---|---|---|
+| `RoomTracker.prefab` | GameObject con `RoomTracker` | Arrastrar a la escena (uno solo). Opcionalmente asignar `playerOverride`. |
+| `RoomZone.prefab` | `BoxCollider` (isTrigger, 10×3×10) + `RoomTriggerZone` | Por cada habitación: instanciar, escalar/posicionar para que cubra la sala, y cambiar `roomName`. |
+| `HauntedFurniture.prefab` | `HauntedObject` con valores por defecto | Instanciar; **arrastrar el modelo 3D como hijo** del prefab y asignar `nearSounds`/`farSounds`. El `AudioSource` se agrega solo en runtime. |
+
+> **Todos los prefabs traen la configuración por defecto del sistema** (volúmenes, intervalos,
+> `proceduralShake` activado, etc.). Basta con arrastrar el modelo 3D dentro y asignar los clips.
+
+### Regenerar los prefabs (opcional)
+Los prefabs fueron escritos a mano y referencian a los scripts por GUID fijo. Si algo se desincroniza
+o prefieres generarlos desde Unity, hay un generador automático:
+
+1. Abre el proyecto en Unity.
+2. Menú **Tools > Arcano XV > Generar prefabs de ambience**.
+3. Se reescriben los 3 prefabs con la configuración por defecto y referencias limpias.
