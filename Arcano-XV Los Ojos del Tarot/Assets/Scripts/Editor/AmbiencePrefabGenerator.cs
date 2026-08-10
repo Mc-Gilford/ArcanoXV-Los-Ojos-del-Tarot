@@ -16,7 +16,7 @@ public static class AmbiencePrefabGenerator
 {
     private const string Folder = "Assets/Prefabs/Ambience";
 
-    [MenuItem("Tools/Arcano XV/Generar prefabs de ambience")]
+    // Ya no es menú propio: lo invoca el único menú Tools > Arcano XV > Generar TODO.
     public static void GenerateAll()
     {
         Directory.CreateDirectory(Folder);
@@ -29,7 +29,8 @@ public static class AmbiencePrefabGenerator
             col.size = new Vector3(10f, 3f, 10f);
             col.center = new Vector3(0f, 1.5f, 0f);
         });
-        Create<HauntedObject>("HauntedFurniture", go => { });
+        Create<HauntedObject>("HauntedFurniture", go =>
+            SustosSounds.AssignTo(go.GetComponent<HauntedObject>()));
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
