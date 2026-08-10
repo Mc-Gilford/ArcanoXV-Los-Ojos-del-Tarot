@@ -63,6 +63,19 @@ public class Jugador : MonoBehaviour
     private void MoverJugador()
     {
         direccion = accionMovimiento.ReadValue<Vector2>();   
-        transform.position += new Vector3(direccion.x,0,direccion.y) * velocidad * Time.deltaTime;
+
+        Vector3 forward  = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+
+        //Evitar que el personaje se incline
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 movement = (forward * direccion.y + right * direccion.x) * velocidad * Time.deltaTime;
+
+        transform.position += movement;
     }
 }
