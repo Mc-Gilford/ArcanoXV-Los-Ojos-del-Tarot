@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public static class AmbienceTestSceneGenerator
 {
-    [MenuItem("Tools/Arcano XV/Generar escena de prueba de ambience")]
+    // Ya no es menú propio: lo invoca el único menú Tools > Arcano XV > Generar TODO.
     public static void Generate()
     {
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -50,6 +50,7 @@ public static class AmbienceTestSceneGenerator
         GameObject furniture = new GameObject("MuebleEmbrujado");
         HauntedObject haunted = furniture.AddComponent<HauntedObject>();
         haunted.proximityDistance = 5f;
+        SustosSounds.AssignTo(haunted);
 
         GameObject mesh = GameObject.CreatePrimitive(PrimitiveType.Cube);
         mesh.name = "Malla";
