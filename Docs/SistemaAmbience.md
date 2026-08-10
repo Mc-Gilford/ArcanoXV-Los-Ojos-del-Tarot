@@ -81,3 +81,22 @@ o prefieres generarlos desde Unity, hay un generador automático:
 1. Abre el proyecto en Unity.
 2. Menú **Tools > Arcano XV > Generar prefabs de ambience**.
 3. Se reescriben los 3 prefabs con la configuración por defecto y referencias limpias.
+
+## 🎮 Probar el sistema en 1 clic (escena de prueba)
+
+Para probar sin armar nada, en Unity:
+
+1. Menú **Tools > Arcano XV > Generar escena de prueba de ambience**.
+2. Se crea y abre `Assets/Scenes/AmbienceTest.unity` con:
+   - `RoomTracker` (uno en la escena)
+   - `ZonaPrueba` (trigger de 30×6×30 con `RoomTriggerZone`)
+   - `MuebleEmbrujado` (cubo con `HauntedObject`, `proximityDistance = 5`)
+   - `JugadorPrueba` (cápsula con tag `Player` + `DebugPlayerMover`: WASD + ratón)
+   - Piso y luz direccional
+3. Presiona **Play** y muévete:
+   - **Acércate** al mueble → reacciones `near` (sacudida procedural, ya que no hay Animator ni clips aún).
+   - **Aléjate** quedándote dentro de la zona → cada 8-20 s debería dispararse la reacción `far`.
+4. Para verlo en la Consola/Logs, el componente está listo para que le asignes `nearSounds`/`farSounds`.
+
+> `DebugPlayerMover` es **temporal** (solo para probar). Cuando exista el controlador real del juego,
+> reemplázalo y elimina esta escena o este script.
