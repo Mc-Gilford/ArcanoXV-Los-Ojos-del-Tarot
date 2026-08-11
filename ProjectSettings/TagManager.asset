@@ -9,6 +9,8 @@ TagManager:
   - Wall
   - Roof
   - Ground
+  - Bullet
+  - Room
   layers:
   - Default
   - TransparentFX
