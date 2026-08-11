@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("Player not found");
         }
         int damageRandom = UnityEngine.Random.Range(1,3);
-        Damage = damageRandom;
+        damage = damageRandom;
     }
 
     private void FixedUpdate()
