@@ -3,8 +3,8 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 
-    private int health;
-    private float speed;
+    public int health;
+    public float speed { get; set; }
     private bool isAlive;
     private float jumpforce;
 
@@ -35,5 +35,6 @@ public class Character : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+        Debug.Log("Muerte "+gameObject.name);
     }
 }
