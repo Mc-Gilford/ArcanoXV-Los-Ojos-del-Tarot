@@ -37,6 +37,7 @@ public class Enemy : Character
     [SerializeField] private bool isWaitingToJump;
     [SerializeField] private bool isJumping;
     [SerializeField] private bool isInRoom;
+    [SerializeField] private bool IsAngerActive;
     private int damage { get; set; }
 
 
@@ -45,6 +46,7 @@ public class Enemy : Character
     private Vector3 surfaceNormal = Vector3.up;
     private float wallDetachTimer;
     private float airTimeRemaining;
+    private float maxHealth; 
 
     void Start()
     {
@@ -56,6 +58,7 @@ public class Enemy : Character
             Debug.Log("Player not found");
         }
         initializeVariables();
+        StartCoroutine(WaitAnger());
     }
 
     private void initializeVariables()
@@ -64,12 +67,16 @@ public class Enemy : Character
         damage = damageRandom;
         int lifeLevelRandom = UnityEngine.Random.Range(8, 10);
         health = lifeLevelRandom;
+        maxHealth = health;
         speed = 3;
     }
 
     public void IncreaseAngry()
     {
-
+        if(health<=maxHealth/2 && anger<=5)
+        {
+            anger=anger+0.01f;
+        }
     }
 
     private void FixedUpdate()
@@ -131,10 +138,18 @@ public class Enemy : Character
         {
             randomJumpCoroutine = StartCoroutine(WaitJump());
         }
-
+        IncreaseAngry();
         ControlMaximumVelocity();
     }
+    private IEnumerator WaitAnger()
+    {
+        IsAngerActive = true;
+        yield return new WaitForSeconds(300);
+        if (anger<=5) {
+            anger++;
+        }
 
+    }
     private IEnumerator WaitJump()
     {
         isWaitingToJump = true;

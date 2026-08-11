@@ -3,7 +3,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 
-    public int health { get; set;}
+    public int health;
     public float speed { get; set; }
     private bool isAlive;
     private float jumpforce;
