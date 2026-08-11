@@ -90,6 +90,11 @@ public class Jugador : Character
         rb.AddForce(Vector3.up * salto, ForceMode.Impulse);
     }
 
+    private void Shoot()
+    {
+        Debug.Log("Pow");
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Hola");
