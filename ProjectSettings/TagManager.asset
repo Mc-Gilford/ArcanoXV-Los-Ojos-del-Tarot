@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - suelo
+  - Enemy
+  - Wall
+  - Roof
+  - Ground
   layers:
   - Default
   - TransparentFX
