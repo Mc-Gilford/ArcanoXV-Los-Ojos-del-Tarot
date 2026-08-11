@@ -1,0 +1,8 @@
+Model Information:
+* title:	Mafia Office Asset Pack
+* source:	https://sketchfab.com/3d-models/mafia-office-asset-pack-3888154f059e4199ade215621e29a3c9
+* author:	Bársh (https://sketchfab.com/borsh_and)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

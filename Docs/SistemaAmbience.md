@@ -10,7 +10,7 @@ cordura y "sonidos aleatorios que mantendrán al usuario en alta alerta").
 |---|---|
 | `RoomTracker` | Singleton que sabe en qué habitación (`RoomTriggerZone`) está el jugador. Emite eventos `PlayerEnteredRoom` / `PlayerExitedRoom`. |
 | `RoomTriggerZone` | Volumen invisible (collider `isTrigger`) que delata a cada habitación. Se coloca uno por sala y reporta al `RoomTracker`. |
-| `HauntedObject` | Se añade a cualquier mueble/prop. Reacciona con sonidos y animaciones aleatorias **cerca** del jugador y con sonidos inesperados **lejos pero en la misma habitación**. |
+| `HauntedObject` | Se añade a cualquier mueble/prop. **Por defecto** suena a intervalos aleatorios **sin importar la distancia** (cada objeto "habla" solo para asustar). Modo clásico opcional: reacciona con sonidos y animaciones aleatorias **cerca** del jugador y con sonidos inesperados **lejos pero en la misma habitación**. |
 
 ## Configuración paso a paso
 
@@ -31,17 +31,27 @@ cordura y "sonidos aleatorios que mantendrán al usuario en alta alerta").
 
 ### 4. Objetos embrujados (muebles/props)
 - Selecciona un mueble (sillón, lámpara, mesa...) y añade `HauntedObject`.
-- Arrastra los **AudioClips** de susto a `nearSounds` (cerca) y/o `farSounds` (lejos, misma habitación).
+- Arrastra los **AudioClips** de susto a `nearSounds` y/o `farSounds`. En el modo por defecto
+  (`scareAnywhere = true`) se usan **todos juntos** como pool de sustos: el objeto suena uno al azar
+  a intervalos aleatorios, no importa dónde esté el jugador.
+- Ajusta `minIntervalScare`/`maxIntervalScare` (cuánto tarda en volver a sonar) y `scareChance`
+  (probabilidad de sonar en cada intervalo). Si hay **muchos objetos** y suenan seguido, baja `scareChance`.
 - Opcional: si el objeto tiene `Animator`, asigna `animationTriggers` (nombres de los triggers). Si no,
   deja `proceduralShake = true` y el objeto hará una sacudida de susto automática.
-- En el editor, al seleccionarlo verás un **círculo naranja** = radio de "cerca".
+- En el editor, al seleccionarlo verás un **círculo naranja** = radio de "cerca" (solo modo clásico).
+
+### 4b. Modo "susto en cualquier sitio" (nueva mecánica, por defecto)
+- `scareAnywhere = true` → el objeto **no depende de la distancia**: suena solo, a intervalos aleatorios,
+  mezclando `nearSounds` + `farSounds`. Ideal para que la casa entera "se despierta" sin importar dónde estés.
+- `scareAnywhere = false` → vuelve al comportamiento clásico de la tabla de abajo (cerca/lejos por habitación).
 
 ## Cómo funciona cada tarea del GDD
 
 | Tarea | Componente | Comportamiento |
 |---|---|---|
-| Detección del jugador → sonidos/animaciones aleatorias | `HauntedObject` | Cuando el jugador entra al círculo de `proximityDistance`, el objeto reacciona cada `min/maxIntervalNear` con un clip aleatorio y una animación (trigger o sacudida). |
-| Sonidos inesperados cerca o lejos en la misma habitación | `HauntedObject` + zonas | Si el jugador está en la misma `RoomTriggerZone` pero fuera del círculo, suenan los `farSounds` a intervalos largos y con menor volumen. Si está cerca, suenan los `nearSounds`. |
+| Sonidos aleatorios para asustar (sin importar distancia) | `HauntedObject` (`scareAnywhere = true`) | Cada objeto suena a intervalos aleatorios (`min/maxIntervalScare`, con `scareChance`) mezclando `nearSounds`+`farSounds`. No depende de dónde esté el jugador. |
+| Detección del jugador → sonidos/animaciones aleatorias (clásico) | `HauntedObject` (`scareAnywhere = false`) | Cuando el jugador entra al círculo de `proximityDistance`, el objeto reacciona cada `min/maxIntervalNear` con un clip aleatorio y una animación (trigger o sacudida). |
+| Sonidos inesperados cerca o lejos en la misma habitación (clásico) | `HauntedObject` + zonas | Si el jugador está en la misma `RoomTriggerZone` pero fuera del círculo, suenan los `farSounds` a intervalos largos y con menor volumen. Si está cerca, suenan los `nearSounds`. |
 
 ## Notas importantes
 
@@ -57,9 +67,10 @@ cordura y "sonidos aleatorios que mantendrán al usuario en alta alerta").
 
 ## Siguiente paso sugerido
 
-Los sonidos de susto (`nearSounds`/`farSounds`) aún no existen como AudioClips. Puedes usar efectos
-gratuitos tipo *scary ambience*, y más adelante este sistema se integra con la **barra de cordura**
-(por ejemplo: más sustos a menor cordura).
+Los sonidos de susto ya existen como AudioClips en `Assets/Audio/Sustos/Near` y `Assets/Audio/Sustos/Far`
+(y el menú **Tools > Arcano XV > Asignar sonidos de susto al prefab** los coloca en el `HauntedFurniture`).
+Siguiente paso natural: conectar el susto aleatorio con la **barra de cordura**
+(por ejemplo: más sustos y más seguido a menor cordura).
 
 ## 🧩 Prefabs listos (Assets/Prefabs/Ambience)
 
@@ -90,13 +101,14 @@ Para probar sin armar nada, en Unity:
 2. Se crea y abre `Assets/Scenes/AmbienceTest.unity` con:
    - `RoomTracker` (uno en la escena)
    - `ZonaPrueba` (trigger de 30×6×30 con `RoomTriggerZone`)
-   - `MuebleEmbrujado` (cubo con `HauntedObject`, `proximityDistance = 5`)
+   - `MuebleEmbrujado` (cubo con `HauntedObject`, `scareAnywhere = true`, con los sustos asignados)
    - `JugadorPrueba` (cápsula con tag `Player` + `DebugPlayerMover`: WASD + ratón)
    - Piso y luz direccional
-3. Presiona **Play** y muévete:
-   - **Acércate** al mueble → reacciones `near` (sacudida procedural, ya que no hay Animator ni clips aún).
-   - **Aléjate** quedándote dentro de la zona → cada 8-20 s debería dispararse la reacción `far`.
-4. Para verlo en la Consola/Logs, el componente está listo para que le asignes `nearSounds`/`farSounds`.
+3. Presiona **Play**: el mueble **solo** empieza a sonar a intervalos aleatorios (15-40 s,
+   con `scareChance`), **sin importar si estás cerca o lejos**. Espera un rato o acércate/aléjate.
+4. Para probar el modo clásico, desmarca `scareAnywhere` en el `HauntedObject` y repite:
+   - **Acércate** al mueble → reacciones `near` (sacudida procedural).
+   - **Aléjate** quedándote dentro de la zona → cada 8-20 s la reacción `far`.
 
 > `DebugPlayerMover` es **temporal** (solo para probar). Cuando exista el controlador real del juego,
 > reemplázalo y elimina esta escena o este script.

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fur Rug
+* source:	https://sketchfab.com/3d-models/fur-rug-d35c27f807824d65b74fe13171da445d
+* author:	blackmanticor (https://sketchfab.com/blackmanticor)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fur Rug" (https://sketchfab.com/3d-models/fur-rug-d35c27f807824d65b74fe13171da445d) by blackmanticor (https://sketchfab.com/blackmanticor) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

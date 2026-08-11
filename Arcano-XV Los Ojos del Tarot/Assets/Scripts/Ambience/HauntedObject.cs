@@ -3,14 +3,22 @@ using UnityEngine;
 
 /// <summary>
 /// Objeto embrujado: detecta al jugador y reacciona con sonidos y animaciones aleatorias.
-/// - Jugador CERCA del objeto  → reacciones 'near' frecuentes (sonidos + animación).
-/// - Jugador en la MISMA habitación pero LEJOS → sonidos inesperados 'far' (sustos).
 ///
-/// Detección de "misma habitación":
+/// DOS MODOS (elige con `scareAnywhere`):
+///  - TRUE (por defecto, nueva mecánica): el objeto suena a intervalos aleatorios SIN
+///    importar si el jugador está cerca o lejos. Cada mueble/prop de la casa puede
+///    "hablar" solo para asustar, aunque nadie lo esté tocando.
+///  - FALSE (modo clásico por proximidad):
+///      · Jugador CERCA del objeto  → reacciones 'near' frecuentes (sonidos + animación).
+///      · Jugador en la MISMA habitación pero LEJOS → sonidos inesperados 'far' (sustos).
+///
+/// Detección de "misma habitación" (solo modo clásico):
 ///  - Si hay RoomTriggerZone en el objeto (o en su padre... GetComponentInParent) y el
 ///    RoomTracker del escenario, se compara la zona real.
 ///  - Si no hay zonas configuradas, se aproxima por distancia (roomRadiusFallback).
-/// Lo que permite usar el sistema tanto con "zonas por habitación" como de forma simple.
+///
+/// El sonido siempre es 3D (spatialBlend = 1): se oye desde la posición del objeto,
+/// así un susto "lejano" se percibe lejos y uno "cerca" salta encima.
 /// </summary>
 public class HauntedObject : MonoBehaviour
 {
@@ -19,19 +27,30 @@ public class HauntedObject : MonoBehaviour
     public Transform playerOverride;
     public string playerTag = "Player";
 
-    [Header("Proximidad")]
+    [Header("Proximidad (modo clásico)")]
     [Tooltip("Distancia a la que el jugador se considera 'cerca'. Dibuja un gizmo naranja en el editor.")]
     public float proximityDistance = 5f;
 
     [Header("Sonidos")]
-    [Tooltip("Clips que suenan cuando el jugador está cerca.")]
+    [Tooltip("Clips que suenan cuando el jugador está cerca (o, en modo scareAnywhere, parte del pool de sustos).")]
     public AudioClip[] nearSounds;
-    [Tooltip("Clips que suenan cuando el jugador está lejos pero en la misma habitación (sustos inesperados).")]
+    [Tooltip("Clips que suenan cuando el jugador está lejos pero en la misma habitación (o, en modo scareAnywhere, parte del pool de sustos).")]
     public AudioClip[] farSounds;
     [Tooltip("Activa los sonidos 'lejos' cuando el jugador está en la misma habitación.")]
     public bool enableFarSounds = true;
 
-    [Header("Temporización aleatoria")]
+    [Header("Susto aleatorio (nueva mecánica)")]
+    [Tooltip("TRUE (por defecto): el objeto suena a intervalos aleatorios SIN importar la distancia al jugador. FALSE: vuelve al comportamiento por proximidad (cerca/lejos).")]
+    public bool scareAnywhere = true;
+    [Tooltip("Intervalo aleatorio entre sustos cuando scareAnywhere está activo.")]
+    public float minIntervalScare = 15f;
+    public float maxIntervalScare = 40f;
+    [Tooltip("Probabilidad (0-1) de que el objeto suene en cada intervalo. Bájala si hay muchos objetos y suenan demasiado seguido.")]
+    [Range(0f, 1f)] public float scareChance = 0.4f;
+    [Tooltip("Volumen del susto cuando scareAnywhere está activo.")]
+    [Range(0f, 1f)] public float scareVolume = 0.85f;
+
+    [Header("Temporización aleatoria (modo clásico)")]
     [Tooltip("Intervalo aleatorio entre reacciones cuando el jugador está cerca.")]
     public float minIntervalNear = 3f;
     public float maxIntervalNear = 8f;
@@ -49,11 +68,11 @@ public class HauntedObject : MonoBehaviour
     public float shakeMagnitude = 10f;
     public float shakeDuration = 0.35f;
 
-    [Header("Detección sin zonas (fallback)")]
+    [Header("Detección sin zonas (fallback, modo clásico)")]
     [Tooltip("Si el objeto no está dentro de ninguna RoomTriggerZone, se asume 'misma habitación' si el jugador está a menos de esta distancia.")]
     public float roomRadiusFallback = 30f;
 
-    [Header("Volumen")]
+    [Header("Volumen (modo clásico)")]
     [Range(0f, 1f)] public float nearVolume = 1f;
     [Range(0f, 1f)] public float farVolume = 0.55f;
 
@@ -63,30 +82,40 @@ public class HauntedObject : MonoBehaviour
     private Transform _tagPlayer;
     private Coroutine _shake;
 
-    // Estado evaluado cada frame en Update.
+    // Estado evaluado cada frame en Update (solo modo clásico).
     private bool _playerNear;
     private bool _playerSameRoom;
 
     private void Awake()
     {
         _zone = GetComponentInParent<RoomTriggerZone>();
-        _source = GetComponent<AudioSource>();
-        if (_source == null)
-            _source = gameObject.AddComponent<AudioSource>();
 
+        // AudioSource PROPIO (siempre nuevo): no se comparte con ObjectAmbience,
+        // que también crea el suyo. Si se compartieran, al terminar el sonido de
+        // contacto ObjectAmbience baja el volumen a 0 y callaría estos sustos.
+        _source = gameObject.AddComponent<AudioSource>();
         _source.playOnAwake = false;
         _source.spatialBlend = 1f; // audio 3D: se oye más fuerte cuanto más cerca
         _source.rolloffMode = AudioRolloffMode.Logarithmic;
+        _source.minDistance = 5f;  // audible a unos metros (se mantiene "presente" en la habitación)
+        _source.maxDistance = 150f;
     }
 
     private void Start()
     {
-        StartCoroutine(NearLoop());
-        StartCoroutine(FarLoop());
+        if (scareAnywhere)
+            StartCoroutine(ScareAnywhereLoop());
+        else
+        {
+            StartCoroutine(NearLoop());
+            StartCoroutine(FarLoop());
+        }
     }
 
     private void Update()
     {
+        if (scareAnywhere) return; // el susto ya no depende de la posición del jugador
+
         _player = ResolvePlayer();
         if (_player == null) return;
 
@@ -101,7 +130,42 @@ public class HauntedObject : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, proximityDistance);
     }
 
-    // ---- Lógica ------------------------------------------------------------
+    // ---- Lógica: modo "susto en cualquier sitio" --------------------------
+
+    /// <summary>
+    /// Bucle de susto aleatorio: cada intervalo el objeto decide (con `scareChance`)
+    /// sonar un clip aleatorio del pool (near + far) y hacer una animación de susto.
+    /// No depende de la distancia ni de la habitación del jugador.
+    /// </summary>
+    private IEnumerator ScareAnywhereLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(Random.Range(minIntervalScare, maxIntervalScare));
+
+            if (Random.value > scareChance) continue;
+
+            AudioClip clip = RandomScareClip();
+            if (clip != null)
+                _source.PlayOneShot(clip, scareVolume);
+
+            // Animación (Animator) o sacudida procedural, algo más suave que la de "cerca".
+            PlayRandomAnimation(shakeMagnitude * 0.6f);
+        }
+    }
+
+    private AudioClip RandomScareClip()
+    {
+        int near = nearSounds != null ? nearSounds.Length : 0;
+        int far = farSounds != null ? farSounds.Length : 0;
+        if (near + far == 0) return null;
+
+        int r = Random.Range(0, near + far);
+        if (r < near) return nearSounds[r];
+        return farSounds[r - near];
+    }
+
+    // ---- Lógica: modo clásico por proximidad ------------------------------
 
     private bool IsSameRoom(float currentDistance)
     {
@@ -146,16 +210,21 @@ public class HauntedObject : MonoBehaviour
         else
             PlayRandomClip(farSounds, farVolume);
 
-        // Animación aleatoria (Animator) o sacudida procedural.
+        float mag = zone == "near" ? shakeMagnitude : shakeMagnitude * 0.5f;
+        PlayRandomAnimation(mag);
+    }
+
+    /// <summary>Dispara una animación aleatoria (Animator) o una sacudida procedural.</summary>
+    private void PlayRandomAnimation(float magnitude)
+    {
         if (animator != null && animationTriggers != null && animationTriggers.Length > 0)
         {
             animator.SetTrigger(animationTriggers[Random.Range(0, animationTriggers.Length)]);
         }
         else if (proceduralShake)
         {
-            float mag = zone == "near" ? shakeMagnitude : shakeMagnitude * 0.5f;
             if (_shake != null) StopCoroutine(_shake);
-            _shake = StartCoroutine(ShakeRoutine(mag));
+            _shake = StartCoroutine(ShakeRoutine(magnitude));
         }
     }
 

@@ -76,3 +76,64 @@ Base común para toda la casa: **sillón, sofá, cama, mesas de centro, sillas, 
 - **Escala:** al importar, comprueba que el mueble está en escala humana (1 unidad ≈ 1 metro). Ajusta con un cubo de 1 m de referencia.
 - **Colliders:** añade `Mesh Collider` (o `Box Collider` aproximado) a los muebles con los que el jugador collide.
 - **Como prefab:** una vez importado, hazlo un **Prefab** e instáncialo en las habitaciones. Así puedes añadirle el `HauntedObject` una sola vez al prefab base y se propaga a todas las copias.
+
+---
+
+## 📦 Inventario descargado (2026-08-11)
+
+Todo extraído y organizado en **`Assets/Models/<Categoría>/<nombre>/`** (cada carpeta con
+su modelo + `textures/`). Categorías: `Base`, `Cocina`, `Olvido`, `Castigo`, `Generador`,
+`Ritual`, `Reliquia`, `Caceria`, `Investigacion`, `Almacen`.
+
+**📦 FORMATOS — ya convertidos a `.glb` (nadie necesita Blender):**
+- Los **37 `.blend`** originales se convirtieron a **`.glb` con texturas incluidas** con Blender
+  headless, en `Assets/Models/GLB/<Categoría>/<modelo>.glb` con texturas a **máx. 2048px**
+  (el proyecto bajó de ~3 GB a ~850 MB). Los `.blend` originales se resguardaron en
+  `BlendOriginal/` (fuera de `Assets`, por si hay que re-exportar).
+- Los **5 `.gltf`** (Alfombra, Almacen, Cadenas, Escritorio, Altar_cabeza) se importan directo
+  con glTFast (ya registrado en `Packages/manifest.json`).
+- Para que los modelos se importen en Unity solo hace falta glTFast (baja solo). **Blender
+  solo es necesario si quieren volver a tocar los `.blend`** (Edit > Preferences > External Tools).
+- **La huida no tenía modelo:** `corredores blancos` era una **textura JPG**; quedó en
+  `Assets/Textures/Huida/corredor_blanco.jpg` como textura de pared.
+
+**⚠️ `Reliquia_bustos` está mal descargado:** el zip contiene `grass_medium` (césped), no bustos.
+   Re-descargar de Poly Haven en su lugar: buscar **"bust"** (ej. `marble_bust_01`).
+
+**Notas de montaje (los marqué al organizar):**
+- Algunos son **escenas/props grandes** que hay que ubicar: `Generador/engranajesytuberias`
+  (modular_pipes: sistema de tuberías), `Ritual/Altar_velas` (candelabros de latón).
+- Varios son **objetos sueltos que necesitan una superficie** donde apoyarse (tazas, comida, velas,
+  relojes → van sobre mesas/estanterías).
+- `Reliquia/Pedestal` trae una `gothic_statue` (estatua), no un pedestal: igual sirve para la sala.
+- `Reliquia/Vitrina` trae una `worn_metal_rack` (estante metálico gastado): útil como vitrina/estante.
+
+---
+
+## 🏠 Habitaciones reales del GDD (generador)
+
+`Tools > Arcano XV > Generar habitaciones` (también sale con **Generar TODO**) arma las
+**10 habitaciones** del GDD como escenas en `Assets/Scenes/Habitaciones/`:
+
+- Estructura: piso, paredes con vano de puerta, techo y luz tenue de terror.
+- **RoomTracker + zona de sonido** con el nombre de la sala (sistema de ambience).
+- Mobiliario con los **modelos reales de `Assets/Models`** (los que no tienen modelo usan
+  la primitiva de respaldo con su sonido: TV, máquina de escribir, teléfono, nevera...).
+- **Sonido por contacto** (`ObjectAmbience`) y **susto aleatorio** (`HauntedObject`) en cada mueble.
+- Jugador temporal con pasos de madera para probar.
+
+**La Huida:** no tiene modelo 3D (el zip era una textura), así que su sala usa
+`Assets/Textures/Huida/corredor_blanco.jpg` en las paredes + muebles base + puerta de salida.
+
+> Los planos de muebles (posición, rotación, escala y qué modelo usan) se editan en
+> `Assets/Scripts/Ambience/RoomsLayouts.cs`. Si un modelo aún no importa (falta Blender/glTFast)
+> verás avisos "Modelo no importado aún" y se usa la primitiva; al repetir el comando
+> cuando Blender esté listo se reemplazan solos.
+
+**📏 Medición (2026-08-11) — polígonos y tamaño por modelo (ya con texturas 2k):**
+- La mayoría está entre **1k–20k triángulos** (correcto para un juego).
+- Los más pesados: tubos del generador **94k**, archivadores/libros **68k**, trofeo león **47k**,
+  candelabros **42k**, set de té **40k**. Si algún FPS/espacio los exige, se pueden decimar con
+  Blender o usar LODs — es un punto de optimización opcional, no urgente.
+- Tamaño en disco: total **~850 MB** en `Assets/Models/GLB/` (los gordos son `modular_pipes` y
+  `brass_candleholders`, ~95 MB c/u).
