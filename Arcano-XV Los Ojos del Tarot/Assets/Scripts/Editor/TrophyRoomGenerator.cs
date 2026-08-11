@@ -38,6 +38,7 @@ public static class TrophyRoomGenerator
         CreateObjectPrefabs();                 // prefabs de objetos para las habitaciones
         CreatePlayerPrefab();                  // jugador con pasos
         GenerateTrophyRoom();                  // escena de la habitación trofeo (asigna todo)
+        RoomsGenerator.GenerateAllRooms();     // las 10 habitaciones reales amobladas
     }
 
     public static void GenerateTrophyRoom()
@@ -138,8 +139,10 @@ public static class TrophyRoomGenerator
 
     /// <summary>
     /// Arma el GameObject de un objeto del catálogo (primitiva + material +
-    /// ObjectAmbience de contacto). Se usa tanto para los trofeos de la sala como
-    /// para los prefabs que se llevan a las habitaciones reales.
+    /// ObjectAmbience de contacto + HauntedObject de susto aleatorio). Se usa tanto
+    /// para los trofeos de la sala como para los prefabs que se llevan a las
+    /// habitaciones reales: así TODOS los elementos suenan a intervalos aleatorios
+    /// sin importar si el jugador está cerca o lejos.
     /// </summary>
     private static GameObject CreateObjectVisual(RoomObjectCatalog.ObjectDef def)
     {
@@ -156,6 +159,15 @@ public static class TrophyRoomGenerator
             amb.playDuration = 3f;     // suena 3 s al tocarlo y se apaga
             amb.triggerRadius = 1.5f;  // área de contacto casi al tocar
         }
+
+        // Susto aleatorio en CADA elemento (nueva mecánica): suena solo a
+        // intervalos aleatorios, no importa la distancia. El primer intervalo es
+        // aleatorio por objeto, así nunca arrancan todos sincronizados.
+        HauntedObject haunted = obj.AddComponent<HauntedObject>();
+        haunted.nearSounds = SustosSounds.NearClips();
+        haunted.farSounds = SustosSounds.FarClips();
+        haunted.minIntervalScare = Random.Range(15f, 30f);
+        haunted.maxIntervalScare = haunted.minIntervalScare + Random.Range(15f, 30f);
 
         return obj;
     }

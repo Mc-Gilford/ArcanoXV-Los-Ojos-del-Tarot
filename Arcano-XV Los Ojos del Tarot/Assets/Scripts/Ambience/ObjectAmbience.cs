@@ -37,8 +37,10 @@ public class ObjectAmbience : MonoBehaviour
         trigger.isTrigger = true;
         trigger.radius = Mathf.Max(0.1f, triggerRadius);
 
-        _source = GetComponent<AudioSource>();
-        if (_source == null) _source = gameObject.AddComponent<AudioSource>();
+        // AudioSource PROPIO (siempre nuevo): no se comparte con HauntedObject,
+        // que también crea el suyo. Si se compartieran, bajar el volumen a 0 al
+        // terminar el sonido de contacto callaría los sustos aleatorios.
+        _source = gameObject.AddComponent<AudioSource>();
 
         _source.playOnAwake = false;
         _source.loop = false;          // un disparo de playDuration, no bucle continuo

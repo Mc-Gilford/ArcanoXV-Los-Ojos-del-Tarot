@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fallen Angel
+* source:	https://sketchfab.com/3d-models/fallen-angel-80d17df5ba9a4cc69b4f0ed8b38eb6d6
+* author:	Giordani_Mathieu (https://sketchfab.com/Giordani_Mathieu)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fallen Angel" (https://sketchfab.com/3d-models/fallen-angel-80d17df5ba9a4cc69b4f0ed8b38eb6d6) by Giordani_Mathieu (https://sketchfab.com/Giordani_Mathieu) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
