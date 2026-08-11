@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
-public class Jugador : MonoBehaviour
+public class Jugador : Character
 {
 
     private PlayerInput inputJugador;
@@ -12,14 +12,21 @@ public class Jugador : MonoBehaviour
 
     private InputAction accionSalto;
 
+    private InputAction sprintAction;
+
     private Rigidbody rb;
     
     private Vector2 direccion; 
 
     private bool puedeSaltar = true;
 
+
+    [SerializeField] private bool isRunning= false;
+    [SerializeField] private bool isAbleToRun= true;
+    [SerializeField] private bool isTired= false;
     [SerializeField] private float velocidad = 5f;
     [SerializeField] private float salto = 20f;
+    [SerializeField] private float stamina = 10f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,6 +34,10 @@ public class Jugador : MonoBehaviour
         inputJugador = GetComponent<PlayerInput>();
         accionMovimiento = inputJugador.actions.FindAction("Movimiento");
         accionSalto = inputJugador.actions.FindAction("Saltar");
+        sprintAction = inputJugador.actions.FindAction("Run");
+
+        sprintAction.started += ctx => Run();
+        sprintAction.canceled += ctx => StopRunning();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -39,11 +50,39 @@ public class Jugador : MonoBehaviour
             puedeSaltar = false;
             Saltar();
         }
+
+        if(stamina > 0 && isRunning && isAbleToRun)
+        {
+            stamina -= Time.deltaTime; 
+        }
+        else if(!isRunning && stamina <10 && !isTired)
+        {
+            stamina += Time.deltaTime;
+        }
+        else if(stamina <=0 && isAbleToRun)
+        {
+            isAbleToRun = false;
+            isRunning = false;
+            isTired = true;
+            velocidad /= 3f;
+            StartCoroutine(FullRechargeStamina());
+        }
+       
     }
 
     void FixedUpdate()
     {
         
+    }
+
+    IEnumerator FullRechargeStamina()
+    {
+        Debug.Log("Recargando stamina");
+
+        yield return new WaitForSeconds(10);
+        stamina = 10;
+        isTired = false;
+        isAbleToRun = true;
     }
 
     private void Saltar () 
@@ -77,5 +116,24 @@ public class Jugador : MonoBehaviour
         Vector3 movement = (forward * direccion.y + right * direccion.x) * velocidad * Time.deltaTime;
 
         transform.position += movement;
+    }
+
+    private void Run()
+    {
+        if(isAbleToRun)
+        {
+            isRunning = true;
+            velocidad *= 3f;
+        }
+    }
+
+    private void StopRunning()
+    {
+        if(!isTired && isRunning)
+        {
+            isRunning = false;
+            velocidad /= 3f;
+        }
+        
     }
 }
