@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [Header("References")]
     [SerializeField] private GameObject player;
@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] private float anger = 0.9f;
-    [SerializeField] private int speed = 3;
     [SerializeField] private float nearDistance = 3f;
     [SerializeField] private float slowDistance = 5f;
     [SerializeField] private float wallForce = 5f;
@@ -56,8 +55,21 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Player not found");
         }
-        int damageRandom = UnityEngine.Random.Range(1,3);
-        Damage = damageRandom;
+        initializeVariables();
+    }
+
+    private void initializeVariables()
+    {
+        int damageRandom = UnityEngine.Random.Range(1, 3);
+        damage = damageRandom;
+        int lifeLevelRandom = UnityEngine.Random.Range(8, 10);
+        health = lifeLevelRandom;
+        speed = 3;
+    }
+
+    public void IncreaseAngry()
+    {
+
     }
 
     private void FixedUpdate()
@@ -257,14 +269,18 @@ public class Enemy : MonoBehaviour
             // En una pared se cancela el salto aleatorio
             CancelRandomJump();
         }
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(2);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("Room"))
         {
-            Destroy(gameObject);
-            //Die
+            //Destroy(gameObject);
+            Die();
         }
     }
 
