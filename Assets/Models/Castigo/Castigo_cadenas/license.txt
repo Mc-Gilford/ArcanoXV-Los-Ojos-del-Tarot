@@ -1,0 +1,11 @@
+Model Information:
+* title:	Iron chain
+* source:	https://sketchfab.com/3d-models/iron-chain-6d079f01c7c142e0be54d7f2d33b33e6
+* author:	Adamante (https://sketchfab.com/Adamant6686)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Iron chain" (https://sketchfab.com/3d-models/iron-chain-6d079f01c7c142e0be54d7f2d33b33e6) by Adamante (https://sketchfab.com/Adamant6686) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
