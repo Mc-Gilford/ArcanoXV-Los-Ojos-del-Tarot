@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [Header("References")]
     [SerializeField] private GameObject player;
@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] private float anger = 0.9f;
-    [SerializeField] private int speed = 3;
     [SerializeField] private float nearDistance = 3f;
     [SerializeField] private float slowDistance = 5f;
     [SerializeField] private float wallForce = 5f;
@@ -38,6 +37,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool isWaitingToJump;
     [SerializeField] private bool isJumping;
     [SerializeField] private bool isInRoom;
+    [SerializeField] private bool IsAngerActive;
     private int damage { get; set; }
 
 
@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour
     private Vector3 surfaceNormal = Vector3.up;
     private float wallDetachTimer;
     private float airTimeRemaining;
+    private float maxHealth; 
 
     void Start()
     {
@@ -56,8 +57,26 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Player not found");
         }
-        int damageRandom = UnityEngine.Random.Range(1,3);
+        initializeVariables();
+        StartCoroutine(WaitAnger());
+    }
+
+    private void initializeVariables()
+    {
+        int damageRandom = UnityEngine.Random.Range(1, 3);
         damage = damageRandom;
+        int lifeLevelRandom = UnityEngine.Random.Range(8, 10);
+        health = lifeLevelRandom;
+        maxHealth = health;
+        speed = 3;
+    }
+
+    public void IncreaseAngry()
+    {
+        if(health<=maxHealth/2 && anger<=5)
+        {
+            anger=anger+0.01f;
+        }
     }
 
     private void FixedUpdate()
@@ -119,10 +138,18 @@ public class Enemy : MonoBehaviour
         {
             randomJumpCoroutine = StartCoroutine(WaitJump());
         }
-
+        IncreaseAngry();
         ControlMaximumVelocity();
     }
+    private IEnumerator WaitAnger()
+    {
+        IsAngerActive = true;
+        yield return new WaitForSeconds(300);
+        if (anger<=5) {
+            anger++;
+        }
 
+    }
     private IEnumerator WaitJump()
     {
         isWaitingToJump = true;
@@ -257,14 +284,18 @@ public class Enemy : MonoBehaviour
             // En una pared se cancela el salto aleatorio
             CancelRandomJump();
         }
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(2);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("Room"))
         {
-            Destroy(gameObject);
-            //Die
+            //Destroy(gameObject);
+            Die();
         }
     }
 
