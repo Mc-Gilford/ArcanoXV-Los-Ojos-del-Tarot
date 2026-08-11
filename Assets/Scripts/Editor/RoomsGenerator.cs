@@ -101,6 +101,8 @@ public static class RoomsGenerator
         rb.useGravity = false;
         player.AddComponent<DebugPlayerMover>();
         player.AddComponent<PlayerFootsteps>();
+        player.AddComponent<CardSelectionSystem>();
+        player.AddComponent<CardCollector>();
 
         // Asignar clips de contacto y de pasos automáticamente
         TrophyRoomGenerator.AssignObjectSoundsInScene();
