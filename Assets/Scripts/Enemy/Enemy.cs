@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool isWaitingToJump;
     [SerializeField] private bool isJumping;
     [SerializeField] private bool isInRoom;
+    private int damage { get; set; }
 
 
     private Rigidbody enemyrb;
@@ -55,6 +56,8 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Player not found");
         }
+        int damageRandom = UnityEngine.Random.Range(1,3);
+        Damage = damageRandom;
     }
 
     private void FixedUpdate()
