@@ -21,6 +21,7 @@ public class CameraScript : MonoBehaviour
     {
         distancetoPlayer = Vector3.Distance(transform.position, target.position);
         target = GameObject.Find("Player").transform;
+        setCameraConfig();
     }
     
     void Start()
@@ -66,5 +67,13 @@ public class CameraScript : MonoBehaviour
     {
         public float min;
         public float max;
+    }
+
+    private void setCameraConfig()
+    {
+        cameraAngle.min = -10f;
+        cameraAngle.max = 40f;
+        mouseSensitivity.horizontal = 20f;
+        mouseSensitivity.vertical = 10f;
     }
 }
