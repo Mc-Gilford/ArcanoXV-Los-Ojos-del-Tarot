@@ -136,6 +136,42 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WDash"",
+                    ""type"": ""Button"",
+                    ""id"": ""4102baa0-5ff8-4199-8b41-ad1cef2edd0d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SDash"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2a219fe-afac-4750-bd1c-4bf85903818b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ADash"",
+                    ""type"": ""Button"",
+                    ""id"": ""18b69a9b-3e8e-4625-9a0e-2f6d0c746d30"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DDash"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea5dc713-1fe6-499b-903d-353554be9c43"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -237,6 +273,50 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f77edc05-6639-43b6-9fa2-5f9dda848e42"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WDash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a25d7cf-c6ef-4f1d-b006-654887e7a8cd"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SDash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""808de789-d532-4be8-baca-bae545562f22"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ADash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b8d542f-d680-4dab-9d60-be3300d4459b"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DDash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +330,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Jugador_Look = m_Jugador.FindAction("Look", throwIfNotFound: true);
         m_Jugador_Run = m_Jugador.FindAction("Run", throwIfNotFound: true);
         m_Jugador_Shoot = m_Jugador.FindAction("Shoot", throwIfNotFound: true);
+        m_Jugador_WDash = m_Jugador.FindAction("WDash", throwIfNotFound: true);
+        m_Jugador_SDash = m_Jugador.FindAction("SDash", throwIfNotFound: true);
+        m_Jugador_ADash = m_Jugador.FindAction("ADash", throwIfNotFound: true);
+        m_Jugador_DDash = m_Jugador.FindAction("DDash", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -335,6 +419,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Jugador_Look;
     private readonly InputAction m_Jugador_Run;
     private readonly InputAction m_Jugador_Shoot;
+    private readonly InputAction m_Jugador_WDash;
+    private readonly InputAction m_Jugador_SDash;
+    private readonly InputAction m_Jugador_ADash;
+    private readonly InputAction m_Jugador_DDash;
     /// <summary>
     /// Provides access to input actions defined in input action map "Jugador".
     /// </summary>
@@ -366,6 +454,22 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Jugador/Shoot".
         /// </summary>
         public InputAction @Shoot => m_Wrapper.m_Jugador_Shoot;
+        /// <summary>
+        /// Provides access to the underlying input action "Jugador/WDash".
+        /// </summary>
+        public InputAction @WDash => m_Wrapper.m_Jugador_WDash;
+        /// <summary>
+        /// Provides access to the underlying input action "Jugador/SDash".
+        /// </summary>
+        public InputAction @SDash => m_Wrapper.m_Jugador_SDash;
+        /// <summary>
+        /// Provides access to the underlying input action "Jugador/ADash".
+        /// </summary>
+        public InputAction @ADash => m_Wrapper.m_Jugador_ADash;
+        /// <summary>
+        /// Provides access to the underlying input action "Jugador/DDash".
+        /// </summary>
+        public InputAction @DDash => m_Wrapper.m_Jugador_DDash;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -407,6 +511,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
+            @WDash.started += instance.OnWDash;
+            @WDash.performed += instance.OnWDash;
+            @WDash.canceled += instance.OnWDash;
+            @SDash.started += instance.OnSDash;
+            @SDash.performed += instance.OnSDash;
+            @SDash.canceled += instance.OnSDash;
+            @ADash.started += instance.OnADash;
+            @ADash.performed += instance.OnADash;
+            @ADash.canceled += instance.OnADash;
+            @DDash.started += instance.OnDDash;
+            @DDash.performed += instance.OnDDash;
+            @DDash.canceled += instance.OnDDash;
         }
 
         /// <summary>
@@ -433,6 +549,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
+            @WDash.started -= instance.OnWDash;
+            @WDash.performed -= instance.OnWDash;
+            @WDash.canceled -= instance.OnWDash;
+            @SDash.started -= instance.OnSDash;
+            @SDash.performed -= instance.OnSDash;
+            @SDash.canceled -= instance.OnSDash;
+            @ADash.started -= instance.OnADash;
+            @ADash.performed -= instance.OnADash;
+            @ADash.canceled -= instance.OnADash;
+            @DDash.started -= instance.OnDDash;
+            @DDash.performed -= instance.OnDDash;
+            @DDash.canceled -= instance.OnDDash;
         }
 
         /// <summary>
@@ -508,5 +636,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnShoot(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WDash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWDash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SDash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSDash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ADash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnADash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DDash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDDash(InputAction.CallbackContext context);
     }
 }

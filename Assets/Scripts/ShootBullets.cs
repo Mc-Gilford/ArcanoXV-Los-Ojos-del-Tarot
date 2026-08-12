@@ -21,6 +21,10 @@ public class ShootBullets : MonoBehaviour
 
     public Camera playerCamera;
     public Transform attackPoint;
+
+    //Use of a textMeshPro for a shootpoint guide
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
