@@ -29,12 +29,18 @@ public class ShootBullets : MonoBehaviour
     void Start()
     {
         shootForce = 10f;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         ShowPointer();
+    }
+
+    private void LateUpdate()
+    {
+        
     }
 
     private void ShowPointer()
