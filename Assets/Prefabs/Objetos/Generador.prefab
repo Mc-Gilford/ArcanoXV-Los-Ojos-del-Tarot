@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5129995046140988340}
   - component: {fileID: 3885039981486592700}
   - component: {fileID: 5689504684380077788}
+  - component: {fileID: 4746697370983877631}
   m_Layer: 0
   m_Name: Generador
   m_TagString: Untagged
@@ -130,3 +131,44 @@ MonoBehaviour:
   baseVolume: 0.9
   playDuration: 3
   triggerRadius: 1.5
+--- !u!114 &4746697370983877631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595742215630718262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d4e5f60718293a4b5c6d7e8f90a1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HauntedObject
+  playerOverride: {fileID: 0}
+  playerTag: Player
+  proximityDistance: 5
+  nearSounds:
+  - {fileID: 8300000, guid: 6ba612cbc3ff95c45ba33fd1284e2847, type: 3}
+  - {fileID: 8300000, guid: feb619853f53eb045a612a7c91fb400a, type: 3}
+  - {fileID: 8300000, guid: b357e8c78dfb99a4c85c5aeb9ecfb981, type: 3}
+  - {fileID: 8300000, guid: 01678dc92c8307a4fb670b7a29c0db97, type: 3}
+  farSounds:
+  - {fileID: 8300000, guid: 72b516e460e605f46920779f9203883c, type: 3}
+  - {fileID: 8300000, guid: 77f0e30f3d4d06148b16624fbadeea79, type: 3}
+  enableFarSounds: 1
+  scareAnywhere: 1
+  minIntervalScare: 24.904064
+  maxIntervalScare: 50.946373
+  scareChance: 0.4
+  scareVolume: 0.85
+  minIntervalNear: 3
+  maxIntervalNear: 8
+  minIntervalFar: 8
+  maxIntervalFar: 20
+  animator: {fileID: 0}
+  animationTriggers: []
+  proceduralShake: 1
+  shakeMagnitude: 10
+  shakeDuration: 0.35
+  roomRadiusFallback: 30
+  nearVolume: 1
+  farVolume: 0.55

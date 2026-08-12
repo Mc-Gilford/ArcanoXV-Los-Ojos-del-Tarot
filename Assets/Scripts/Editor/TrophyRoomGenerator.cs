@@ -88,6 +88,10 @@ public static class TrophyRoomGenerator
         // Jugador con pasos de madera
         GameObject player = CreatePlayer();
 
+        // Cartas recogibles + puerta del jefe final (coleccionables)
+        SpawnCartasRecogibles();
+        SpawnPuertaJefe();
+
         // Los clips ya viven en Assets/Audio/Objetos/<Categoría> y Assets/Audio/Pasos:
         // asígnalos a los trofeos y a los pasos en el mismo paso (un solo clic).
         AssignObjectSoundsInScene();
@@ -216,6 +220,8 @@ public static class TrophyRoomGenerator
 
         player.AddComponent<DebugPlayerMover>();
         player.AddComponent<PlayerFootsteps>();
+        player.AddComponent<CardSelectionSystem>();
+        player.AddComponent<CardCollector>();
 
         // Asigna los crujidos de madera si ya existen clips en Assets/Audio/Pasos
         PlayerFootsteps steps = player.GetComponent<PlayerFootsteps>();
@@ -226,6 +232,72 @@ public static class TrophyRoomGenerator
             Debug.Log($"[Arcano XV] Pasos asignados: {steps.stepClips.Length} crujidos de madera.");
 
         return player;
+    }
+
+    // ------------------------------------------------------------ cartas y puerta del jefe
+
+    /// <summary>
+    /// Coloca las 5 cartas recogibles (modelo Assets/Models/Cartas) en un anillo
+    /// alrededor del centro. Se recogen con E y alimentan a CardCollector.
+    /// </summary>
+    private static void SpawnCartasRecogibles()
+    {
+        const string modelPath = "Assets/Models/Cartas/scene.gltf";
+        GameObject model = LoadModelAsset(modelPath);
+        if (model == null)
+        {
+            Debug.LogWarning("[Arcano XV] Modelo de carta no importado aún: " + modelPath +
+                " → las cartas recogibles no se colocaron. Abre el proyecto para que glTFast lo importe.");
+            return;
+        }
+
+        const int total = 5;
+        const float radius = 25f;
+        for (int i = 0; i < total; i++)
+        {
+            float angle = (i / (float)total) * Mathf.PI * 2f;
+            Vector3 pos = new Vector3(Mathf.Cos(angle) * radius, 1.2f, Mathf.Sin(angle) * radius);
+
+            GameObject carta;
+            try { carta = (GameObject)PrefabUtility.InstantiatePrefab(model); }
+            catch (System.Exception) { carta = null; }
+            if (carta == null) continue;
+
+            carta.name = "CartaRecogible_" + (i + 1);
+            carta.transform.position = pos;
+            carta.transform.localScale = Vector3.one * 1.6f;
+
+            BoxCollider bc = carta.AddComponent<BoxCollider>();
+            bc.size = new Vector3(0.7f, 0.9f, 0.2f);
+            bc.center = new Vector3(0f, 0.45f, 0f);
+
+            carta.AddComponent<CardPickup>();
+        }
+        Debug.Log($"[Arcano XV] {total} cartas recogibles colocadas en la sala (pulsa E para recogerlas).");
+    }
+
+    /// <summary>
+    /// Puerta del jefe final: nace bloqueada y se abre (BossDoor) cuando se reúnen
+    /// todas las cartas. Es la evolución de la "llave" que abría el último cuarto.
+    /// </summary>
+    private static void SpawnPuertaJefe()
+    {
+        GameObject puerta = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        puerta.name = "PuertaJefeFinal";
+        puerta.transform.position = new Vector3(0f, 2.5f, 46f);
+        puerta.transform.localScale = new Vector3(8f, 5f, 0.5f);
+        puerta.GetComponent<Renderer>().sharedMaterial =
+            CreateLitMaterial("MatPuertaJefe", new Color(0.6f, 0.1f, 0.1f));
+        puerta.AddComponent<BossDoor>();
+        Debug.Log("[Arcano XV] Puerta del jefe final colocada: se abre al reunir las 5 cartas.");
+    }
+
+    private static GameObject LoadModelAsset(string path)
+    {
+        GameObject m = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        if (m != null) return m;
+        string prefabPath = path.Replace(".glb", ".prefab").Replace(".gltf", ".prefab");
+        return AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
     }
 
     // ------------------------------------------------------------ audio
@@ -337,6 +409,8 @@ public static class TrophyRoomGenerator
         rb.useGravity = false;
 
         player.AddComponent<DebugPlayerMover>();
+        player.AddComponent<CardSelectionSystem>();
+        player.AddComponent<CardCollector>();
         PlayerFootsteps steps = player.AddComponent<PlayerFootsteps>();
         steps.stepClips = LoadAllClips(RoomObjectCatalog.PasosFolder);
 
