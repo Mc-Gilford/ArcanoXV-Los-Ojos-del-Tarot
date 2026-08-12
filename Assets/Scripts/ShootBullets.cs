@@ -24,7 +24,7 @@ public class ShootBullets : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        shootForce = 10f;
     }
 
     // Update is called once per frame
@@ -80,7 +80,7 @@ public class ShootBullets : MonoBehaviour
             bulletsLeft -= 1;
             StartCoroutine(GunKnockback()); 
 
-            GameObject currentBullet = Instantiate(bulletModel, attackPoint.position, Quaternion.identity);
+            GameObject currentBullet = Instantiate(bulletModel, attackPoint.position, Quaternion.LookRotation(directionWithSpread.normalized) * Quaternion.Euler(90, 0, 0));
 
             currentBullet.transform.forward = directionWithSpread.normalized;
 
