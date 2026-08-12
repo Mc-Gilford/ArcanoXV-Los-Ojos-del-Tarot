@@ -70,6 +70,8 @@ public static class AmbienceTestSceneGenerator
         rb.useGravity = false;
 
         player.AddComponent<DebugPlayerMover>();
+        player.AddComponent<CardSelectionSystem>();
+        player.AddComponent<CardCollector>();
 
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         const string path = "Assets/Scenes/AmbienceTest.unity";
