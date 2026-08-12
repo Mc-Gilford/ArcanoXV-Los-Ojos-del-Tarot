@@ -45,6 +45,11 @@ public class Jugador : Character
     void Update()
     {
         MoverJugador();
+        ValidateStamina();
+    }
+
+    private void ValidateStamina()
+    {
         if(accionSalto.triggered && puedeSaltar)
         {
             puedeSaltar = false;
@@ -67,8 +72,7 @@ public class Jugador : Character
             velocidad /= 3f;
             StartCoroutine(FullRechargeStamina());
         }
-       
-    }
+    } 
 
     void FixedUpdate()
     {

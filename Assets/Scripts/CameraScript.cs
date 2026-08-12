@@ -15,13 +15,23 @@ public class CameraScript : MonoBehaviour
     [SerializeField] private CameraAngle cameraAngle;
 
     private CameraRotation cameraRotation;
+
+    public GameObject gunModel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
     void Awake()
     {
-        distancetoPlayer = Vector3.Distance(transform.position, target.position);
+        
+        //distancetoPlayer = Vector3.Distance(transform.position, target.position);
         target = GameObject.Find("Player").transform;
         setCameraConfig();
+
+        Vector3 initialPosition = target.position + Vector3.up * 1.5f;
+        transform.position = initialPosition;
+
+        cameraRotation = new CameraRotation { pitch = 0f, yaw = 0f };
+
+        
     }
     
     void Start()
@@ -40,7 +50,8 @@ public class CameraScript : MonoBehaviour
     private void LateUpdate()
     {
         transform.eulerAngles = new Vector3(cameraRotation.pitch, cameraRotation.yaw, 0.0f);
-        transform.position = target.position - transform.forward * distancetoPlayer;
+        transform.position = target.position + Vector3.up * 1.5f;
+        //transform.position = target.position - transform.forward * distancetoPlayer;
     }
 
     public void Look(InputAction.CallbackContext context)

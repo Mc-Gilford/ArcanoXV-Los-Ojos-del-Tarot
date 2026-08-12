@@ -18,6 +18,14 @@ public class DebugPlayerMover : MonoBehaviour
     [Tooltip("Altura a la que va la cámara respecto al jugador.")]
     public float cameraHeight = 1.6f;
 
+    [Header("Bloqueo y modificadores (los usa el sistema de cartas)")]
+    [Tooltip("Congela SOLO la traslación WASD; la cámara/ratón sigue funcionando.")]
+    public bool lockMovement = false;
+    [Tooltip("Multiplicador externo de velocidad (0.7 / 0.8 / 1.6).")]
+    public float speedMultiplier = 1f;
+    [Tooltip("Si false, pierdes el sprint (maldición).")]
+    public bool canSprint = true;
+
     private Transform _cam;
     private float _pitch;
 
@@ -43,12 +51,16 @@ public class DebugPlayerMover : MonoBehaviour
         if (kb.aKey.isPressed) move.x -= 1f;
         if (kb.dKey.isPressed) move.x += 1f;
 
-        // Correr con Shift izquierdo o derecho.
-        bool sprinting = kb.leftShiftKey.isPressed || kb.rightShiftKey.isPressed;
-        float speed = moveSpeed * (sprinting ? sprintMultiplier : 1f);
+        // Correr con Shift izquierdo o derecho (puede bloquearse con canSprint).
+        bool sprinting = canSprint && (kb.leftShiftKey.isPressed || kb.rightShiftKey.isPressed);
+        float speed = moveSpeed * speedMultiplier * (sprinting ? sprintMultiplier : 1f);
 
-        Vector3 wish = (transform.right * move.x + transform.forward * move.y).normalized;
-        transform.position += wish * speed * Time.deltaTime;
+        // Movimiento WASD (se congela al seleccionar carta, la cámara no).
+        if (!lockMovement)
+        {
+            Vector3 wish = (transform.right * move.x + transform.forward * move.y).normalized;
+            transform.position += wish * speed * Time.deltaTime;
+        }
 
         // Mirar con el ratón.
         Vector2 look = mouse.delta.ReadValue() * lookSpeed;
