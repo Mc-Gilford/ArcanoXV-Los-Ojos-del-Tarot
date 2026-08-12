@@ -1192,7 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3144973b33ab2994d9d8e67a2b59f7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootBullets
-  bulletModel: {fileID: 6823531440630008267, guid: 3b2eec99d21e4414eb182f793c902425, type: 3}
+  bulletModel: {fileID: 1145030656307566588, guid: 5e4967597b4302b4cb29625bd9012bbb, type: 3}
   shootForce: 0
   upwardForce: 0
   spread: 0
