@@ -439,7 +439,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 281652044}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 947a9f4ab816afa42bdd51cb061ff74d, type: 3}
   m_Name: 
@@ -451,6 +451,7 @@ MonoBehaviour:
   - {fileID: 6752004552603906069, guid: eab8c6e6edfd03c44a0df30c90babc6a, type: 3}
   - {fileID: 4029998432755234742, guid: 765a8d3de27f8ad4280001f6cd9711b5, type: 3}
   - {fileID: 7375917810369655312, guid: c536c58481191d54498c76e0c61c30b9, type: 3}
+  limitEnemies: 30
   enemyCount: 0
 --- !u!1 &324477215
 GameObject:
@@ -797,10 +798,13 @@ MonoBehaviour:
   isRunning: 0
   isAbleToRun: 1
   isTired: 0
+  canDash: 1
   velocidad: 5
   salto: 20
   stamina: 10
   cordura: 10
+  dashForce: 10
+  timeDoubleTap: 0.2
 --- !u!114 &515369106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,7 +861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &777289435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -877,6 +881,7 @@ MonoBehaviour:
   - {fileID: 84451933}
   - {fileID: 1805934664}
   - {fileID: 1619636223}
+  limitEnemies: 30
   enemyCount: 0
 --- !u!4 &777289436
 Transform:
