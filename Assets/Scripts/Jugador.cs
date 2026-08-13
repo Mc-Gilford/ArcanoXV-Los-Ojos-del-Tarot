@@ -27,6 +27,7 @@ public class Jugador : Character
     [SerializeField] private float velocidad = 5f;
     [SerializeField] private float salto = 20f;
     [SerializeField] private float stamina = 10f;
+    [SerializeField] private float cordura = 10f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,6 +40,11 @@ public class Jugador : Character
         sprintAction.started += ctx => Run();
         sprintAction.canceled += ctx => StopRunning();
         rb = GetComponent<Rigidbody>();
+    }
+
+    public float getCordura()
+    {
+        return cordura;
     }
 
     // Update is called once per frame
