@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - Bullet
   - Room
+  - Follower
   layers:
   - Default
   - TransparentFX
