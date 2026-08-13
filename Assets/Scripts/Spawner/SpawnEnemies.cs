@@ -10,7 +10,7 @@ public class SpawnEnemies : MonoBehaviour
     //private float startDelay = 1.0f;
     private float randomInterval = 1.0f;
     private Transform spawnPosition;
-    private int limitEnemies=30;
+    public int limitEnemies=30;
     private int timerInterval = 0;
     private float timerCounter = 0f;
     public int enemyCount;
@@ -23,11 +23,12 @@ public class SpawnEnemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;
+        enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length-1;
     }
 
     private void createEnemy()
     {
+        Debug.Log("Creando Enemigo");
         spawnPosition = selectEmptyPostion();
         GameObject enemy = selectEnemy();
         Instantiate(enemy, spawnPosition.position, spawnPosition.rotation);
@@ -74,6 +75,7 @@ public class SpawnEnemies : MonoBehaviour
         // Convertimos a entero SOLO para guardarlo y mostrarlo en tu Debug.Log
         timerInterval = (int)timerCounter;
         Debug.Log("Timer : " + timerInterval + " Random Interval " + randomInterval);
+
         if (enemyCount <= limitEnemies && timerInterval == randomInterval)
         {
             createEnemy();
