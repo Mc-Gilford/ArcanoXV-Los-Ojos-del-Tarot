@@ -38,16 +38,26 @@ public class Jugador : Character
     [SerializeField] private bool isAbleToRun= true;
     [SerializeField] private bool isTired= false;
     [SerializeField] private bool canDash = true;
+    [SerializeField] private bool isInsane = false;
     [SerializeField] private float velocidad = 5f;
-    [SerializeField] private float salto = 20f;
+    [SerializeField] private float salto = 10f;
     [SerializeField] private float stamina = 10f;
+    [SerializeField] private float cordura = 540f;
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float timeDoubleTap = 0.2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        DefinePlayerData();
+    }
+
+    public void DefinePlayerData()
+    {
         dashForce = 8f;
+        salto = 10f;
+        cordura = 540f;
         puedeSaltar = true;
+        isInsane = false;
         inputJugador = GetComponent<PlayerInput>();
         accionMovimiento = inputJugador.actions.FindAction("Movimiento");
         accionSalto = inputJugador.actions.FindAction("Saltar");
@@ -66,11 +76,32 @@ public class Jugador : Character
         rb = GetComponent<Rigidbody>();
     }
 
+    public float getCordura()
+    {
+        return cordura;
+    }
+
     // Update is called once per frame
     void Update()
     {
         MoverJugador();
         ValidateStamina();
+    }
+
+    private void ValidateSanity()
+    {
+        if(cordura >= 0)
+        {
+            cordura -= Time.deltaTime;
+            if(!isInsane && cordura <270)
+            {
+                isInsane = true;
+            }
+        }
+        else
+        {
+
+        }
     }
 
     private void ValidateStamina()
@@ -103,6 +134,14 @@ public class Jugador : Character
     void FixedUpdate()
     {
         
+    }
+
+    IEnumerator RecoverSanity()
+    {
+        Debug.Log("Recobrando la cordura");
+        yield return new WaitForSeconds(1);
+        cordura = 540f;
+        isInsane = false;
     }
 
     IEnumerator FullRechargeStamina()

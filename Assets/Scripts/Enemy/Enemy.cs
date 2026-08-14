@@ -4,17 +4,17 @@ using System.Collections;
 public class Enemy : Character
 {
     [Header("References")]
-    [SerializeField] private GameObject player;
+    [SerializeField] public GameObject player;
 
     [Header("Movement")]
     [SerializeField] private float rotationSpeed = 8f;
-    [SerializeField] private float anger = 0.9f;
-    [SerializeField] private float nearDistance = 3f;
-    [SerializeField] private float slowDistance = 5f;
+    [SerializeField] public float anger = 0.9f;
+    [SerializeField] public float nearDistance = 3f;
+    [SerializeField] public float slowDistance = 5f;
     [SerializeField] private float wallForce = 5f;
     [SerializeField] private float stoppingDistance = 1f;
     [SerializeField] private float jumpForce = 6f;
-    [SerializeField] private float maximumSpeed = 8f;
+    [SerializeField] public float maximumSpeed = 8f;
     [SerializeField] private float airAcceleration = 12f;
     [SerializeField] private float maximumFallSpeed = 12f;
 
@@ -31,14 +31,14 @@ public class Enemy : Character
     [SerializeField] private float maximumJumpTime = 8f;
 
     [Header("State")]
-    [SerializeField] private bool isNear;
+    [SerializeField] public bool isNear;
     [SerializeField] private bool isOnWall;
     [SerializeField] private bool isOnGround;
     [SerializeField] private bool isWaitingToJump;
     [SerializeField] private bool isJumping;
     [SerializeField] private bool isInRoom;
     [SerializeField] private bool IsAngerActive;
-    private int damage { get; set; }
+    public int damage { get; set; }
 
 
     private Rigidbody enemyrb;
@@ -46,7 +46,7 @@ public class Enemy : Character
     private Vector3 surfaceNormal = Vector3.up;
     private float wallDetachTimer;
     private float airTimeRemaining;
-    private float maxHealth; 
+    public float maxHealth; 
 
     void Start()
     {
@@ -124,7 +124,7 @@ public class Enemy : Character
         // Si no está en la pared, sigue al jugador
         else
         {
-            FollowPlayer();
+            FollowPlayer(enemyrb);
         }
 
         // Al tocar el suelo continúa girando hasta quedar de pie
@@ -292,19 +292,19 @@ public class Enemy : Character
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Room"))
+        if(other.CompareTag("Room") && !gameObject.CompareTag("Follower"))
         {
             //Destroy(gameObject);
             Die();
         }
     }
 
-    public void FollowPlayer()
+    public void FollowPlayer(Rigidbody enemyRb)
     {
-        enemyrb.useGravity = true;
+        enemyRb.useGravity = true;
 
         Vector3 directionToPlayer =
-            player.transform.position - enemyrb.position;
+            player.transform.position - enemyRb.position;
 
         // En el suelo solamente persigue horizontalmente
         directionToPlayer.y = 0f;
@@ -323,7 +323,8 @@ public class Enemy : Character
 
             RotateEnemy(
                 lookDirection,
-                Vector3.up
+                Vector3.up,
+                enemyRb
             );
         }
 
@@ -331,12 +332,12 @@ public class Enemy : Character
         if (distanceToPlayer <= stoppingDistance)
         {
             Vector3 velocity =
-                enemyrb.linearVelocity;
+                enemyRb.linearVelocity;
 
             velocity.x = 0f;
             velocity.z = 0f;
 
-            enemyrb.linearVelocity = velocity;
+            enemyRb.linearVelocity = velocity;
             return;
         }
 
@@ -358,7 +359,7 @@ public class Enemy : Character
             player.transform.position;
 
         targetPosition.y =
-            enemyrb.position.y;
+            enemyRb.position.y;
 
         /*
          * MoveTowards evita que el enemigo se pase
@@ -366,12 +367,12 @@ public class Enemy : Character
          */
         Vector3 nextPosition =
             Vector3.MoveTowards(
-                enemyrb.position,
+                enemyRb.position,
                 targetPosition,
                 currentSpeed * Time.fixedDeltaTime
             );
 
-        enemyrb.MovePosition(nextPosition);
+        enemyRb.MovePosition(nextPosition);
     }
 
     private void FollowPlayerOnWall()
@@ -399,7 +400,8 @@ public class Enemy : Character
         // Se ajusta con la rotación de la pared
         RotateEnemy(
             wallDirection,
-            surfaceNormal
+            surfaceNormal,
+            enemyrb
         );
     }
 
@@ -501,7 +503,8 @@ public class Enemy : Character
 
     private void RotateEnemy(
         Vector3 direction,
-        Vector3 upDirection
+        Vector3 upDirection,
+        Rigidbody enemyRB
     )
     {
         // Evita calcular rotación si no existe dirección
@@ -516,12 +519,12 @@ public class Enemy : Character
 
         Quaternion smoothRotation =
             Quaternion.Slerp(
-                enemyrb.rotation,
+                enemyRB.rotation,
                 targetRotation,
                 rotationSpeed * Time.fixedDeltaTime
             );
 
-        enemyrb.MoveRotation(smoothRotation);
+        enemyRB.MoveRotation(smoothRotation);
     }
 
     private void RotateFallingUpright()
