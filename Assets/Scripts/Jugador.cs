@@ -98,10 +98,6 @@ public class Jugador : Character
                 isInsane = true;
             }
         }
-        else
-        {
-
-        }
     }
 
     private void ValidateStamina()
@@ -134,6 +130,11 @@ public class Jugador : Character
     void FixedUpdate()
     {
         
+    }
+
+    private void SavedProgress()
+    {
+        StartCoroutine(RecoverSanity());
     }
 
     IEnumerator RecoverSanity()

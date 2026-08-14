@@ -172,6 +172,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""53c6addb-c162-478f-a530-814665e464ec"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +326,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""DDash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4470af0-b8e5-451b-86dd-f18ad8166597"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -334,6 +354,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Jugador_SDash = m_Jugador.FindAction("SDash", throwIfNotFound: true);
         m_Jugador_ADash = m_Jugador.FindAction("ADash", throwIfNotFound: true);
         m_Jugador_DDash = m_Jugador.FindAction("DDash", throwIfNotFound: true);
+        m_Jugador_Reload = m_Jugador.FindAction("Reload", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -423,6 +444,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Jugador_SDash;
     private readonly InputAction m_Jugador_ADash;
     private readonly InputAction m_Jugador_DDash;
+    private readonly InputAction m_Jugador_Reload;
     /// <summary>
     /// Provides access to input actions defined in input action map "Jugador".
     /// </summary>
@@ -470,6 +492,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Jugador/DDash".
         /// </summary>
         public InputAction @DDash => m_Wrapper.m_Jugador_DDash;
+        /// <summary>
+        /// Provides access to the underlying input action "Jugador/Reload".
+        /// </summary>
+        public InputAction @Reload => m_Wrapper.m_Jugador_Reload;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -523,6 +549,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @DDash.started += instance.OnDDash;
             @DDash.performed += instance.OnDDash;
             @DDash.canceled += instance.OnDDash;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         /// <summary>
@@ -561,6 +590,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @DDash.started -= instance.OnDDash;
             @DDash.performed -= instance.OnDDash;
             @DDash.canceled -= instance.OnDDash;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         /// <summary>
@@ -664,5 +696,12 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDDash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Reload" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReload(InputAction.CallbackContext context);
     }
 }
