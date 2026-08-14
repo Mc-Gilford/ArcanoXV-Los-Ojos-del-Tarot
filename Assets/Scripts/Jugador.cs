@@ -325,6 +325,12 @@ public class Jugador : Character
         stamina -= 6f;
     }
 
+    public void HealHP()
+    {
+        Debug.Log("Salud curada");
+        this.health += 1;
+    }
+
     /*private void DashW()
     {
         Debug.Log("Double dash made");
