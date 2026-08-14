@@ -14,7 +14,7 @@ public class ShootBullets : MonoBehaviour
     
     [SerializeField] private bool canShoot=true;
 
-    public int magazine, bulletsLeft;
+    public int magazine, bulletsLeft, bulletsOnGun;
 
     private Vector3 directionWithoutSpread, directionWithSpread;
     
@@ -22,6 +22,8 @@ public class ShootBullets : MonoBehaviour
     public Camera playerCamera;
     public Transform attackPoint;
 
+
+    [SerializeField] private int ammoClip;
     //Use of a textMeshPro for a shootpoint guide
     
 
@@ -29,7 +31,7 @@ public class ShootBullets : MonoBehaviour
     void Start()
     {
         shootForce = 10f;
-        
+        magazine = 24;
     }
 
     // Update is called once per frame
@@ -70,16 +72,33 @@ public class ShootBullets : MonoBehaviour
 
     }
 
-    public void Reload(int ammo)
+    public void Reload(InputAction.CallbackContext context)
     {
-        int recoverBullets = bulletsLeft+ammo;
-        if(recoverBullets >= magazine)
+
+        int bulletsToReload = ammoClip - bulletsOnGun;
+        if(bulletsLeft >= bulletsToReload)
         {
-            bulletsLeft=magazine;
+            bulletsLeft-=bulletsToReload;
+            bulletsOnGun += bulletsToReload;
+            canShoot = true;
         }
-        else
+        else if(bulletsLeft > 0)
         {
-            bulletsLeft = recoverBullets;
+            bulletsOnGun += bulletsLeft;
+            bulletsLeft = 0;
+            canShoot = true;
+        }
+    }
+
+    public void GetAmmo(int ammo)
+    {
+        int currentBullets = bulletsLeft + ammo;
+        if(currentBullets < magazine)
+        {
+            bulletsLeft += ammo;
+        }else if(currentBullets >= ammo)
+        {
+            bulletsLeft = magazine;
         }
     }
 
@@ -87,7 +106,7 @@ public class ShootBullets : MonoBehaviour
     {
         if(context.started && canShoot)
         {
-            bulletsLeft -= 1;
+            bulletsOnGun -= 1;
             StartCoroutine(GunKnockback()); 
 
             GameObject currentBullet = Instantiate(bulletModel, attackPoint.position, Quaternion.LookRotation(directionWithSpread.normalized) * Quaternion.Euler(90, 0, 0));
@@ -96,9 +115,15 @@ public class ShootBullets : MonoBehaviour
 
             currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
 
+            if(bulletsOnGun == 0)
+            {
+                canShoot = false;
+            }
 
         }
     }
+
+
 
     IEnumerator GunKnockback()
     {
