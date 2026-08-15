@@ -28,13 +28,17 @@ public class Character : MonoBehaviour
         if(this.health <=0)
         {
             isAlive = false;
-            Die();
+            if (!gameObject.CompareTag("Follower")) {
+                Die();
+            }
+            
         }
     }
 
     public virtual void Die()
     {
         Destroy(gameObject);
+
         Debug.Log("Muerte "+gameObject.name);
     }
 }
