@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: ad1e449ec156d0148a80694cb84a9c1e
-=======
 guid: da830a6a192b80b40807369cd7f21b7c
->>>>>>> origin/develop
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -35,15 +31,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-<<<<<<< HEAD
-      name: Armature|ArmatureAction.001
-      takeName: Armature|ArmatureAction.001
-      internalID: -1422011007694221501
-=======
       name: SpiderWalk
       takeName: Armature|Armature|ArmatureAction.001
       internalID: 6468842206477671005
->>>>>>> origin/develop
       firstFrame: 0
       lastFrame: 124
       wrapMode: 0
