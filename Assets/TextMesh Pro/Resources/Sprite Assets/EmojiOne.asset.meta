@@ -1,11 +1,16 @@
 fileFormatVersion: 2
 guid: c41005c129ba4d66911b75229fd70b45
 timeCreated: 1480316912
+<<<<<<< HEAD
 licenseType: Store
+=======
+licenseType: Pro
+>>>>>>> origin/develop
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
 AssetOrigin:
   serializedVersion: 1
   productId: 213197
@@ -13,3 +18,5 @@ AssetOrigin:
   packageVersion: 1.0.3
   assetPath: Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
   uploadId: 727820
+=======
+>>>>>>> origin/develop

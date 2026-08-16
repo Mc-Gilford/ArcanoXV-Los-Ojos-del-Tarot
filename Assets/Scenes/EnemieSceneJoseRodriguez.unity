@@ -799,7 +799,10 @@ MonoBehaviour:
   isAbleToRun: 1
   isTired: 0
   canDash: 1
+<<<<<<< HEAD
   isInsane: 0
+=======
+>>>>>>> origin/develop
   velocidad: 5
   salto: 20
   stamina: 10
@@ -1831,7 +1834,11 @@ GameObject:
   - component: {fileID: 1410055393}
   - component: {fileID: 1410055392}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Ground
+=======
+  m_Name: Floor
+>>>>>>> origin/develop
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

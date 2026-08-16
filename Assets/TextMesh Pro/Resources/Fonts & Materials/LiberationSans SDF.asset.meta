@@ -1,11 +1,16 @@
 fileFormatVersion: 2
 guid: 8f586378b4e144a9851e7b34d9b748ee
 timeCreated: 1484171803
+<<<<<<< HEAD
 licenseType: Store
+=======
+licenseType: Pro
+>>>>>>> origin/develop
 NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
 AssetOrigin:
   serializedVersion: 1
   productId: 213197
@@ -13,3 +18,5 @@ AssetOrigin:
   packageVersion: 1.0.3
   assetPath: Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
   uploadId: 727820
+=======
+>>>>>>> origin/develop

@@ -98,10 +98,6 @@ public class Jugador : Character
                 isInsane = true;
             }
         }
-        else
-        {
-
-        }
     }
 
     private void ValidateStamina()
@@ -134,6 +130,11 @@ public class Jugador : Character
     void FixedUpdate()
     {
         
+    }
+
+    private void SavedProgress()
+    {
+        StartCoroutine(RecoverSanity());
     }
 
     IEnumerator RecoverSanity()
@@ -322,6 +323,12 @@ public class Jugador : Character
         Debug.Log("Double dash made");
         rb.AddForce(direction.normalized * dashForce, ForceMode.Impulse);
         stamina -= 6f;
+    }
+
+    public void HealHP()
+    {
+        Debug.Log("Salud curada");
+        this.health += 1;
     }
 
     /*private void DashW()

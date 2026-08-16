@@ -4,6 +4,7 @@ ShaderImporter:
   externalObjects: {}
   defaultTextures: []
   nonModifiableTextures: []
+<<<<<<< HEAD
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -14,3 +15,8 @@ AssetOrigin:
   packageVersion: 1.0.3
   assetPath: Assets/TextMesh Pro/Shaders/TMPro.cginc
   uploadId: 727820
+=======
+  userData: Version 2.0
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> origin/develop
