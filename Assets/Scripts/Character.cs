@@ -28,7 +28,10 @@ public class Character : MonoBehaviour
         if(this.health <=0)
         {
             isAlive = false;
-            Die();
+            if (!gameObject.CompareTag("Follower"))
+            {
+                Die();
+            }
         }
     }
 
