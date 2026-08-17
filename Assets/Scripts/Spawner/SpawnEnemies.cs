@@ -71,14 +71,30 @@ public class SpawnEnemies : MonoBehaviour
     private void activateSpawn()
     {
         timerCounter += Time.deltaTime;
-
-        // Convertimos a entero SOLO para guardarlo y mostrarlo en tu Debug.Log
         timerInterval = (int)timerCounter;
-        Debug.Log("Timer : " + timerInterval + " Random Interval " + randomInterval);
 
-        if (enemyCount <= limitEnemies && timerInterval == randomInterval)
+        Debug.Log("Timer : " + timerInterval + " Random Interval " + randomInterval + " Enemies: " + enemyCount);
+
+        // 1. PRIMERO: Comprobamos si ya pasó el tiempo de espera
+        if (timerInterval >= randomInterval)
         {
-            createEnemy();
+            // 2. SEGUNDO: Si el tiempo ya se cumplió, revisamos si hay espacio
+            if (enemyCount < limitEnemies)
+            {
+                // Hay espacio (ej. hay 3 enemigos y el límite es 4): Creamos uno.
+                // (Esta función ya resetea timerCounter y timerInterval a 0)
+                createEnemy();
+            }
+            else
+            {
+                // No hay espacio (ya hay 4 enemigos): No creamos nada,
+                // pero SI O SÍ reiniciamos el tiempo para que vuelva a contar desde cero.
+                timerCounter = 0;
+                timerInterval = 0;
+                randomInterval = getRandomInterval();
+                Debug.Log("Límite alcanzado (" + enemyCount + "/" + limitEnemies + "). Reiniciando temporizador de espera.");
+            }
         }
     }
+
 }
