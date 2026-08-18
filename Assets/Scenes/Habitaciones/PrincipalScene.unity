@@ -70812,13 +70812,53 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1078657049750671800, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355931894810117372, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: bulletsOnGun
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355931894810117372, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: hasBulletsToShoot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235646516311466375, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 5000730583466763867}
     - target: {fileID: 2627944424092730325, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_Name
       value: PlayerSet
       objectReference: {fileID: 0}
+    - target: {fileID: 3268975710442634533, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.951
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268975710442634533, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.058
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268975710442634533, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338177056941694331, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5000730583466763866}
     - target: {fileID: 3338177056941694331, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 5000730583466763866}
+    - target: {fileID: 3338177056941694331, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Shoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338177056941694331, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Reload
       objectReference: {fileID: 0}
     - target: {fileID: 5465632942743037496, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -70865,6 +70905,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+--- !u!114 &5000730583466763866 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1355931894810117372, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+  m_PrefabInstance: {fileID: 5000730583466763865}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3144973b33ab2994d9d8e67a2b59f7f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShootBullets
+--- !u!4 &5000730583466763867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4057296353023997633, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+  m_PrefabInstance: {fileID: 5000730583466763865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
