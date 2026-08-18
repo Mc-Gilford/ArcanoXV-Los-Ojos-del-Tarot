@@ -17,6 +17,7 @@ public class Ghost : Enemy
     private AudioSource scareAudio;
     private bool isHidden = true;
     private float[] teleportDistance = {2,4,6,10};
+    private bool isGhostAlwaysActive; 
 
     void Start()
     {
@@ -52,14 +53,21 @@ public class Ghost : Enemy
             //hasAlmostAllKeys = playerScript.getCordura() > 7;
             Debug.Log(corduraPlayer);
 
-            if(corduraPlayer<=5 || hasAlmostAllKeys)
+            if((corduraPlayer<=5 || hasAlmostAllKeys) && !isTeletransported)
             {
                 //gameObject.SetActive(true);
+                isGhostAlwaysActive = true;
+                isTeletransported = true;
                 ShowGhost();
+                randomTimeScare = UnityEngine.Random.Range(60, 90);
+                StartCoroutine(WaitAction(randomTimeScare, ScarePlayer));
             }
-            else if(corduraPlayer>5 && !isTeletransported)
+
+            else if((corduraPlayer>5 && !hasAlmostAllKeys) &&!isTeletransported)
             {
                 isTeletransported = true;
+                isGhostAlwaysActive = false;
+               
                 randomTimeScare = UnityEngine.Random.Range(10, 20);
                 StartCoroutine( WaitAction(randomTimeScare, ScarePlayer));
             }
@@ -119,7 +127,13 @@ public class Ghost : Enemy
         teletransportPosition = player.transform.position - directionToPlayer * teleportDistance[index];
         ghostRb.position = teletransportPosition;
         isTeletransported = true;
-        StartCoroutine(WaitAction(20, HideGhost, isTeletransported));
+        if (!isGhostAlwaysActive)
+        {
+            StartCoroutine(WaitAction(20, HideGhost, isTeletransported));
+        }
+        else{
+            isTeletransported = false;
+        }
 
 
     }
