@@ -38,12 +38,14 @@ public class Jugador : Character
     [SerializeField] private bool isAbleToRun= true;
     [SerializeField] private bool isTired= false;
     [SerializeField] private bool canDash = true;
-    [SerializeField] private bool isInsane = false;
+    public bool isInsane { get; private set; }
     [SerializeField] private bool isInsideSafeRoom = false;
     [SerializeField] private float velocidad = 5f;
     [SerializeField] private float salto = 10f;
     [SerializeField] private float stamina = 10f;
-    [SerializeField] private float cordura = 540f;
+    [SerializeField] private float cordura = 600f;
+    [SerializeField] private float sanityTimer=0f;
+    [SerializeField] private int sanityPoints=10;
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float timeDoubleTap = 0.2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -56,7 +58,7 @@ public class Jugador : Character
     {
         dashForce = 8f;
         salto = 10f;
-        cordura = 540f;
+        cordura = 600f;
         puedeSaltar = true;
         isInsane = false;
         inputJugador = GetComponent<PlayerInput>();
@@ -87,6 +89,7 @@ public class Jugador : Character
     {
         MoverJugador();
         ValidateStamina();
+        ValidateSanity();
     }
 
     private void ValidateSanity()
@@ -94,10 +97,22 @@ public class Jugador : Character
         if(cordura >= 0 && !isInsideSafeRoom)
         {
             cordura -= Time.deltaTime;
-            if(!isInsane && cordura <270)
+            sanityTimer += Time.deltaTime;
+            DecreaseSanity();
+            if(!isInsane && sanityPoints <=3)
             {
+                Debug.Log("Me voy a volver loco aqui");
                 isInsane = true;
             }
+        }
+    }
+
+    private void DecreaseSanity()
+    {
+        if(sanityTimer >= 60)
+        {
+            sanityPoints--;
+            sanityTimer=0;
         }
     }
 
