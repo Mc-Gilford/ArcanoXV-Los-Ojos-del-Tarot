@@ -49,11 +49,11 @@ public class Ghost : Enemy
     {
         if (player != null)
         {
-            float corduraPlayer = playerScript.getCordura();
+            bool corduraPlayer = playerScript.isInsane;
             //hasAlmostAllKeys = playerScript.getCordura() > 7;
             Debug.Log(corduraPlayer);
 
-            if((corduraPlayer<=5 || hasAlmostAllKeys) && !isTeletransported)
+            if((corduraPlayer || hasAlmostAllKeys) && !isTeletransported)
             {
                 //gameObject.SetActive(true);
                 isGhostAlwaysActive = true;
@@ -63,7 +63,7 @@ public class Ghost : Enemy
                 StartCoroutine(WaitAction(randomTimeScare, ScarePlayer));
             }
 
-            else if((corduraPlayer>5 && !hasAlmostAllKeys) &&!isTeletransported)
+            else if((corduraPlayer && !hasAlmostAllKeys) &&!isTeletransported)
             {
                 isTeletransported = true;
                 isGhostAlwaysActive = false;
