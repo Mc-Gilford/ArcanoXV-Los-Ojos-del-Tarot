@@ -39,6 +39,7 @@ public class Jugador : Character
     [SerializeField] private bool isTired= false;
     [SerializeField] private bool canDash = true;
     [SerializeField] private bool isInsane = false;
+    [SerializeField] private bool isInsideSafeRoom = false;
     [SerializeField] private float velocidad = 5f;
     [SerializeField] private float salto = 10f;
     [SerializeField] private float stamina = 10f;
@@ -90,7 +91,7 @@ public class Jugador : Character
 
     private void ValidateSanity()
     {
-        if(cordura >= 0)
+        if(cordura >= 0 && !isInsideSafeRoom)
         {
             cordura -= Time.deltaTime;
             if(!isInsane && cordura <270)
