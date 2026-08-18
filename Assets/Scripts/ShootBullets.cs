@@ -118,6 +118,7 @@ public class ShootBullets : MonoBehaviour
     {
         if(context.started && canShoot && hasBulletsToShoot)
         {
+            Debug.Log("Shoot sound");
             bulletsOnGun -= 1;
             StartCoroutine(GunKnockback()); 
 
