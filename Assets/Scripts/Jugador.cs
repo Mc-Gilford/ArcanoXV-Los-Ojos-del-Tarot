@@ -61,6 +61,7 @@ public class Jugador : Character
         cordura = 600f;
         puedeSaltar = true;
         isInsane = false;
+        health = 4;
         inputJugador = GetComponent<PlayerInput>();
         accionMovimiento = inputJugador.actions.FindAction("Movimiento");
         accionSalto = inputJugador.actions.FindAction("Saltar");
@@ -188,6 +189,11 @@ public class Jugador : Character
         if(collision.collider.CompareTag("suelo"))
         {
             puedeSaltar = true;
+        }
+
+        if(collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("Follower"))
+        {
+            TakeDamage(1);
         }
     }
 
