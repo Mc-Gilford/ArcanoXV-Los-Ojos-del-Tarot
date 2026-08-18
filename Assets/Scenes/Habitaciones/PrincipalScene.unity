@@ -34365,6 +34365,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bb4dd7301700a43aa2b273b132383b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CamerColora
+--- !u!4 &1036180692 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8364785495825884747, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+  m_PrefabInstance: {fileID: 5000730583466763865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1039344760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4388053584151060432, guid: cce4d8667f2436a479759f07084d8ff4, type: 3}
@@ -35985,6 +35990,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4388053584151060432, guid: cce4d8667f2436a479759f07084d8ff4, type: 3}
   m_PrefabInstance: {fileID: 505269784}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1101666146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1101666147}
+  - component: {fileID: 1101666149}
+  - component: {fileID: 1101666148}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1101666147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101666146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4414, y: -0.2127, z: -0.5066}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1036180692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101666148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101666146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bb4dd7301700a43aa2b273b132383b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraColor
+--- !u!114 &1101666149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101666146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: f8f5eaaa5fb89e2438761a89feaba852, type: 2}
 --- !u!1001 &1101953076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70845,6 +70912,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 5000730583466763867}
+    - target: {fileID: 2498418577274894517, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2627944424092730325, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_Name
       value: PlayerSet
@@ -70917,9 +70988,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7082206461726481772, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: cordura
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8364785495825884747, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1101666147}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7957190706809315962, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       insertIndex: -1
