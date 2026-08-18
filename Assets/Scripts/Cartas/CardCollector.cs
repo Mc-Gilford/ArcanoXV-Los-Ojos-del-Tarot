@@ -12,7 +12,7 @@ public class CardCollector : MonoBehaviour
     public static CardCollector Instance { get; private set; }
 
     [Tooltip("Cuántas cartas hay que recoger para abrir la puerta del jefe final.")]
-    public int cartasNecesarias = 5;
+    public int cartasNecesarias = 9;
 
     public int CartasObtenidas { get; private set; }
     public bool TodasRecogidas => CartasObtenidas >= cartasNecesarias;
@@ -24,10 +24,13 @@ public class CardCollector : MonoBehaviour
 
     private Text _hud;
 
+    public GameManager gameManager;
+
     private void Awake()
     {
         Instance = this;
         CrearHud();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void OnDestroy()
@@ -41,6 +44,8 @@ public class CardCollector : MonoBehaviour
         CartasObtenidas = Mathf.Min(cartasNecesarias, CartasObtenidas + 1);
 
         OnCartaRecogida?.Invoke(CartasObtenidas, cartasNecesarias);
+        gameManager.GetKeyCard();
+
         ActualizarHud();
         Debug.Log($"[Cartas] Carta recogida: {CartasObtenidas}/{cartasNecesarias}.");
 
@@ -86,5 +91,10 @@ public class CardCollector : MonoBehaviour
     {
         if (_hud != null)
             _hud.text = "Cartas: " + CartasObtenidas + "/" + cartasNecesarias;
+    }
+
+    public void LoadCards(int cardsLoaded)
+    {
+        CartasObtenidas += cardsLoaded;
     }
 }

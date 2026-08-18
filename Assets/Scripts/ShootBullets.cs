@@ -14,6 +14,8 @@ public class ShootBullets : MonoBehaviour
     
     [SerializeField] private bool canShoot=true;
 
+    [SerializeField] private bool hasBulletsToShoot;
+
     public int magazine, bulletsLeft, bulletsOnGun;
 
     private Vector3 directionWithoutSpread, directionWithSpread;
@@ -32,6 +34,8 @@ public class ShootBullets : MonoBehaviour
     {
         shootForce = 10f;
         magazine = 24;
+        ammoClip = 5;
+        CheckBullets();
     }
 
     // Update is called once per frame
@@ -43,6 +47,14 @@ public class ShootBullets : MonoBehaviour
     private void LateUpdate()
     {
         
+    }
+
+    private void CheckBullets()
+    {
+        if(bulletsOnGun <= 0)
+        {
+            hasBulletsToShoot = false;
+        } 
     }
 
     private void ShowPointer()
@@ -80,13 +92,13 @@ public class ShootBullets : MonoBehaviour
         {
             bulletsLeft-=bulletsToReload;
             bulletsOnGun += bulletsToReload;
-            canShoot = true;
+            hasBulletsToShoot = true;
         }
         else if(bulletsLeft > 0)
         {
             bulletsOnGun += bulletsLeft;
             bulletsLeft = 0;
-            canShoot = true;
+            hasBulletsToShoot = true;
         }
     }
 
@@ -104,7 +116,7 @@ public class ShootBullets : MonoBehaviour
 
     public void Shoot(InputAction.CallbackContext context)
     {
-        if(context.started && canShoot)
+        if(context.started && canShoot && hasBulletsToShoot)
         {
             bulletsOnGun -= 1;
             StartCoroutine(GunKnockback()); 
@@ -115,10 +127,7 @@ public class ShootBullets : MonoBehaviour
 
             currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
 
-            if(bulletsOnGun == 0)
-            {
-                canShoot = false;
-            }
+            CheckBullets();
 
         }
     }
