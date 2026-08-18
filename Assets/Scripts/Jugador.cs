@@ -32,7 +32,7 @@ public class Jugador : Character
     private float lastTapS = 0f;
     private float lastTapA = 0f;
     private float lastTapD = 0f;
-
+    private int drunkEffect = 10;
 
     [SerializeField] private bool isRunning= false;
     [SerializeField] private bool isAbleToRun= true;
@@ -48,6 +48,9 @@ public class Jugador : Character
     [SerializeField] private int sanityPoints=10;
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float timeDoubleTap = 0.2f;
+    [SerializeField] private float invertedControllers = 1f;
+    [SerializeField] private bool isDrunk = false;
+    [SerializeField] private int drunkShield = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -78,6 +81,7 @@ public class Jugador : Character
         sprintAction.started += ctx => Run();
         sprintAction.canceled += ctx => StopRunning();
         rb = GetComponent<Rigidbody>();
+        StartCoroutine(GetDrunk());
     }
 
     public float getCordura()
@@ -173,6 +177,17 @@ public class Jugador : Character
         isAbleToRun = true;
     }
 
+    IEnumerator GetDrunk()
+    {
+        invertedControllers = -1f;
+        isDrunk=true;
+        drunkShield = 0;
+        yield return new WaitForSeconds(drunkEffect);
+        invertedControllers = 1f;
+        isDrunk=false;
+        drunkShield = 1;
+    }
+
     private void Saltar () 
     {
         rb.AddForce(Vector3.up * salto, ForceMode.Impulse);
@@ -193,7 +208,7 @@ public class Jugador : Character
 
         if(collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("Follower"))
         {
-            TakeDamage(1);
+            TakeDamage(1*drunkShield);
         }
     }
 
@@ -211,7 +226,7 @@ public class Jugador : Character
         forward.Normalize();
         right.Normalize();
 
-        Vector3 movement = (forward * direccion.y + right * direccion.x) * velocidad * Time.deltaTime;
+        Vector3 movement = (forward * (direccion.y*invertedControllers) + right * (direccion.x*invertedControllers)) * velocidad * Time.deltaTime;
 
         transform.position += movement;
     }
@@ -242,7 +257,15 @@ public class Jugador : Character
 
         if(currenTime - lastTapW <= timeDoubleTap)
         {
-            ManageDash("forward");
+            switch(invertedControllers)
+            {
+                case 1:
+                    ManageDash("forward");
+                    break;
+                case -1:
+                    ManageDash("backward");
+                    break;
+            }
             lastTapW = 0f;
 
         }else
@@ -260,7 +283,16 @@ public class Jugador : Character
 
         if(currenTime - lastTapA <= timeDoubleTap)
         {
-            ManageDash("left");
+            switch(invertedControllers)
+            {
+                case 1:
+                    ManageDash("left");
+                    break;
+                case -1:
+                    ManageDash("right");
+                    break;
+            }
+            
             lastTapA = 0f;
 
         }else
@@ -278,7 +310,15 @@ public class Jugador : Character
 
         if(currenTime - lastTapS <= timeDoubleTap)
         {
-            ManageDash("backward");
+            switch(invertedControllers)
+            {
+                case 1:
+                    ManageDash("backward");
+                    break;
+                case -1:
+                    ManageDash("forward");
+                    break;
+            }
             lastTapS = 0f;
 
         }else
@@ -296,7 +336,15 @@ public class Jugador : Character
 
         if(currenTime - lastTapD <= timeDoubleTap)
         {
-            ManageDash("right");
+            switch(invertedControllers)
+            {
+                case 1:
+                    ManageDash("right");
+                    break;
+                case -1:
+                    ManageDash("left");
+                    break;
+            }
             lastTapD = 0f;
 
         }else
@@ -351,6 +399,11 @@ public class Jugador : Character
     {
         Debug.Log("Salud curada");
         this.health += 1;
+    }
+
+    public void LetsDrink()
+    {
+        StartCoroutine(GetDrunk());
     }
 
     /*private void DashW()
