@@ -14,6 +14,8 @@ public class SpawnEnemies : MonoBehaviour
     private int timerInterval = 0;
     private float timerCounter = 0f;
     public int enemyCount;
+    private bool moodCarnage;
+    public int enemyCountCarnage = 0;
 
     void Start()
     {
@@ -79,20 +81,26 @@ public class SpawnEnemies : MonoBehaviour
         if (timerInterval >= randomInterval)
         {
             // 2. SEGUNDO: Si el tiempo ya se cumplió, revisamos si hay espacio
-            if (enemyCount < limitEnemies)
+            if ((enemyCount < limitEnemies) && !moodCarnage)
             {
                 // Hay espacio (ej. hay 3 enemigos y el límite es 4): Creamos uno.
                 // (Esta función ya resetea timerCounter y timerInterval a 0)
                 createEnemy();
             }
+            else if(moodCarnage && enemyCountCarnage < limitEnemies)
+            {
+                createEnemy();
+                enemyCountCarnage++;
+            }
             else
             {
                 // No hay espacio (ya hay 4 enemigos): No creamos nada,
                 // pero SI O SÍ reiniciamos el tiempo para que vuelva a contar desde cero.
-                timerCounter = 0;
+                timerCounter = 0; 
+                enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length - 1;
                 timerInterval = 0;
                 randomInterval = getRandomInterval();
-                Debug.Log("Límite alcanzado (" + enemyCount + "/" + limitEnemies + "). Reiniciando temporizador de espera.");
+                //Debug.Log("Límite alcanzado (" + enemyCount + "/" + limitEnemies + "). Reiniciando temporizador de espera.");
             }
         }
     }
