@@ -24,31 +24,31 @@ public class CameraColor : MonoBehaviour
     {
         player = GameObject.Find("Player");
 
-        Debug.Log("Player encontrado: " + (player != null));
+        //Debug.Log("Player encontrado: " + (player != null));
 
         if (player != null)
         {
             playerScript = player.GetComponent<Jugador>();
-            Debug.Log("Jugador script encontrado: " + (playerScript != null));
+            //Debug.Log("Jugador script encontrado: " + (playerScript != null));
         }
 
         globalVolume = GetComponent<Volume>();
 
-        Debug.Log("Volume encontrado: " + (globalVolume != null));
+        //Debug.Log("Volume encontrado: " + (globalVolume != null));
 
         if (globalVolume != null)
         {
-            Debug.Log("Volume Profile: " + globalVolume.profile);
+            //Debug.Log("Volume Profile: " + globalVolume.profile);
 
             // Buscar Color Adjustments
             bool colorFound = globalVolume.profile.TryGet(out colorAdjustments);
 
-            Debug.Log("ColorAdjustments encontrado: " + colorFound);
+            //Debug.Log("ColorAdjustments encontrado: " + colorFound);
 
             // Buscar Vignette
             bool vignetteFound = globalVolume.profile.TryGet(out vignette);
 
-            Debug.Log("Vignette encontrado: " + vignetteFound);
+            //Debug.Log("Vignette encontrado: " + vignetteFound);
 
             if (colorAdjustments != null)
             {
@@ -56,7 +56,7 @@ public class CameraColor : MonoBehaviour
 
                 originalColor = colorAdjustments.colorFilter.value;
 
-                Debug.Log("Color original: " + originalColor);
+                //Debug.Log("Color original: " + originalColor);
             }
 
             if (vignette != null)
@@ -69,7 +69,7 @@ public class CameraColor : MonoBehaviour
                 originalVignetteSmoothness = vignette.smoothness.value;
                 originalVignetteColor = vignette.color.value;
 
-                Debug.Log("Vignette original intensity: " + originalVignetteIntensity);
+                //Debug.Log("Vignette original intensity: " + originalVignetteIntensity);
             }
         }
     }
@@ -93,7 +93,7 @@ public class CameraColor : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("NO SE PUEDE CAMBIAR EFECTO | Player: " + (playerScript != null) + " | ColorAdjustments: " + (colorAdjustments != null) + " | Vignette: " + (vignette != null));
+            //Debug.LogWarning("NO SE PUEDE CAMBIAR EFECTO | Player: " + (playerScript != null) + " | ColorAdjustments: " + (colorAdjustments != null) + " | Vignette: " + (vignette != null));
         }
     }
 
@@ -114,7 +114,7 @@ public class CameraColor : MonoBehaviour
 
         isRed = true;
 
-        Debug.Log("APLICANDO EFECTO DE CORDURA | Color: " + colorAdjustments.colorFilter.value + " | Vignette: " + vignette.intensity.value);
+        //Debug.Log("APLICANDO EFECTO DE CORDURA | Color: " + colorAdjustments.colorFilter.value + " | Vignette: " + vignette.intensity.value);
     }
 
     private void RestoreCameraColor()
@@ -134,6 +134,6 @@ public class CameraColor : MonoBehaviour
 
         isRed = false;
 
-        Debug.Log("RESTAURANDO CAMARA | Color: " + colorAdjustments.colorFilter.value + " | Vignette: " + vignette.intensity.value);
+        //Debug.Log("RESTAURANDO CAMARA | Color: " + colorAdjustments.colorFilter.value + " | Vignette: " + vignette.intensity.value);
     }
 }
