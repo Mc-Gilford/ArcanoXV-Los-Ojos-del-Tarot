@@ -416,7 +416,17 @@ public class Jugador : Character
 
     public void LoseHalfHP()
     {
-        Debug.Log("Hola");
+        float waste = health % 2;
+        float half=0f;
+        if(waste == 0)
+        {
+            health /= 2;
+        }
+        else
+        {
+            half = health/2;
+            health = Mathf.FloorToInt(half);
+        }
     }
 
     /*private void DashW()
