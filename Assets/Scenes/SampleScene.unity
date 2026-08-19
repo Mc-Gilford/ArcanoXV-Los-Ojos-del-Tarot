@@ -694,59 +694,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &974546812 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-  m_PrefabInstance: {fileID: 3224417612631581344}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &974546813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974546812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3277fcdc7a2cf34cbb1ed02fc3264b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionSystem
-  cartas:
-  - nombre: Inversion Espectral
-    poderDesc: "Eres inmune al da\xF1o"
-    maldicionDesc: Tus controles se invierten
-    color: {r: 0.15, g: 0.55, b: 0.25, a: 1}
-    velocidadMult: 1.6
-    duracionPoder: 12
-    maldicionVelocidadMult: 1
-    maldicionSinSprint: 1
-    duracionMaldicion: 10
-  - nombre: Destruccion Espectral
-    poderDesc: Destruyes a los enemigos de la sala
-    maldicionDesc: Perdes la mitad de tu vida
-    color: {r: 0.2, g: 0.45, b: 0.85, a: 1}
-    velocidadMult: 1.25
-    duracionPoder: 12
-    maldicionVelocidadMult: 0.7
-    maldicionSinSprint: 0
-    duracionMaldicion: 1
-  - nombre: Corazon Guia
-    poderDesc: Teletransporta al jugador a la zona segura
-    maldicionDesc: Pierdes todas las municiones que no esten dentro del cargador
-      de tu arma
-    color: {r: 0.92, g: 0.92, b: 0.92, a: 1}
-    velocidadMult: 2
-    duracionPoder: 8
-    maldicionVelocidadMult: 0.5
-    maldicionSinSprint: 1
-    duracionMaldicion: 1
-  cooldownHabilidad: 45
-  tiempoAbrir: 0.4
-  tiempoAnimacionElegir: 0.5
-  tiempoResultado: 2.5
-  tiempoFlash: 0.4
-  bloquearMovimientoAlElegir: 1
-  gameManager: {fileID: 0}
 --- !u!1 &1112871363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,37 +1026,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700856211}
   m_CullTransparentMesh: 1
---- !u!1 &1930676160
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1930676161}
-  m_Layer: 0
-  m_Name: PuntoDisparo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1930676161
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1930676160}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.6520392, z: -0, w: 0.7581854}
-  m_LocalPosition: {x: 0.277, y: 0.081, z: -0.009}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2078798946}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2078798944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1162,20 +1078,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9195615305045848528, guid: 748d19574625db444877ca05561b6aea, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 4102742168588312558, guid: 748d19574625db444877ca05561b6aea, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 330585545}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1930676161}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2738520558268228719, guid: 748d19574625db444877ca05561b6aea, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2078798947}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 748d19574625db444877ca05561b6aea, type: 3}
 --- !u!1 &2078798945 stripped
 GameObject:
@@ -1187,11 +1097,10 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3263699454365990613, guid: 748d19574625db444877ca05561b6aea, type: 3}
   m_PrefabInstance: {fileID: 2078798944}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2078798947
+--- !u!114 &2078798947 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4102742168588312558, guid: 748d19574625db444877ca05561b6aea, type: 3}
+  m_PrefabInstance: {fileID: 2078798944}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078798945}
   m_Enabled: 1
@@ -1199,19 +1108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3144973b33ab2994d9d8e67a2b59f7f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShootBullets
-  bulletModel: {fileID: 1145030656307566588, guid: 5e4967597b4302b4cb29625bd9012bbb, type: 3}
-  shootForce: 0
-  upwardForce: 0
-  spread: 0
-  shootCooldown: 1
-  canShoot: 1
-  hasBulletsToShoot: 0
-  magazine: 0
-  bulletsLeft: 0
-  bulletsOnGun: 0
-  playerCamera: {fileID: 330585545}
-  attackPoint: {fileID: 1930676161}
-  ammoClip: 0
 --- !u!1001 &658303846509712463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1318,26 +1214,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
-      value: 53c6addb-c162-478f-a530-814665e464ec
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
-      value: 'Jugador/Reload[/Keyboard/r]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 330585548}
@@ -1349,26 +1225,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2078798947}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Shoot
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Reload
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ShootBullets, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1376,10 +1232,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 974546813}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
 --- !u!1001 &8630997523231430961
 PrefabInstance:
