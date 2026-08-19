@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+
+    private int cardCooldown;
 
     [SerializeField] private int keyCards;
 
@@ -15,11 +18,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool deathCard=false;
     [SerializeField] private bool safeCard=false;
     [SerializeField] private bool drunkCard=false;
+    [SerializeField] private bool canUseCard=false;
+    [SerializeField] private string cardSelected="";
+
+    public Jugador playerScript;
+    public ShootBullets gunScript;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //keyCardCollection = GameObject.Find("CardPickup").GetComponent<CardPickup>();
         cardsBeforeStalker = 5;
+        cardCooldown = 5;
+        playerScript = GameObject.Find("Player").GetComponent<Jugador>();
+        gunScript = GameObject.Find("Gun").GetComponent<ShootBullets>();
     }
 
     // Update is called once per frame
@@ -64,4 +76,47 @@ public class GameManager : MonoBehaviour
     {
         safeCard = true;
     }
+
+    /*public void UseCard(InputAction.CallbackContext context)
+    {
+        if(context.started && (cardSelected != "" && cardSelected != "none") && canUseCard)
+        {
+            Debug.Log("Usando carta");
+            CardEffect();
+        }
+    }*/
+
+    private void CardEffect()
+    {
+        switch(cardSelected)
+        {
+            case 1:
+                playerScript.LetsDrink();
+                cardSelected = "none";
+                drunkCard = false;
+                StartCoroutine(CardWaitTime());
+                break;
+            case "Death":
+                SpectralDestruction();
+                cardSelected="none"
+                deathCard = false;
+                StartCoroutine(CardWaitTime());
+                break;
+            case "Safe":
+                playerScript.GoToSafeRoom();
+                gunScript.EmptyBullets();
+                cardSelected = "none";
+                safeCard = false;
+                StartCoroutine(CardWaitTime());
+                break;
+        }
+    }
+
+    /*IEnumerator CardWaitTime()
+    {
+        Debug.Log("Espera antes de usar otra carta");
+        canUseCard = false;
+        yield return new WaitForSeconds(cardCooldown);
+        canUseCard = true;
+    } */
 }

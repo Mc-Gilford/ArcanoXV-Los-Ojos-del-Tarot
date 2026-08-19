@@ -31,39 +31,39 @@ public class CardDef
         {
             new CardDef
             {
-                nombre = "El Carro",
+                nombre = "Inversion Espectral",
                 color = new Color(0.15f, 0.55f, 0.25f),
-                poderDesc = "Vas más rápido (+60% velocidad) durante 12 s.",
-                maldicionDesc = "Pierdes el sprint durante 12 s.",
+                poderDesc = "Eres inmune al daño",
+                maldicionDesc = "Tus controles se invierten",
                 velocidadMult = 1.6f,
                 duracionPoder = 12f,
                 maldicionVelocidadMult = 1f,
                 maldicionSinSprint = true,
-                duracionMaldicion = 12f
+                duracionMaldicion = 10f
             },
             new CardDef
             {
-                nombre = "La Estrella",
+                nombre = "Destruccion Espectral",
                 color = new Color(0.20f, 0.45f, 0.85f),
-                poderDesc = "Avanzas con paso firme (+25% velocidad) durante 12 s.",
-                maldicionDesc = "Te ralentiza (-30% velocidad) durante 15 s.",
+                poderDesc = "Destruyes a los enemigos de la sala",
+                maldicionDesc = "Perdes la mitad de tu vida",
                 velocidadMult = 1.25f,
                 duracionPoder = 12f,
                 maldicionVelocidadMult = 0.7f,
                 maldicionSinSprint = false,
-                duracionMaldicion = 15f
+                duracionMaldicion = 1f
             },
             new CardDef
             {
-                nombre = "El Ahorcado",
+                nombre = "Corazon Guia",
                 color = new Color(0.92f, 0.92f, 0.92f),
-                poderDesc = "Ráfaga de velocidad (+100%) durante 8 s.",
-                maldicionDesc = "Pierdes el sprint y vas lento (-50% velocidad) durante 15 s.",
+                poderDesc = "Teletransporta al jugador a la zona segura",
+                maldicionDesc = "Pierdes todas las municiones que no esten dentro del cargador de tu arma",
                 velocidadMult = 2f,
                 duracionPoder = 8f,
                 maldicionVelocidadMult = 0.5f,
                 maldicionSinSprint = true,
-                duracionMaldicion = 15f
+                duracionMaldicion = 1f
             }
         };
     }

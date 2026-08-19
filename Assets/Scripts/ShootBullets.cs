@@ -108,7 +108,7 @@ public class ShootBullets : MonoBehaviour
         if(currentBullets < magazine)
         {
             bulletsLeft += ammo;
-        }else if(currentBullets >= ammo)
+        }else if(currentBullets >= magazine)
         {
             bulletsLeft = magazine;
         }
@@ -133,7 +133,10 @@ public class ShootBullets : MonoBehaviour
         }
     }
 
-
+    public void EmptyBullets()
+    {
+        bulletsLeft = 0;
+    }
 
     IEnumerator GunKnockback()
     {

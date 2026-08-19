@@ -414,6 +414,11 @@ public class Jugador : Character
         isInsideSafeRoom=true;
     }
 
+    public void LoseHalfHP()
+    {
+        Debug.Log("Hola");
+    }
+
     /*private void DashW()
     {
         Debug.Log("Double dash made");
