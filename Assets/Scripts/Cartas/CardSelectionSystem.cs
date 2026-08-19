@@ -87,7 +87,7 @@ public class CardSelectionSystem : MonoBehaviour
             if (kb.jKey.wasPressedThisFrame) { ElegirCarta(0); return; }
             if (kb.kKey.wasPressedThisFrame) { ElegirCarta(1); return; }
             if (kb.lKey.wasPressedThisFrame) { ElegirCarta(2); return; }
-            if (kb.spaceKey.wasPressedThisFrame || kb.tabKey.wasPressedThisFrame) CerrarSinElegir();
+            if (kb.tabKey.wasPressedThisFrame) CerrarSinElegir();
         }
 
         if (_estado == Estado.EnCooldown)
