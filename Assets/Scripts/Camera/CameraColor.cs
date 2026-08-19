@@ -80,7 +80,7 @@ public class CameraColor : MonoBehaviour
         {
             float corduraPlayer = playerScript.getCordura();
 
-            Debug.Log("Cordura: " + corduraPlayer + " | isRed: " + isRed);
+            //Debug.Log("Cordura: " + corduraPlayer + " | isRed: " + isRed);
 
             if (corduraPlayer <= 3 && !isRed)
             {
