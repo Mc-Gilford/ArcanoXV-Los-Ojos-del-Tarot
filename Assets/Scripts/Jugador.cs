@@ -81,7 +81,7 @@ public class Jugador : Character
         sprintAction.started += ctx => Run();
         sprintAction.canceled += ctx => StopRunning();
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(GetDrunk());
+        //StartCoroutine(GetDrunk());
     }
 
     public float getCordura()
@@ -186,7 +186,7 @@ public class Jugador : Character
         invertedControllers = 1f;
         isDrunk=false;
         drunkShield = 1;
-        GoToSafeRoom();
+        //GoToSafeRoom();
     }
 
     private void Saltar () 

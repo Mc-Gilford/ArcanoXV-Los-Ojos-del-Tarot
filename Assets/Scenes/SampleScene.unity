@@ -484,6 +484,60 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &530248053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530248055}
+  - component: {fileID: 530248054}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &530248054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530248053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddb330f2431cc54ea4a56e1331f796f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  keyCards: 0
+  cardsBeforeStalker: 0
+  isAwaked: 0
+  deathCard: 0
+  safeCard: 0
+  drunkCard: 0
+  canUseCard: 0
+  cardSelected: 
+  playerScript: {fileID: 0}
+  gunScript: {fileID: 0}
+--- !u!4 &530248055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530248053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.30618, y: 1.94735, z: -0.74115}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &545487942 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2914483279350274709, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
@@ -640,6 +694,59 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &974546812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+  m_PrefabInstance: {fileID: 3224417612631581344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &974546813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974546812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3277fcdc7a2cf34cbb1ed02fc3264b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionSystem
+  cartas:
+  - nombre: Inversion Espectral
+    poderDesc: "Eres inmune al da\xF1o"
+    maldicionDesc: Tus controles se invierten
+    color: {r: 0.15, g: 0.55, b: 0.25, a: 1}
+    velocidadMult: 1.6
+    duracionPoder: 12
+    maldicionVelocidadMult: 1
+    maldicionSinSprint: 1
+    duracionMaldicion: 10
+  - nombre: Destruccion Espectral
+    poderDesc: Destruyes a los enemigos de la sala
+    maldicionDesc: Perdes la mitad de tu vida
+    color: {r: 0.2, g: 0.45, b: 0.85, a: 1}
+    velocidadMult: 1.25
+    duracionPoder: 12
+    maldicionVelocidadMult: 0.7
+    maldicionSinSprint: 0
+    duracionMaldicion: 1
+  - nombre: Corazon Guia
+    poderDesc: Teletransporta al jugador a la zona segura
+    maldicionDesc: Pierdes todas las municiones que no esten dentro del cargador
+      de tu arma
+    color: {r: 0.92, g: 0.92, b: 0.92, a: 1}
+    velocidadMult: 2
+    duracionPoder: 8
+    maldicionVelocidadMult: 0.5
+    maldicionSinSprint: 1
+    duracionMaldicion: 1
+  cooldownHabilidad: 45
+  tiempoAbrir: 0.4
+  tiempoAnimacionElegir: 0.5
+  tiempoResultado: 2.5
+  tiempoFlash: 0.4
+  bloquearMovimientoAlElegir: 1
+  gameManager: {fileID: 0}
 --- !u!1 &1112871363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,7 +1376,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 974546813}
   m_SourcePrefab: {fileID: 100100000, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
 --- !u!1001 &8630997523231430961
 PrefabInstance:
@@ -1366,3 +1476,4 @@ SceneRoots:
   - {fileID: 1112871367}
   - {fileID: 658303846509712463}
   - {fileID: 8630997523231430961}
+  - {fileID: 530248055}
