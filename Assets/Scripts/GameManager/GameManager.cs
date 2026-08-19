@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
                 break;
             case "Death":
                 SpectralDestruction();
-                cardSelected="none"
+                cardSelected="none";
                 deathCard = false;
                 StartCoroutine(CardWaitTime());
                 break;
