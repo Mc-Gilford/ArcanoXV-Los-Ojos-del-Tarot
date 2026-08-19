@@ -140,19 +140,6 @@ public class CardSelectionSystem : MonoBehaviour
         OcultarHUD();
     }
 
-    // ------------------------------------------------------------------ efectos
-
-    
-
-    /// <summary>
-    /// Línea temporal de la carta: primero el poder, al agotarse empieza la maldición
-    /// (su velocidad reemplaza la del poder). La maldición de sprint arranca desde el
-    /// primer instante (ej. El Carro: "vas rápido pero no corres").
-    /// </summary>
-  
-
-
-    // ------------------------------------------------------------------ animaciones
 
     private IEnumerator AnimacionAbrir()
     {
@@ -395,13 +382,20 @@ public class CardSelectionSystem : MonoBehaviour
             ? new Color(0.15f, 0.15f, 0.15f)   // carta blanca → texto oscuro
             : Color.white;
 
-        Image relleno = CrearImagen(raiz, "Relleno", Vector2.zero, new Vector2(352f, 492f), def.color);
-        CrearTexto(relleno.rectTransform, "Nombre", def.nombre, 34, textoColor,
-            new Vector2(0f, 180f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);
-        CrearTexto(relleno.rectTransform, "Poder", def.poderDesc, 22, textoColor,
-            new Vector2(0f, -20f), new Vector2(320f, 180f), TextAnchor.MiddleCenter);
-        CrearTexto(relleno.rectTransform, "Maldicion", "Maldición: ",def.maldicionDesc , 22, textoColor,
-            new Vector2(0f, -170f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);
+        Image relleno = CrearImagen(raiz,"Relleno",Vector2.zero,new Vector2(352f, 492f),Color.white);
+
+        if (def.imagen != null)
+        {
+            relleno.sprite = def.imagen;
+            relleno.preserveAspect = true;/*Commer*/
+        }
+        //Image relleno = CrearImagen(raiz, "Relleno", Vector2.zero, new Vector2(352f, 492f), def.color);
+        /* CrearTexto(relleno.rectTransform, "Nombre", def.nombre, 34, textoColor,
+             new Vector2(0f, 180f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);
+         CrearTexto(relleno.rectTransform, "Poder", def.poderDesc, 22, textoColor,
+             new Vector2(0f, -20f), new Vector2(320f, 180f), TextAnchor.MiddleCenter);
+         CrearTexto(relleno.rectTransform, "Maldicion", "Maldición: ",def.maldicionDesc , 22, textoColor,
+             new Vector2(0f, -170f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);*/
     }
 
     private void OcultarHUD()
