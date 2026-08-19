@@ -54,8 +54,9 @@ public class GameManager : MonoBehaviour
 
     public void SpectralDestruction()
     {
-        GameObject[] monsters = GameObject.FindGameObjectsWithTag("enemy");
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Enemy");
 
+        
         foreach (GameObject entity in monsters)
         {
             Destroy(entity);
@@ -86,28 +87,20 @@ public class GameManager : MonoBehaviour
         }
     }*/
 
-    private void CardEffect()
+    public void CardEffect(int card)
     {
-        switch(cardSelected)
+        switch(card)
         {
-            case 1:
+            case 0:
                 playerScript.LetsDrink();
-                cardSelected = "none";
-                drunkCard = false;
-                StartCoroutine(CardWaitTime());
                 break;
-            case "Death":
+            case 1:
                 SpectralDestruction();
-                cardSelected="none";
-                deathCard = false;
-                StartCoroutine(CardWaitTime());
+                playerScript.LoseHalfHP();
                 break;
-            case "Safe":
+            case 2:
                 playerScript.GoToSafeRoom();
                 gunScript.EmptyBullets();
-                cardSelected = "none";
-                safeCard = false;
-                StartCoroutine(CardWaitTime());
                 break;
         }
     }
