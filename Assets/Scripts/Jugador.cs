@@ -186,6 +186,7 @@ public class Jugador : Character
         invertedControllers = 1f;
         isDrunk=false;
         drunkShield = 1;
+        GoToSafeRoom();
     }
 
     private void Saltar () 
@@ -404,6 +405,13 @@ public class Jugador : Character
     public void LetsDrink()
     {
         StartCoroutine(GetDrunk());
+    }
+
+    public void GoToSafeRoom()
+    {
+        //Definir un punto de teletransporte dentro de la habitacion segura
+        transform.position = new Vector3(-4.01225f,1.05f,-0.66555f);
+        isInsideSafeRoom=true;
     }
 
     /*private void DashW()
