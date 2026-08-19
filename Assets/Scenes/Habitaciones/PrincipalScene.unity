@@ -71356,6 +71356,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7957190706809315962, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1036180687}
+    - targetCorrespondingSourceObject: {fileID: 6761618042471953554, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5000730583466763869}
   m_SourcePrefab: {fileID: 100100000, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
 --- !u!114 &5000730583466763866 stripped
 MonoBehaviour:
@@ -71373,6 +71376,62 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4057296353023997633, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
   m_PrefabInstance: {fileID: 5000730583466763865}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5000730583466763868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6761618042471953554, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+  m_PrefabInstance: {fileID: 5000730583466763865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5000730583466763869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5000730583466763868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3277fcdc7a2cf34cbb1ed02fc3264b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionSystem
+  cartas:
+  - nombre: Inversion Espectral
+    poderDesc: "Eres inmune al da\xF1o"
+    maldicionDesc: Tus controles se invierten
+    color: {r: 0.15, g: 0.55, b: 0.25, a: 1}
+    imagen: {fileID: 21300000, guid: 307757ead4fa1b64390139288d193f7d, type: 3}
+    velocidadMult: 1.6
+    duracionPoder: 12
+    maldicionVelocidadMult: 1
+    maldicionSinSprint: 1
+    duracionMaldicion: 10
+  - nombre: Destruccion Espectral
+    poderDesc: Destruyes a los enemigos de la sala
+    maldicionDesc: Pierdes la mitad de tu vida
+    color: {r: 0.2, g: 0.45, b: 0.85, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 1.25
+    duracionPoder: 12
+    maldicionVelocidadMult: 0.7
+    maldicionSinSprint: 0
+    duracionMaldicion: 1
+  - nombre: Corazon Guia
+    poderDesc: Teletransporta al jugador a la zona segura
+    maldicionDesc: Pierdes todas las municiones que no esten dentro del cargador
+      de tu arma
+    color: {r: 0.92, g: 0.92, b: 0.92, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 2
+    duracionPoder: 8
+    maldicionVelocidadMult: 0.5
+    maldicionSinSprint: 1
+    duracionMaldicion: 1
+  cooldownHabilidad: 45
+  tiempoAbrir: 0.4
+  tiempoAnimacionElegir: 0.5
+  tiempoResultado: 2.5
+  tiempoFlash: 0.4
+  bloquearMovimientoAlElegir: 1
+  gameManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
