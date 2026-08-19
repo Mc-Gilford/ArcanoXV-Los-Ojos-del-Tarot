@@ -86,28 +86,20 @@ public class GameManager : MonoBehaviour
         }
     }*/
 
-    private void CardEffect()
+    private void CardEffect(string card)
     {
-        switch(cardSelected)
+        switch(card)
         {
-            case 1:
+            case "Drunk":
                 playerScript.LetsDrink();
-                cardSelected = "none";
-                drunkCard = false;
-                StartCoroutine(CardWaitTime());
                 break;
             case "Death":
                 SpectralDestruction();
-                cardSelected="none";
-                deathCard = false;
-                StartCoroutine(CardWaitTime());
+                playerScript.LoseHalfHP();
                 break;
             case "Safe":
                 playerScript.GoToSafeRoom();
                 gunScript.EmptyBullets();
-                cardSelected = "none";
-                safeCard = false;
-                StartCoroutine(CardWaitTime());
                 break;
         }
     }

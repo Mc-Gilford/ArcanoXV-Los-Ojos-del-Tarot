@@ -400,7 +400,7 @@ public class CardSelectionSystem : MonoBehaviour
             new Vector2(0f, 180f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);
         CrearTexto(relleno.rectTransform, "Poder", def.poderDesc, 22, textoColor,
             new Vector2(0f, -20f), new Vector2(320f, 180f), TextAnchor.MiddleCenter);
-        CrearTexto(relleno.rectTransform, "Maldicion", "Maldición: ",def.maldicionDesc , 22, textoColor,
+        CrearTexto(relleno.rectTransform, "Maldicion",def.maldicionDesc , 22, textoColor,
             new Vector2(0f, -170f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);
     }
 
