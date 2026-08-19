@@ -25,9 +25,6 @@ public class CardSelectionSystem : MonoBehaviour
     public float tiempoResultado = 2.5f;       // segundos que se muestra el anuncio
     public float tiempoFlash = 0.4f;           // duración del flash de color
 
-    [Header("Penalización por no elegir (Espacio/Tab)")]
-    public float penalizacionDuracion = 10f;       // sin sprint + ralentización
-    public float penalizacionVelocidadMult = 0.7f; // 0.7 = -30% velocidad
 
     [Header("Comportamiento")]
     [Tooltip("Si true, al abrir la selección se congela el WASD (la cámara queda libre).")]
@@ -39,7 +36,9 @@ public class CardSelectionSystem : MonoBehaviour
     private float _cooldownRestante;
     private bool _cartaElegida;   // si ya se eligió en esta apertura
 
-    private DebugPlayerMover _mover;
+    public int IndexCartasSeleccionada { get; private set; } = -1;
+    public bool isPowerUpSeleccionado { get; set; } = false;
+
 
     // ---- Referencias UI (construidas en ConstruirCanvas) ----
     private Font _fuente;
@@ -60,7 +59,6 @@ public class CardSelectionSystem : MonoBehaviour
 
     private void Awake()
     {
-        _mover = GetComponent<DebugPlayerMover>();
         if (cartas == null || cartas.Length == 0)
             cartas = CardDef.Defaults();
         ConstruirCanvas();
@@ -108,7 +106,6 @@ public class CardSelectionSystem : MonoBehaviour
     {
         _estado = Estado.Seleccionando;
         _cartaElegida = false;
-        if (_mover != null) _mover.lockMovement = bloquearMovimientoAlElegir;
         StartCoroutine(AnimacionAbrir());
         Debug.Log("[Cartas] Selección abierta (Tab).");
     }
@@ -116,74 +113,44 @@ public class CardSelectionSystem : MonoBehaviour
     private void ElegirCarta(int indice)
     {
         if (indice < 0 || indice >= cartas.Length) return;
+
         CardDef c = cartas[indice];
+        IndexCartasSeleccionada = indice;
+        isPowerUpSeleccionado = true;
         _cartaElegida = true;
         _estado = Estado.Resolviendo;
+
+        _textoCartaActiva.text = "Carta activa: " + c.nombre;
+
         StartCoroutine(AnimacionElegir(indice));
+
         Debug.Log($"[Cartas] Elegida: {c.nombre}.");
     }
 
     private void CerrarSinElegir()
     {
         _cartaElegida = true;
-        _estado = Estado.Resolviendo;
-        StartCoroutine(AnimacionPenalizar());
-        Debug.Log("[Cartas] Selección cerrada sin elegir → penalización.");
+        IniciarCooldown();
     }
 
     private void IniciarCooldown()
     {
         _estado = Estado.EnCooldown;
         _cooldownRestante = cooldownHabilidad;
-        if (_mover != null) _mover.lockMovement = false;
         OcultarHUD();
     }
 
     // ------------------------------------------------------------------ efectos
 
-    private void AplicarCarta(CardDef c)
-    {
-        if (_mover == null) return;
-        StartCoroutine(EfectosCarta(c));
-    }
+    
 
     /// <summary>
     /// Línea temporal de la carta: primero el poder, al agotarse empieza la maldición
     /// (su velocidad reemplaza la del poder). La maldición de sprint arranca desde el
     /// primer instante (ej. El Carro: "vas rápido pero no corres").
     /// </summary>
-    private IEnumerator EfectosCarta(CardDef c)
-    {
-        _mover.speedMultiplier = c.velocidadMult;
-        if (c.maldicionSinSprint) _mover.canSprint = false;
+  
 
-        yield return new WaitForSeconds(c.duracionPoder);
-
-        _mover.speedMultiplier = c.maldicionVelocidadMult;
-
-        float restante = Mathf.Max(0f, c.duracionMaldicion - c.duracionPoder);
-        yield return new WaitForSeconds(restante);
-
-        _mover.speedMultiplier = 1f;
-        _mover.canSprint = true;
-    }
-
-    private void AplicarPenalizacion()
-    {
-        if (_mover == null) return;
-        StartCoroutine(EfectosPenalizacion());
-    }
-
-    private IEnumerator EfectosPenalizacion()
-    {
-        _mover.speedMultiplier = penalizacionVelocidadMult;
-        _mover.canSprint = false;
-
-        yield return new WaitForSeconds(penalizacionDuracion);
-
-        _mover.speedMultiplier = 1f;
-        _mover.canSprint = true;
-    }
 
     // ------------------------------------------------------------------ animaciones
 
@@ -236,23 +203,9 @@ public class CardSelectionSystem : MonoBehaviour
 
         yield return new WaitForSeconds(tiempoAnimacionElegir);
 
-        AplicarCarta(c);
-        yield return StartCoroutine(AnimacionResultado(c.nombre, "MALDICIÓN: " + c.maldicionDesc, c.color));
+        yield return StartCoroutine(AnimacionResultado(c.nombre, "CARTA ACTIVADA: " + c.maldicionDesc, c.color));
     }
 
-    private IEnumerator AnimacionPenalizar()
-    {
-        Color rojo = new Color(0.8f, 0.1f, 0.1f);
-        StartCoroutine(FlashColor(rojo, tiempoFlash));
-
-        yield return new WaitForSeconds(0.3f);
-
-        AplicarPenalizacion();
-        yield return StartCoroutine(AnimacionResultado(
-            "No elegiste",
-            $"Castigo: -{Mathf.RoundToInt((1f - penalizacionVelocidadMult) * 100f)}% velocidad y sin sprint durante {penalizacionDuracion} s.",
-            rojo));
-    }
 
     private IEnumerator AnimacionResultado(string titulo, string mensaje, Color color)
     {
@@ -365,7 +318,7 @@ public class CardSelectionSystem : MonoBehaviour
                 _textoCartaActiva.text = "";
                 break;
             case Estado.Seleccionando:
-                _textoCooldown.text = "J/K/L elige  ·  Espacio: salir (castigo)  ·  Tab: cerrar";
+                _textoCooldown.text = "J/K/L elige  ·  Espacio: salir   ·  Tab: cerrar";
                 break;
             case Estado.EnCooldown:
                 _textoCooldown.text = "Recarga: " + Mathf.CeilToInt(_cooldownRestante) + " s";
@@ -447,7 +400,7 @@ public class CardSelectionSystem : MonoBehaviour
             new Vector2(0f, 180f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);
         CrearTexto(relleno.rectTransform, "Poder", def.poderDesc, 22, textoColor,
             new Vector2(0f, -20f), new Vector2(320f, 180f), TextAnchor.MiddleCenter);
-        CrearTexto(relleno.rectTransform, "Maldicion", "Maldición: ???", 22, textoColor,
+        CrearTexto(relleno.rectTransform, "Maldicion", "Maldición: ",def.maldicionDesc , 22, textoColor,
             new Vector2(0f, -170f), new Vector2(320f, 60f), TextAnchor.MiddleCenter);
     }
 
@@ -501,6 +454,7 @@ public class CardSelectionSystem : MonoBehaviour
         img.raycastTarget = false;
         return img;
     }
+
 
     private Text CrearTexto(RectTransform padre, string nombre, string contenido, int fontSize, Color color,
         Vector2 pos, Vector2 tam, TextAnchor alineacion)
