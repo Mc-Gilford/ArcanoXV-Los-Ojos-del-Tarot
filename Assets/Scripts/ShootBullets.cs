@@ -26,12 +26,18 @@ public class ShootBullets : MonoBehaviour
 
 
     [SerializeField] private int ammoClip;
+
+    private AudioSource audioSource;
+    public AudioClip shootSound;
+
+    [SerializeField] private float volume =1f;
     //Use of a textMeshPro for a shootpoint guide
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         shootForce = 10f;
         magazine = 24;
         ammoClip = 5;
@@ -119,6 +125,7 @@ public class ShootBullets : MonoBehaviour
         if(context.started && canShoot && hasBulletsToShoot)
         {
             Debug.Log("Shoot sound");
+            audioSource.PlayOneShot(shootSound, volume);
             bulletsOnGun -= 1;
             StartCoroutine(GunKnockback()); 
 
