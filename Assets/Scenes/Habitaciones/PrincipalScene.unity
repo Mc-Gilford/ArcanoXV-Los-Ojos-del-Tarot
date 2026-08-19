@@ -27810,6 +27810,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4388053584151060432, guid: cce4d8667f2436a479759f07084d8ff4, type: 3}
   m_PrefabInstance: {fileID: 2082403600}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &831636660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 831636661}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &831636661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831636660}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.50562, y: 6.81394, z: -16.73173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &831886529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e17a253999e7e294981e5ed8ce32646f, type: 3}
@@ -71397,7 +71428,7 @@ MonoBehaviour:
   - nombre: Inversion Espectral
     poderDesc: "Eres inmune al da\xF1o"
     maldicionDesc: Tus controles se invierten
-    color: {r: 0.15, g: 0.55, b: 0.25, a: 1}
+    color: {r: 0.21623372, g: 0.078431375, b: 0.43529412, a: 1}
     imagen: {fileID: 21300000, guid: 307757ead4fa1b64390139288d193f7d, type: 3}
     velocidadMult: 1.6
     duracionPoder: 12
@@ -71407,8 +71438,8 @@ MonoBehaviour:
   - nombre: Destruccion Espectral
     poderDesc: Destruyes a los enemigos de la sala
     maldicionDesc: Pierdes la mitad de tu vida
-    color: {r: 0.2, g: 0.45, b: 0.85, a: 1}
-    imagen: {fileID: 0}
+    color: {r: 0.5188679, g: 0.056292284, b: 0.056292284, a: 1}
+    imagen: {fileID: 21300000, guid: d262469cba442cd4e9a54e8af77da7af, type: 3}
     velocidadMult: 1.25
     duracionPoder: 12
     maldicionVelocidadMult: 0.7
@@ -71418,8 +71449,8 @@ MonoBehaviour:
     poderDesc: Teletransporta al jugador a la zona segura
     maldicionDesc: Pierdes todas las municiones que no esten dentro del cargador
       de tu arma
-    color: {r: 0.92, g: 0.92, b: 0.92, a: 1}
-    imagen: {fileID: 0}
+    color: {r: 0.055268783, g: 0.4339623, b: 0.13558924, a: 1}
+    imagen: {fileID: 21300000, guid: 0846ce0ac3bcb7941baf84fb063eb707, type: 3}
     velocidadMult: 2
     duracionPoder: 8
     maldicionVelocidadMult: 0.5
@@ -71447,3 +71478,4 @@ SceneRoots:
   - {fileID: 1684028895}
   - {fileID: 852192706}
   - {fileID: 556902788}
+  - {fileID: 831636661}
