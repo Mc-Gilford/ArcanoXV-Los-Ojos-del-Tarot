@@ -30,6 +30,8 @@ public class CardSelectionSystem : MonoBehaviour
     [Tooltip("Si true, al abrir la selección se congela el WASD (la cámara queda libre).")]
     public bool bloquearMovimientoAlElegir = true;
 
+    public GameManager gameManager;
+
     private enum Estado { Idle, Seleccionando, Resolviendo, EnCooldown }
 
     private Estado _estado = Estado.Idle;
@@ -62,6 +64,7 @@ public class CardSelectionSystem : MonoBehaviour
         if (cartas == null || cartas.Length == 0)
             cartas = CardDef.Defaults();
         ConstruirCanvas();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void OnDestroy()
@@ -123,7 +126,7 @@ public class CardSelectionSystem : MonoBehaviour
         _textoCartaActiva.text = "Carta activa: " + c.nombre;
 
         StartCoroutine(AnimacionElegir(indice));
-
+        gameManager.CardEffect(indice);
         Debug.Log($"[Cartas] Elegida: {c.nombre}.");
     }
 
