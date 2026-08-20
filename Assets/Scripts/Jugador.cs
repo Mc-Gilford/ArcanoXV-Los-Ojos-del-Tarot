@@ -34,6 +34,8 @@ public class Jugador : Character
     private float lastTapD = 0f;
     private int drunkEffect = 10;
 
+    public AudioClip[] stepClips;
+
     [SerializeField] private bool isRunning= false;
     [SerializeField] private bool isAbleToRun= true;
     [SerializeField] private bool isTired= false;
@@ -51,9 +53,30 @@ public class Jugador : Character
     [SerializeField] private float invertedControllers = 1f;
     [SerializeField] private bool isDrunk = false;
     [SerializeField] private int drunkShield = 1;
+
+    //Variables para la reproduccion de audio
+
+    [Tooltip("Distancia recorrida (m) entre cada paso.")]
+    public float stepDistance = 0.75f;
+    [Tooltip("Volumen de los pasos.")]
+    [Range(0f, 1f)] public float volume = 0.7f;
+    [Tooltip("Variación de tono entre pasos para que no parezca grabado.")]
+    public float pitchJitter = 0.12f;
+    private Vector3 _lastPos;
+    private float _accumulated;
+    private float _lastMovedTime = -1f;      // cuándo caminó por última vez
+    private const float _stopGrace = 0.3f;   // gracia para cortar el crujido al detenerse
+
+    
+ 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if(audioSource != null)
+        {
+            Debug.Log("Si hay audio jsjs");
+        }
+        _lastPos = transform.position;
         DefinePlayerData();
     }
 
@@ -81,7 +104,7 @@ public class Jugador : Character
         sprintAction.started += ctx => Run();
         sprintAction.canceled += ctx => StopRunning();
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(GetDrunk());
+        //StartCoroutine(GetDrunk());
     }
 
     public float getCordura()
@@ -186,6 +209,7 @@ public class Jugador : Character
         invertedControllers = 1f;
         isDrunk=false;
         drunkShield = 1;
+        //GoToSafeRoom();
     }
 
     private void Saltar () 
@@ -229,6 +253,7 @@ public class Jugador : Character
         Vector3 movement = (forward * (direccion.y*invertedControllers) + right * (direccion.x*invertedControllers)) * velocidad * Time.deltaTime;
 
         transform.position += movement;
+        IsMoving();
     }
 
     private void Run()
@@ -355,6 +380,49 @@ public class Jugador : Character
         
     }
 
+    private void IsMoving()
+    {
+        if (stepClips == null || stepClips.Length == 0) return;
+
+        Vector3 pos = transform.position;
+        float walkDist = Vector3.Distance(
+            new Vector3(pos.x, 0f, pos.z),
+            new Vector3(_lastPos.x, 0f, _lastPos.z));
+        _lastPos = pos;
+
+        if (walkDist <= 0.0001f)
+        {
+            // Dejó de caminar: corta el crujido en curso tras una pequeña gracia,
+            // para que no siga sonando como si aún estuviera andando.
+            if (audioSource.isPlaying && Time.time - _lastMovedTime > _stopGrace)
+                audioSource.Stop();
+            return;
+        }
+
+        _lastMovedTime = Time.time;
+        _accumulated += walkDist;
+        if (_accumulated < stepDistance) return;
+
+        if (audioSource.isPlaying)
+        {
+            // Un crujido a la vez: espera a que termine el paso actual antes de
+            // que suene el siguiente (nada de pasos encimados). Se mantiene el
+            // paso "pendiente" para que no se pierda al acabar el anterior.
+            _accumulated = stepDistance;
+            return;
+        }
+
+        _accumulated = 0f;
+        PlayStep();
+    }
+
+    private void PlayStep()
+    {
+        AudioClip clip = stepClips[Random.Range(0, stepClips.Length)];
+        audioSource.pitch = 1f + Random.Range(-pitchJitter, pitchJitter);
+        audioSource.PlayOneShot(clip, volume);
+    }
+
     private void ManageDash(string typeDash)
     {
         Vector3 dashDirection = new Vector3(0,0,0);
@@ -404,6 +472,28 @@ public class Jugador : Character
     public void LetsDrink()
     {
         StartCoroutine(GetDrunk());
+    }
+
+    public void GoToSafeRoom()
+    {
+        //Definir un punto de teletransporte dentro de la habitacion segura
+        transform.position = new Vector3(-4.01225f,1.05f,-0.66555f);
+        isInsideSafeRoom=true;
+    }
+
+    public void LoseHalfHP()
+    {
+        float waste = health % 2;
+        float half=0f;
+        if(waste == 0)
+        {
+            health /= 2;
+        }
+        else
+        {
+            half = health/2;
+            health = Mathf.FloorToInt(half);
+        }
     }
 
     /*private void DashW()

@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4499004529023971631}
   - component: {fileID: 933309455251002563}
   - component: {fileID: 8247559661208236344}
+  - component: {fileID: 4146120901487361454}
+  - component: {fileID: 1140431282714836053}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -202,6 +204,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: ea5dc713-1fe6-499b-903d-353554be9c43
     m_ActionName: 'Jugador/DDash[/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ShootBullets, Assembly-CSharp
+        m_MethodName: Reload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 53c6addb-c162-478f-a530-814665e464ec
+    m_ActionName: 'Jugador/Reload[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Jugador
@@ -246,15 +264,175 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d51ef66e06ae02468ac6a470907c2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Jugador
-  health: 10
   audioSource: {fileID: 0}
+  stepClips:
+  - {fileID: 8300000, guid: e5d357958f3a4ce45a7feea2d6f09248, type: 3}
+  - {fileID: 8300000, guid: 3f6dc0320cc460b48b72c125da2591bc, type: 3}
+  - {fileID: 8300000, guid: bc382820bc583c7469bb7d4d83b13548, type: 3}
   isRunning: 0
   isAbleToRun: 1
   isTired: 0
   canDash: 1
+  isInsideSafeRoom: 0
   velocidad: 5
   salto: 2
   stamina: 10
   cordura: 10
+  sanityTimer: 0
+  sanityPoints: 10
   dashForce: 15
   timeDoubleTap: 0.3
+  invertedControllers: 1
+  isDrunk: 0
+  drunkShield: 1
+  stepDistance: 0.75
+  volume: 0.7
+  pitchJitter: 0.12
+--- !u!114 &4146120901487361454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614349743589103814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3277fcdc7a2cf34cbb1ed02fc3264b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionSystem
+  cartas:
+  - nombre: Inversion Espectral
+    poderDesc: "Eres inmune al da\xF1o"
+    maldicionDesc: Tus controles se invierten
+    color: {r: 0.15, g: 0.55, b: 0.25, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 1.6
+    duracionPoder: 12
+    maldicionVelocidadMult: 1
+    maldicionSinSprint: 1
+    duracionMaldicion: 10
+  - nombre: Destruccion Espectral
+    poderDesc: Destruyes a los enemigos de la sala
+    maldicionDesc: Perdes la mitad de tu vida
+    color: {r: 0.2, g: 0.45, b: 0.85, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 1.25
+    duracionPoder: 12
+    maldicionVelocidadMult: 0.7
+    maldicionSinSprint: 0
+    duracionMaldicion: 1
+  - nombre: Corazon Guia
+    poderDesc: Teletransporta al jugador a la zona segura
+    maldicionDesc: Pierdes todas las municiones que no esten dentro del cargador
+      de tu arma
+    color: {r: 0.92, g: 0.92, b: 0.92, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 2
+    duracionPoder: 8
+    maldicionVelocidadMult: 0.5
+    maldicionSinSprint: 1
+    duracionMaldicion: 1
+  cooldownHabilidad: 45
+  tiempoAbrir: 0.4
+  tiempoAnimacionElegir: 0.5
+  tiempoResultado: 2.5
+  tiempoFlash: 0.4
+  bloquearMovimientoAlElegir: 1
+  gameManager: {fileID: 0}
+--- !u!82 &1140431282714836053
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614349743589103814}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
