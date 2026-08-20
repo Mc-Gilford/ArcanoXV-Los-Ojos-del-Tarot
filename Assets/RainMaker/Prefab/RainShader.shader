@@ -1,149 +1,103 @@
-﻿//
-// Rain Maker (c) 2015 Digital Ruby, LLC
-// http://www.digitalruby.com
-//
-
-Shader "Custom/RainShader"
+﻿Shader "Custom/RainShader"
 {
     Properties
-	{
-		_MainTex ("Color (RGB) Alpha (A)", 2D) = "gray" {}
-		_TintColor ("Tint Color (RGB)", Color) = (1, 1, 1, 1)
-		_PointSpotLightMultiplier ("Point/Spot Light Multiplier", Range (0, 10)) = 2
-		_DirectionalLightMultiplier ("Directional Light Multiplier", Range (0, 10)) = 1
-		_InvFade ("Soft Particles Factor", Range(0.01, 100.0)) = 1.0
-		_AmbientLightMultiplier ("Ambient light multiplier", Range(0, 1)) = 0.25
+    {
+        _MainTex ("Color (RGB) Alpha (A)", 2D) = "gray" {}
+        _TintColor ("Tint Color (RGB)", Color) = (1, 1, 1, 1)
+        _PointSpotLightMultiplier ("Point/Spot Light Multiplier", Range(0, 10)) = 2
+        _DirectionalLightMultiplier ("Directional Light Multiplier", Range(0, 10)) = 1
+        _InvFade ("Soft Particles Factor", Range(0.01, 100.0)) = 1.0
+        _AmbientLightMultiplier ("Ambient light multiplier", Range(0, 1)) = 0.25
     }
 
     SubShader
-	{
-        Tags { "QUEUE"="Transparent" "IGNOREPROJECTOR"="true" "RenderType"="Transparent" "LightMode"="Vertex" }
-		LOD 100
+    {
+        Tags
+        {
+            "Queue"="Transparent"
+            "RenderType"="Transparent"
+            "RenderPipeline"="UniversalPipeline"
+        }
 
         Pass
-		{
-			ZWrite Off
-			Cull Back
-            Lighting On     
-			AlphaTest Greater 0.01
-			ColorMask RGB
-			Blend SrcAlpha OneMinusSrcAlpha
+        {
+            Name "RainPass"
+            Tags
+            {
+                "LightMode"="UniversalForward"
+            }
 
-            CGPROGRAM
+            Blend SrcAlpha OneMinusSrcAlpha
+            ZWrite Off
+            Cull Back
 
-            #pragma multi_compile_particles
+            HLSLPROGRAM
+
             #pragma vertex vert
             #pragma fragment frag
-			#pragma fragmentoption ARB_precision_hint_fastest
 
-            #include "UnityCG.cginc"
-			#include "Lighting.cginc"
+            #pragma multi_compile_particles
 
-			fixed4 _TintColor;
-			float _DirectionalLightMultiplier;
-			float _PointSpotLightMultiplier;
-			float _AmbientLightMultiplier;
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-			#if defined(SOFTPARTICLES_ON)
-			float _InvFade;
-			#endif
-
-			struct appdata_t
-			{
-				float4 vertex : POSITION;
-				fixed4 color : COLOR;
-				float2 texcoord : TEXCOORD0;
-			};
-
-		    struct v2f
+            struct Attributes
             {
-                half2 uv_MainTex : TEXCOORD0;
-                fixed4 color : COLOR0;
-                float4 pos : SV_POSITION;
-				#if defined(SOFTPARTICLES_ON)
-                float4 projPos : TEXCOORD1;
-                #endif
+                float4 positionOS : POSITION;
+                float4 color : COLOR;
+                float2 uv : TEXCOORD0;
             };
 
-			float3 ApplyLight(int index, float3 lightColor, float3 viewPos)
-			{
-				fixed3 currentLightColor = unity_LightColor[index].rgb;
-				float4 lightPos = unity_LightPosition[index];
-
-				if (lightPos.w == 0)
-				{
-					// directional light, the lightPos is actually the direction of the light
-					// for some weird reason, Unity seems to change the directional light position based on the vertex,
-					// this hack seems to compensate for that
-					lightPos = mul(lightPos, UNITY_MATRIX_V);
-
-					// depending on how the directional light is pointing, reduce the intensity (which goes to 0 as it goes below the horizon)
-					fixed multiplier = clamp((lightPos.y * 2) + 1, 0, 1);
-					return lightColor + (currentLightColor * multiplier * _DirectionalLightMultiplier);
-				}
-				else
-				{
-					float3 toLight = lightPos.xyz - viewPos;
-	                fixed lengthSq = dot(toLight, toLight);
-	                fixed atten = 1.0 / (1.0 + (lengthSq * unity_LightAtten[index].z));
-					return lightColor + (currentLightColor * atten * _PointSpotLightMultiplier);
-				}
-			}
- 
-            fixed4 LightForVertex(float4 vertex)
+            struct Varyings
             {
-                float3 viewPos = UnityObjectToViewPos(vertex).xyz;
-                fixed3 lightColor = UNITY_LIGHTMODEL_AMBIENT.rgb * _AmbientLightMultiplier;
+                float4 positionHCS : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float4 color : COLOR;
+            };
 
-				lightColor = ApplyLight(0, lightColor, viewPos);
-				lightColor = ApplyLight(1, lightColor, viewPos);
-				lightColor = ApplyLight(2, lightColor, viewPos);
-				lightColor = ApplyLight(3, lightColor, viewPos);
+            TEXTURE2D(_MainTex);
+            SAMPLER(sampler_MainTex);
 
-                return fixed4(lightColor, 1);
-            }
- 
-            float4 _MainTex_ST;
- 
-            v2f vert(appdata_t v)
+            CBUFFER_START(UnityPerMaterial)
+
+                float4 _MainTex_ST;
+                float4 _TintColor;
+
+                float _PointSpotLightMultiplier;
+                float _DirectionalLightMultiplier;
+                float _AmbientLightMultiplier;
+                float _InvFade;
+
+            CBUFFER_END
+
+            Varyings vert(Attributes input)
             {
-                v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv_MainTex = TRANSFORM_TEX(v.texcoord, _MainTex);
-                o.color = LightForVertex(v.vertex) * v.color * _TintColor;
+                Varyings output;
 
-				// o.color = v.color * _TintColor; // temp if you want to disable lighting
+                output.positionHCS =
+                    TransformObjectToHClip(input.positionOS.xyz);
 
-				// make sure the alpha scales down with the light
-				o.color *= (min(o.color.rgb, _TintColor.a).r / _TintColor.a);
+                output.uv =
+                    TRANSFORM_TEX(input.uv, _MainTex);
 
-				#if defined(SOFTPARTICLES_ON)
-                o.projPos = ComputeScreenPos(o.pos);
-                COMPUTE_EYEDEPTH(o.projPos.z);
-                #endif
+                output.color =
+                    input.color * _TintColor;
 
-                return o; 
+                return output;
             }
-			
-			#if defined(SOFTPARTICLES_ON)
-			sampler2D _CameraDepthTexture;
-			#endif
-			
-			sampler2D _MainTex;
-  
-            fixed4 frag (v2f i) : COLOR
-			{
-				#if defined(SOFTPARTICLES_ON)
-				float sceneZ = LinearEyeDepth(UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos))));
-				float partZ = i.projPos.z;
-				i.color.a *= saturate(_InvFade * (sceneZ - partZ));
-				#endif
 
-				return tex2D(_MainTex, i.uv_MainTex) * i.color;
+            half4 frag(Varyings input) : SV_Target
+            {
+                half4 tex =
+                    SAMPLE_TEXTURE2D(
+                        _MainTex,
+                        sampler_MainTex,
+                        input.uv
+                    );
+
+                return tex * input.color;
             }
-            ENDCG
+
+            ENDHLSL
         }
     }
- 
-    Fallback "Particles/Alpha Blended"
 }
