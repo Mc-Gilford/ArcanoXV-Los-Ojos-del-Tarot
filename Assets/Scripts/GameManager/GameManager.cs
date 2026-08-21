@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     public Jugador playerScript;
     public ShootBullets gunScript;
+
+    public GameObject gameOvermenu;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -112,4 +115,29 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(cardCooldown);
         canUseCard = true;
     } */
+
+    //Metodo para desplegar el Submenu del Canvas
+    public void GameOver()
+    {
+        gameOverMenu.SetActive(true);
+        referenciaALaMira.SetActive(false);
+    }
+
+    //Funcion para recargar la escena
+    public void RestartGame()
+    {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //Funcion para regresar al menu principal
+    public void Exit()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
+
+
+
+
+
+
