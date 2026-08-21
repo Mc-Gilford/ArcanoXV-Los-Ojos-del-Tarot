@@ -596,7 +596,7 @@ MonoBehaviour:
   stoppingDistance: 1
   detectionDistance: 150
   wallForce: 5
-  jumpForce: 10
+  jumpForce: 6
   maximumSpeed: 6
   airAcceleration: 12
   maximumFallSpeed: 12
