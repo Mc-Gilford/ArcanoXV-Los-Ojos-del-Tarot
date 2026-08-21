@@ -303,10 +303,7 @@ public class CardSelectionSystem : MonoBehaviour
 
         switch (_estado)
         {
-            case Estado.Idle:
-                _textoCooldown.text = "Habilidad lista — Tab";
-                _textoCartaActiva.text = "";
-                break;
+            
             case Estado.Seleccionando:
                 _textoCooldown.text = "J/K/L elige  ·  Espacio: salir   ·  Tab: cerrar";
                 break;

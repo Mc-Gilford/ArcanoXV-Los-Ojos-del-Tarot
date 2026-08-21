@@ -225,7 +225,7 @@ public class Jugador : Character
     void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Hola");
-        if(collision.collider.CompareTag("suelo"))
+        if(collision.collider.CompareTag("Ground"))
         {
             puedeSaltar = true;
         }
