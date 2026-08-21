@@ -14,7 +14,7 @@ public class Enemy : Character
     [SerializeField] private float stoppingDistance = 1f;
     [SerializeField] private float detectionDistance = 150f; // NUEVO: distancia máxima para perseguir
     [SerializeField] private float wallForce = 5f;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float jumpForce = 1f;
     [SerializeField] public float maximumSpeed = 8f;
     [SerializeField] private float airAcceleration = 12f;
     [SerializeField] private float maximumFallSpeed = 12f;
@@ -97,14 +97,16 @@ public class Enemy : Character
             enemyrb.position
         );
 
-        if (playerDistance > detectionDistance)
+        if (playerDistance > detectionDistance && !gameObject.CompareTag("Follower"))
         {
             enemyrb.linearVelocity = Vector3.zero;
             CancelRandomJump();
             return;
         }
-
-        isNear = isPlayerNear();
+        if (!gameObject.CompareTag("Follower"))
+        {
+            isNear = isPlayerNear();
+        }
 
         if (airTimeRemaining > 0f)
         {
@@ -157,7 +159,7 @@ public class Enemy : Character
         }
 
         // Los saltos aleatorios solamente ocurren en el suelo
-        if (isOnGround && !isOnWall && !isWaitingToJump && !isJumping)
+        if (isOnGround && !isOnWall && !isWaitingToJump && !isJumping && !gameObject.CompareTag("Follower"))
         {
             randomJumpCoroutine = StartCoroutine(WaitJump());
         }
