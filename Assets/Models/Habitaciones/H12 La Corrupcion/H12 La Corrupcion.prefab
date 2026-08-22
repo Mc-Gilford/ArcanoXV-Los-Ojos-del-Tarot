@@ -105,6 +105,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 54a4d6ee785bf2140adcea19e16311e5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9985694aa03931f4a9f9a0def99843e9, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 54a4d6ee785bf2140adcea19e16311e5, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 00c4734ea07b0074d8cc9cf14e1c8020, type: 2}
     - target: {fileID: 919132149155446097, guid: 54a4d6ee785bf2140adcea19e16311e5, type: 3}
       propertyPath: m_Name
       value: H12 Puerta
@@ -196,6 +204,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ac72135350a878b499f1279df2c3f55b, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fde279cfe4cd5a94995c95acf077e434, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ac72135350a878b499f1279df2c3f55b, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 28b9af1c561dac24f978a1beb67f4869, type: 2}
     - target: {fileID: 919132149155446097, guid: ac72135350a878b499f1279df2c3f55b, type: 3}
       propertyPath: m_Name
       value: H12 Techo
@@ -291,6 +307,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 84b15cd98e0a476499e56276ff29e9e9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e44a78ff6319fb4cbc4baeb6dc310cb, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 84b15cd98e0a476499e56276ff29e9e9, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 333412004a8530847b767f2963e45c6e, type: 2}
     - target: {fileID: 919132149155446097, guid: 84b15cd98e0a476499e56276ff29e9e9, type: 3}
       propertyPath: m_Name
       value: H12 Piso
@@ -386,6 +410,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ac450a7eefe63c54f844e8995254daf1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: eb17ec5148a553e44ab031bc31f246d5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ac450a7eefe63c54f844e8995254daf1, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e4ebf64ea2fe073439fa9f3a575e2953, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ac450a7eefe63c54f844e8995254daf1, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2f9af04001f0ef247a758db3f240b990, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ac450a7eefe63c54f844e8995254daf1, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: be58d38408e95aa4e910b122902a6e64, type: 2}
+    - target: {fileID: -7511558181221131132, guid: ac450a7eefe63c54f844e8995254daf1, type: 3}
+      propertyPath: 'm_Materials.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ba6bc836609ca74f939b8224509c444, type: 2}
     - target: {fileID: 919132149155446097, guid: ac450a7eefe63c54f844e8995254daf1, type: 3}
       propertyPath: m_Name
       value: H12 Paredes
