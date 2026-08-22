@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using DigitalRuby.RainMaker;
 
 public class Jugador : Character
 {
@@ -54,6 +55,9 @@ public class Jugador : Character
     [SerializeField] private bool isDrunk = false;
     [SerializeField] private int drunkShield = 1;
 
+    private GameObject rainPrefab;
+    private RainScript rain;
+
     //Variables para la reproduccion de audio
 
     [Tooltip("Distancia recorrida (m) entre cada paso.")]
@@ -67,11 +71,18 @@ public class Jugador : Character
     private float _lastMovedTime = -1f;      // cuándo caminó por última vez
     private const float _stopGrace = 0.3f;   // gracia para cortar el crujido al detenerse
 
+
     
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rainPrefab = GameObject.Find("RainPrefab");
+        if(rainPrefab!=null)
+        {
+            Debug.Log("Si exixte rain");
+            rain = rainPrefab.GetComponent<RainScript>();
+        }
         if(audioSource != null)
         {
             Debug.Log("Si hay audio jsjs");
@@ -233,6 +244,37 @@ public class Jugador : Character
         if(collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("Follower"))
         {
             TakeDamage(1*drunkShield);
+        }
+    }
+    private void OnTriggerEnter(Collider collider)
+    {
+        Debug.Log("COLISIONANDO CON: " + collider.name);
+        Debug.Log("TAG: " + collider.gameObject.tag);
+
+        if (collider.CompareTag("Home"))
+        {
+            Debug.Log("The tags is right");
+
+            if (rain != null)
+            {
+                Debug.Log("Aqui entra");
+                rain.FollowCamera = false;
+            }
+            else
+            {
+                Debug.Log("RAIN ES NULL");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("Home"))
+        {
+            if (rain != null)
+            {
+                rain.FollowCamera = true;
+            }
         }
     }
 
