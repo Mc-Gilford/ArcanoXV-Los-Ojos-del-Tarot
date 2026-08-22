@@ -7,6 +7,7 @@ public class Character : MonoBehaviour
     public float speed { get; set; }
     private bool isAlive;
     private float jumpforce;
+    private GameManager gameManager;
 
     [SerializeField] protected AudioSource audioSource;
 
@@ -21,7 +22,7 @@ public class Character : MonoBehaviour
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {        
         isAlive = true;
     }
 
@@ -46,7 +47,18 @@ public class Character : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(gameObject);
-        Debug.Log("Muerte "+gameObject.name);
+        if(gameObject.CompareTag("Player"))
+        {
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            Debug.Log("mueriendo...");
+            gameManager.GameOver();
+            //Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            Debug.Log("Muerte "+gameObject.name);
+        }
+        
     }
 }

@@ -9,11 +9,12 @@ public class Enemy : Character
     [Header("Movement")]
     [SerializeField] private float rotationSpeed = 8f;
     [SerializeField] public float anger = 0.9f;
-    [SerializeField] public float nearDistance = 3f;
+    [SerializeField] public float nearDistance = 25f;
     [SerializeField] public float slowDistance = 5f;
-    [SerializeField] private float wallForce = 5f;
     [SerializeField] private float stoppingDistance = 1f;
-    [SerializeField] private float jumpForce = 6f;
+    [SerializeField] private float detectionDistance = 150f; // NUEVO: distancia máxima para perseguir
+    [SerializeField] private float wallForce = 5f;
+    [SerializeField] private float jumpForce = 1f;
     [SerializeField] public float maximumSpeed = 8f;
     [SerializeField] private float airAcceleration = 12f;
     [SerializeField] private float maximumFallSpeed = 12f;
@@ -38,15 +39,16 @@ public class Enemy : Character
     [SerializeField] private bool isJumping;
     [SerializeField] private bool isInRoom;
     [SerializeField] private bool IsAngerActive;
-    public int damage { get; set; }
 
+    public int damage { get; set; }
 
     private Rigidbody enemyrb;
     private Coroutine randomJumpCoroutine;
     private Vector3 surfaceNormal = Vector3.up;
     private float wallDetachTimer;
     private float airTimeRemaining;
-    public float maxHealth; 
+
+    public float maxHealth;
 
     void Start()
     {
@@ -57,6 +59,7 @@ public class Enemy : Character
         {
             Debug.Log("Player not found");
         }
+
         initializeVariables();
         StartCoroutine(WaitAnger());
     }
@@ -65,17 +68,19 @@ public class Enemy : Character
     {
         int damageRandom = UnityEngine.Random.Range(1, 3);
         damage = damageRandom;
+
         int lifeLevelRandom = UnityEngine.Random.Range(8, 10);
         health = lifeLevelRandom;
+
         maxHealth = health;
         speed = 3;
     }
 
     public void IncreaseAngry()
     {
-        if(health<=maxHealth/2 && anger<=5)
+        if (health <= maxHealth / 2 && anger <= 5)
         {
-            anger=anger+0.01f;
+            anger = anger + 0.01f;
         }
     }
 
@@ -84,7 +89,24 @@ public class Enemy : Character
         if (player == null)
             return;
 
-        isNear = isPlayerNear();
+        // NUEVO:
+        // Si el jugador está a más de 150 unidades,
+        // el enemigo deja de perseguirlo.
+        float playerDistance = Vector3.Distance(
+            player.transform.position,
+            enemyrb.position
+        );
+
+        if (playerDistance > detectionDistance && !gameObject.CompareTag("Follower"))
+        {
+            enemyrb.linearVelocity = Vector3.zero;
+            CancelRandomJump();
+            return;
+        }
+        if (!gameObject.CompareTag("Follower"))
+        {
+            isNear = isPlayerNear();
+        }
 
         if (airTimeRemaining > 0f)
         {
@@ -109,18 +131,21 @@ public class Enemy : Character
 
             RotateFallingUpright();
         }
+
         // En la pared solamente salta cuando el jugador está cerca
         else if (isOnWall && isNear)
         {
             CancelRandomJump();
             jumpAttack();
         }
+
         // En la pared y lejos nunca salta
         else if (isOnWall && !isNear)
         {
             CancelRandomJump();
             FollowPlayerOnWall();
         }
+
         // Si no está en la pared, sigue al jugador
         else
         {
@@ -134,22 +159,27 @@ public class Enemy : Character
         }
 
         // Los saltos aleatorios solamente ocurren en el suelo
-        if (isOnGround && !isOnWall && !isWaitingToJump && !isJumping)
+        if (isOnGround && !isOnWall && !isWaitingToJump && !isJumping && !gameObject.CompareTag("Follower"))
         {
             randomJumpCoroutine = StartCoroutine(WaitJump());
         }
+
         IncreaseAngry();
         ControlMaximumVelocity();
     }
+
     private IEnumerator WaitAnger()
     {
         IsAngerActive = true;
+
         yield return new WaitForSeconds(300);
-        if (anger<=5) {
+
+        if (anger <= 5)
+        {
             anger++;
         }
-
     }
+
     private IEnumerator WaitJump()
     {
         isWaitingToJump = true;
@@ -276,7 +306,7 @@ public class Enemy : Character
         }
 
         if ((collision.gameObject.CompareTag("Wall") ||
-            collision.gameObject.CompareTag("Roof")) &&
+             collision.gameObject.CompareTag("Roof")) &&
             !isJumping)
         {
             isOnWall = true;
@@ -284,6 +314,7 @@ public class Enemy : Character
             // En una pared se cancela el salto aleatorio
             CancelRandomJump();
         }
+
         if (collision.gameObject.CompareTag("Bullet"))
         {
             TakeDamage(2);
@@ -292,7 +323,7 @@ public class Enemy : Character
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Room") && !gameObject.CompareTag("Follower"))
+        if (other.CompareTag("Room") && !gameObject.CompareTag("Follower"))
         {
             //Destroy(gameObject);
             Die();
@@ -338,6 +369,7 @@ public class Enemy : Character
             velocity.z = 0f;
 
             enemyRb.linearVelocity = velocity;
+
             return;
         }
 
@@ -504,8 +536,7 @@ public class Enemy : Character
     private void RotateEnemy(
         Vector3 direction,
         Vector3 upDirection,
-        Rigidbody enemyRB
-    )
+        Rigidbody enemyRB)
     {
         // Evita calcular rotación si no existe dirección
         if (direction.sqrMagnitude <= 0.01f)

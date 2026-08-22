@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     public Jugador playerScript;
     public ShootBullets gunScript;
+
+   // public GameObject gameOvermenu;
+    private GameObject gameOverPanel;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,6 +36,12 @@ public class GameManager : MonoBehaviour
         cardCooldown = 5;
         playerScript = GameObject.Find("Player").GetComponent<Jugador>();
         gunScript = GameObject.Find("Gun").GetComponent<ShootBullets>();
+        gameOverPanel = GameObject.FindGameObjectWithTag("GameOver");
+        if(gameOverPanel != null)
+            {
+                gameOverPanel.SetActive(false);
+                Debug.Log("gameover");
+            }
     }
 
     // Update is called once per frame
@@ -105,6 +115,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        Debug.Log("Ya me mori");
+        gameOverPanel.SetActive(true);
+        
+        //referenciaALaMira.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void Exit()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     /*IEnumerator CardWaitTime()
     {
         Debug.Log("Espera antes de usar otra carta");
@@ -112,4 +139,29 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(cardCooldown);
         canUseCard = true;
     } */
+
+    //Metodo para desplegar el Submenu del Canvas
+   /* public void GameOver()
+    {
+        gameOverMenu.SetActive(true);
+        referenciaALaMira.SetActive(false);
+    }
+
+    //Funcion para recargar la escena
+    public void RestartGame()
+    {
+    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //Funcion para regresar al menu principal
+    public void Exit()
+    {
+        SceneManager.LoadScene(0);
+    }*/
 }
+
+
+
+
+
+
