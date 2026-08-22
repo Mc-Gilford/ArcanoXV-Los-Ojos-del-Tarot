@@ -16,6 +16,7 @@ public class SpawnEnemies : MonoBehaviour
     public int enemyCount;
     private bool moodCarnage;
     public int enemyCountCarnage = 0;
+    private HashSet<Enemy> enemiesInRoom = new HashSet<Enemy>();
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class SpawnEnemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length-1;
+        //enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length-1;
     }
 
     private void createEnemy()
@@ -70,13 +71,41 @@ public class SpawnEnemies : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if(enemy !=null && !enemy.CompareTag("Follower"))
+        {
+            enemiesInRoom.Add(enemy);
+            enemyCount = enemiesInRoom.Count;
+            Debug.Log("Enemigos dentro "+enemyCount);
+        }
+    }
+    /*private void OnTriggerExit(Collider other)
+    {
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy != null && !other.CompareTag("Follower"))
+        {
+            enemiesInRoom.Remove(enemy);
+            enemyCount = enemiesInRoom.Count;
+            Debug.Log("Enemigos dentro " + enemyCount);
+        }
+    }*/
+
+    private int CountEnemies()
+    {
+        enemiesInRoom.RemoveWhere(enemy => enemy == null);
+        return enemiesInRoom.Count;
+    }
+
     private void activateSpawn()
     {
         timerCounter += Time.deltaTime;
         timerInterval = (int)timerCounter;
-
+        enemyCount = CountEnemies();
+        //enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length - 1;
         Debug.Log("Timer : " + timerInterval + " Random Interval " + randomInterval + " Enemies: " + enemyCount);
-
+        
         // 1. PRIMERO: Comprobamos si ya pasó el tiempo de espera
         if (timerInterval >= randomInterval)
         {
@@ -96,8 +125,9 @@ public class SpawnEnemies : MonoBehaviour
             {
                 // No hay espacio (ya hay 4 enemigos): No creamos nada,
                 // pero SI O SÍ reiniciamos el tiempo para que vuelva a contar desde cero.
-                timerCounter = 0; 
-                enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length - 1;
+                timerCounter = 0;
+                //enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length - 1;
+                enemyCount = CountEnemies();
                 timerInterval = 0;
                 randomInterval = getRandomInterval();
                 //Debug.Log("Límite alcanzado (" + enemyCount + "/" + limitEnemies + "). Reiniciando temporizador de espera.");

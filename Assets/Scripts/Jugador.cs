@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using DigitalRuby.RainMaker;
 
 public class Jugador : Character
 {
@@ -54,6 +55,9 @@ public class Jugador : Character
     [SerializeField] private bool isDrunk = false;
     [SerializeField] private int drunkShield = 1;
 
+    private GameObject rainPrefab;
+    private RainScript rain;
+
     //Variables para la reproduccion de audio
 
     [Tooltip("Distancia recorrida (m) entre cada paso.")]
@@ -67,11 +71,17 @@ public class Jugador : Character
     private float _lastMovedTime = -1f;      // cuándo caminó por última vez
     private const float _stopGrace = 0.3f;   // gracia para cortar el crujido al detenerse
 
+
     
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        rainPrefab = GameObject.Find("RainPrefab");
+        if(rainPrefab!=null)
+        {
+            rain = rainPrefab.GetComponent<RainScript>();
+        }
         if(audioSource != null)
         {
             Debug.Log("Si hay audio jsjs");
@@ -233,6 +243,26 @@ public class Jugador : Character
         if(collision.collider.CompareTag("Enemy") || collision.collider.CompareTag("Follower"))
         {
             TakeDamage(1*drunkShield);
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.collider.CompareTag("Home"))
+        {
+            if(rain!=null)
+            {
+                rain.FollowCamera = false;
+            }
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("Home"))
+        {
+            if (rain != null)
+            {
+                rain.FollowCamera = true;
+            }
         }
     }
 

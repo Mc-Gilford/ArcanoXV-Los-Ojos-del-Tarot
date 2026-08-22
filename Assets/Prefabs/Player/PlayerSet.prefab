@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2333941059332911076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6069898962173851624}
+  - component: {fileID: 8658011784388127927}
+  - component: {fileID: 3887288151487154075}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6069898962173851624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333941059332911076}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4414, y: -0.2127, z: -0.5066}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8364785495825884747}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8658011784388127927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333941059332911076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: f8f5eaaa5fb89e2438761a89feaba852, type: 2}
+--- !u!114 &3887288151487154075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2333941059332911076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bb4dd7301700a43aa2b273b132383b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraColor
 --- !u!1 &2627944424092730325
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,7 +88,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.653, y: 5.89, z: -50.71}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2.3645945, z: 1.4852874}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8364785495825884747}
@@ -46,6 +108,7 @@ GameObject:
   - component: {fileID: 7678753344805450396}
   - component: {fileID: 2498418577274894517}
   - component: {fileID: 2235646516311466375}
+  - component: {fileID: 3814289868320779696}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -68,6 +131,7 @@ Transform:
   m_Children:
   - {fileID: 2863005196365130637}
   - {fileID: 1015310929838696240}
+  - {fileID: 6069898962173851624}
   m_Father: {fileID: 5465632942743037496}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &546039420350685711
@@ -152,7 +216,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -185,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f1b1a15405b05944a0cfeaabb5584c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraScript
-  target: {fileID: 0}
+  target: {fileID: 4057296353023997633}
   mouseSensitivity:
     horizontal: 0
     vertical: 0
@@ -193,6 +257,18 @@ MonoBehaviour:
     min: 0
     max: 0
   gunModel: {fileID: 8669356363904950830, guid: 650bc1ab58110244fa6c7e0c74856813, type: 3}
+--- !u!114 &3814289868320779696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7957190706809315962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bb4dd7301700a43aa2b273b132383b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CamerColora
 --- !u!1 &8678210522487806419
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 8678210522487806419}
   serializedVersion: 2
   m_LocalRotation: {x: -0.016476316, y: -0.9996718, z: 0.0008209868, w: 0.019598095}
-  m_LocalPosition: {x: 0.6931382, y: 0.027158737, z: -0.0033842921}
+  m_LocalPosition: {x: 0.951, y: 0.058, z: -0.003}
   m_LocalScale: {x: 0.50000006, y: 0.5, z: 0.5000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -272,6 +348,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[0].imagen
+      value: 
+      objectReference: {fileID: 21300000, guid: 307757ead4fa1b64390139288d193f7d, type: 3}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[1].imagen
+      value: 
+      objectReference: {fileID: 21300000, guid: d262469cba442cd4e9a54e8af77da7af, type: 3}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[2].imagen
+      value: 
+      objectReference: {fileID: 21300000, guid: 0846ce0ac3bcb7941baf84fb063eb707, type: 3}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[0].color.b
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[0].color.g
+      value: 0.14901958
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[0].color.r
+      value: 0.2985218
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[1].color.b
+      value: 0.04974585
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[1].color.g
+      value: 0.012014951
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[1].color.r
+      value: 0.509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[2].color.b
+      value: 0.11770974
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[2].color.g
+      value: 0.3490566
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cartas.Array.data[2].color.r
+      value: 0.05762726
+      objectReference: {fileID: 0}
     - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 10
@@ -299,7 +423,11 @@ PrefabInstance:
     - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4152306095576441771, guid: 650bc1ab58110244fa6c7e0c74856813, type: 3}
+      objectReference: {fileID: 1355931894810117372}
+    - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1355931894810117372}
     - target: {fileID: 4499004529023971631, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -328,16 +456,79 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8247559661208236344, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      propertyPath: cordura
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2585345408030216492}
   m_SourcePrefab: {fileID: 100100000, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
 --- !u!4 &4057296353023997633 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2914483279350274709, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
   m_PrefabInstance: {fileID: 1169874395624549460}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6761618042471953554 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+  m_PrefabInstance: {fileID: 1169874395624549460}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2585345408030216492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6761618042471953554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3277fcdc7a2cf34cbb1ed02fc3264b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionSystem
+  cartas:
+  - nombre: Inversion Espectral
+    poderDesc: "Eres inmune al da\xF1o"
+    maldicionDesc: Tus controles se invierten
+    color: {r: 0.21623372, g: 0.078431375, b: 0.43529412, a: 1}
+    imagen: {fileID: 21300000, guid: 307757ead4fa1b64390139288d193f7d, type: 3}
+    velocidadMult: 1.6
+    duracionPoder: 12
+    maldicionVelocidadMult: 1
+    maldicionSinSprint: 1
+    duracionMaldicion: 10
+  - nombre: Destruccion Espectral
+    poderDesc: Destruyes a los enemigos de la sala
+    maldicionDesc: Pierdes la mitad de tu vida
+    color: {r: 0.5188679, g: 0.056292284, b: 0.056292284, a: 1}
+    imagen: {fileID: 21300000, guid: d262469cba442cd4e9a54e8af77da7af, type: 3}
+    velocidadMult: 1.25
+    duracionPoder: 12
+    maldicionVelocidadMult: 0.7
+    maldicionSinSprint: 0
+    duracionMaldicion: 1
+  - nombre: Corazon Guia
+    poderDesc: Teletransporta al jugador a la zona segura
+    maldicionDesc: Pierdes todas las municiones que no esten dentro del cargador
+      de tu arma
+    color: {r: 0.055268783, g: 0.4339623, b: 0.13558924, a: 1}
+    imagen: {fileID: 21300000, guid: 0846ce0ac3bcb7941baf84fb063eb707, type: 3}
+    velocidadMult: 2
+    duracionPoder: 8
+    maldicionVelocidadMult: 0.5
+    maldicionSinSprint: 1
+    duracionMaldicion: 1
+  cooldownHabilidad: 45
+  tiempoAbrir: 0.4
+  tiempoAnimacionElegir: 0.5
+  tiempoResultado: 2.5
+  tiempoFlash: 0.4
+  bloquearMovimientoAlElegir: 1
+  gameManager: {fileID: 0}
 --- !u!1001 &7998459649548614576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -422,6 +613,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8364785495825884747}
     m_Modifications:
+    - target: {fileID: -915442961490450222, guid: c9841888fa5041d499ada59f73087c6a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5855586643228379229, guid: c9841888fa5041d499ada59f73087c6a, type: 3}
       propertyPath: m_Name
       value: Gun
@@ -505,9 +700,12 @@ MonoBehaviour:
   spread: 0
   shootCooldown: 1
   canShoot: 1
+  hasBulletsToShoot: 1
   magazine: 0
   bulletsLeft: 0
-  bulletsOnGun: 0
+  bulletsOnGun: 11
   playerCamera: {fileID: 546039420350685711}
   attackPoint: {fileID: 8470287873173394347}
   ammoClip: 0
+  shootSound: {fileID: 0}
+  volume: 1
