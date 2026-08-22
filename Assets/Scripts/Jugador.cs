@@ -80,6 +80,7 @@ public class Jugador : Character
         rainPrefab = GameObject.Find("RainPrefab");
         if(rainPrefab!=null)
         {
+            Debug.Log("Si exixte rain");
             rain = rainPrefab.GetComponent<RainScript>();
         }
         if(audioSource != null)
@@ -245,19 +246,30 @@ public class Jugador : Character
             TakeDamage(1*drunkShield);
         }
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if(collision.collider.CompareTag("Home"))
+        Debug.Log("COLISIONANDO CON: " + collider.name);
+        Debug.Log("TAG: " + collider.gameObject.tag);
+
+        if (collider.CompareTag("Home"))
         {
-            if(rain!=null)
+            Debug.Log("The tags is right");
+
+            if (rain != null)
             {
+                Debug.Log("Aqui entra");
                 rain.FollowCamera = false;
+            }
+            else
+            {
+                Debug.Log("RAIN ES NULL");
             }
         }
     }
-    private void OnCollisionExit(Collision collision)
+
+    private void OnTriggerExit(Collider collider)
     {
-        if (collision.collider.CompareTag("Home"))
+        if (collider.CompareTag("Home"))
         {
             if (rain != null)
             {
