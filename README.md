@@ -41,8 +41,8 @@ A partir de ese momento, el jugador debe explorar libremente la casa, sobrevivir
 | 🐸 Saltar | `Barra espaciadora` | Salta para esquivar o superar obstáculos |
 | 🔫 Disparar | `Q` | Ataque principal / disparo del arma equipada |
 | ⚡ Dash | Doble tap `W`/`A`/`S`/`D` | Impulso rápido en la dirección deseada (consume stamina) |
-| 🃏 Interactuar / leer carta | `E` | Interactúa con objetos o lee una carta de historia |
-| 🃏 Voltear carta | `C` | Voltea la carta seleccionada |
+| 🃏 Interactuar / leer carta | `X` | Interactúa con objetos o lee una carta de historia |
+| 🃏 Voltear carta | `E` | Voltea la carta seleccionada |
 | 🃏 Cerrar carta | `V` | Cierra la carta abierta |
 | 🃏 Selección de tarot | `Tab` | Abre el menú de selección de cartas del tarot |
 | 🃏 Elegir carta | `J` / `K` / `L` | Navega entre las cartas del tarot |
