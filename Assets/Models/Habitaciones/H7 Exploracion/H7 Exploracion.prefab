@@ -106,6 +106,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5d4a3102601fa3a43ab6b6928a844783, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e44a78ff6319fb4cbc4baeb6dc310cb, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 5d4a3102601fa3a43ab6b6928a844783, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b6b9cb595e92f34ea14c558d0ab744f, type: 2}
     - target: {fileID: 919132149155446097, guid: 5d4a3102601fa3a43ab6b6928a844783, type: 3}
       propertyPath: m_Name
       value: H7 Piso
@@ -201,6 +209,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d778faae8b6b2d94d8b3ed062ad84ce6, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 28b9af1c561dac24f978a1beb67f4869, type: 2}
     - target: {fileID: 919132149155446097, guid: d778faae8b6b2d94d8b3ed062ad84ce6, type: 3}
       propertyPath: m_Name
       value: H7 Techo
@@ -296,6 +308,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1633a103edce74c4685aaec5de54f853, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c031b6a5b20c4bb46a2adf30233e3228, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 1633a103edce74c4685aaec5de54f853, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b04aff70e4bf794d8dbe6bd8ca7f1ec, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 1633a103edce74c4685aaec5de54f853, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2f9af04001f0ef247a758db3f240b990, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 1633a103edce74c4685aaec5de54f853, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9985694aa03931f4a9f9a0def99843e9, type: 2}
     - target: {fileID: 919132149155446097, guid: 1633a103edce74c4685aaec5de54f853, type: 3}
       propertyPath: m_Name
       value: H7 Escaleras
@@ -388,6 +416,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 320d1d6d320278b42bbdcf1cbacc27ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9985694aa03931f4a9f9a0def99843e9, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 320d1d6d320278b42bbdcf1cbacc27ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 00c4734ea07b0074d8cc9cf14e1c8020, type: 2}
     - target: {fileID: 919132149155446097, guid: 320d1d6d320278b42bbdcf1cbacc27ff, type: 3}
       propertyPath: m_Name
       value: H7 Puerta
@@ -479,6 +515,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b1e423c85dd5f1945bfa0beb87240297, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 67b62075a75a2d744a75e8caa8b2047f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b1e423c85dd5f1945bfa0beb87240297, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: eb17ec5148a553e44ab031bc31f246d5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b1e423c85dd5f1945bfa0beb87240297, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2f9af04001f0ef247a758db3f240b990, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b1e423c85dd5f1945bfa0beb87240297, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: be58d38408e95aa4e910b122902a6e64, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b1e423c85dd5f1945bfa0beb87240297, type: 3}
+      propertyPath: 'm_Materials.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ba6bc836609ca74f939b8224509c444, type: 2}
     - target: {fileID: 919132149155446097, guid: b1e423c85dd5f1945bfa0beb87240297, type: 3}
       propertyPath: m_Name
       value: H7 Paredes
