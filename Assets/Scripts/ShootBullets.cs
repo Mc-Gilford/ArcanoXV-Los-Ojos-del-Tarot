@@ -39,8 +39,8 @@ public class ShootBullets : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         shootForce = 10f;
-        magazine = 24;
-        ammoClip = 5;
+        magazine = 50;
+        ammoClip = 10;
         CheckBullets();
     }
 
