@@ -156,8 +156,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 77f0e30f3d4d06148b16624fbadeea79, type: 3}
   enableFarSounds: 1
   scareAnywhere: 1
-  minIntervalScare: 23.840809
-  maxIntervalScare: 47.959545
+  minIntervalScare: 27.07794
+  maxIntervalScare: 46.919617
   scareChance: 0.4
   scareVolume: 0.85
   minIntervalNear: 3
