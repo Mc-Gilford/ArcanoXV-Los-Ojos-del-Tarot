@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class Enemy : Character
 {
@@ -42,6 +43,7 @@ public class Enemy : Character
 
     public int damage { get; set; }
 
+    private NavMeshAgent agent;
     private Rigidbody enemyrb;
     private Coroutine randomJumpCoroutine;
     private Vector3 surfaceNormal = Vector3.up;
@@ -54,6 +56,7 @@ public class Enemy : Character
     {
         enemyrb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+        agent = GetComponent<NavMeshAgent>();
 
         if (player == null)
         {
@@ -61,7 +64,38 @@ public class Enemy : Character
         }
 
         initializeVariables();
+        if (agent != null)
+        {
+            agent.speed = speed * anger;
+            agent.stoppingDistance = stoppingDistance;
+            agent.acceleration = 12f;
+            agent.angularSpeed = 360f;
+        }
         StartCoroutine(WaitAnger());
+    }
+
+    private void EnableNavMesh()
+    {
+        if (agent == null)
+            return;
+
+        if (!agent.enabled)
+        {
+            agent.enabled = true;
+        }
+
+        enemyrb.isKinematic = true;
+        enemyrb.useGravity = false;
+    }
+
+    private void DisableNavMesh()
+    {
+        if (agent != null && agent.enabled)
+        {
+            agent.enabled = false;
+        }
+
+        enemyrb.isKinematic = false;
     }
 
     private void initializeVariables()
@@ -82,6 +116,21 @@ public class Enemy : Character
         {
             anger = anger + 0.01f;
         }
+    }
+    private void FollowPlayerNavMesh()
+    {
+        if (agent == null)
+            return;
+
+        EnableNavMesh();
+
+        if (!agent.isOnNavMesh)
+            return;
+
+        agent.speed = speed * anger;
+        agent.stoppingDistance = stoppingDistance;
+
+        agent.SetDestination(player.transform.position);
     }
 
     private void FixedUpdate()
@@ -149,7 +198,11 @@ public class Enemy : Character
         // Si no está en la pared, sigue al jugador
         else
         {
-            FollowPlayer(enemyrb);
+            //FollowPlayer(enemyrb);
+            if (agent != null && agent.enabled && agent.isOnNavMesh)
+                FollowPlayerNavMesh();
+            else
+                FollowPlayer(enemyrb);
         }
 
         // Al tocar el suelo continúa girando hasta quedar de pie
@@ -217,6 +270,7 @@ public class Enemy : Character
 
     private void jumpAttack()
     {
+        DisableNavMesh();
         bool jumpingFromWall = isOnWall;
 
         enemyrb.useGravity = true;
@@ -307,9 +361,10 @@ public class Enemy : Character
 
         if ((collision.gameObject.CompareTag("Wall") ||
              collision.gameObject.CompareTag("Roof")) &&
-            !isJumping)
+            !isJumping && !gameObject.CompareTag("Follower"))
         {
             isOnWall = true;
+            DisableNavMesh();
 
             // En una pared se cancela el salto aleatorio
             CancelRandomJump();
@@ -649,6 +704,7 @@ public class Enemy : Character
             );
 
         enemyrb.MoveRotation(uprightRotation);
+        EnableNavMesh();
     }
 
     public bool isPlayerNear()
@@ -689,6 +745,9 @@ public class Enemy : Character
         bool isClimbableSurface =
             collision.gameObject.CompareTag("Wall") ||
             collision.gameObject.CompareTag("Roof");
+
+        if (gameObject.CompareTag("Follower"))
+            return;
 
         if (!isClimbableSurface)
             return;

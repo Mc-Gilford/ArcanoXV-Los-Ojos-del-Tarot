@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.56135
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.524276
+      value: 1.1207469
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.18974
+      value: 0.40560794
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.19
+      value: 5.851783
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.51
+      value: 12.73
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.52
+      value: 286.36392
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60,10 +60,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4121213259516975882, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 60fc0d408a309194fb36d28167a5c90b, type: 2}
+      objectReference: {fileID: 2100000, guid: 61fd2d27744f0a941b6aa7af6872dd03, type: 2}
     - target: {fileID: -232931435291581910, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
       propertyPath: m_LocalScale.y
       value: 126.72
@@ -80,6 +84,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Follower
       objectReference: {fileID: 0}
+    - target: {fileID: 6054140826855891635, guid: a962e170b3f75fc4fada5a1b6420cdbc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 60fc0d408a309194fb36d28167a5c90b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -159,15 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0816cb2ce865fa438dead001097df3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ghost
-  health: 100
   audioSource: {fileID: 0}
   player: {fileID: 0}
   rotationSpeed: 8
   anger: 0.9
   nearDistance: 3
   slowDistance: 5
-  wallForce: 5
   stoppingDistance: 1
+  detectionDistance: 400
+  wallForce: 5
   jumpForce: 6
   maximumSpeed: 8
   airAcceleration: 12
