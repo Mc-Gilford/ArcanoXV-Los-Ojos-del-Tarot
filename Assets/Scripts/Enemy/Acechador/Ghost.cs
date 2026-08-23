@@ -20,6 +20,9 @@ public class Ghost : Enemy
     private float[] teleportDistance = { 2, 4, 6, 10 };
     private bool isGhostAlwaysActive;
 
+    // NUEVA FEATURE: Ajusta la altura del Ghost respecto al Player
+    [SerializeField] private float ghostHeightOffset = 1.0f;
+
     void Start()
     {
         ghostRb = GetComponent<Rigidbody>();
@@ -133,6 +136,23 @@ public class Ghost : Enemy
 
         Debug.Log("Follow");
         FollowPlayer(ghostRb);
+        // NUEVA FEATURE: Si prácticamente no se está moviendo, mira al Player
+        if (ghostRb.linearVelocity.magnitude < 0.1f)
+        {
+            LookPlayer();
+        }
+    }
+    // NUEVA FEATURE: Si el Ghost está detenido gira para mirar al Player
+    private void LookPlayer()
+    {
+        Vector3 directionToPlayer = player.transform.position - ghostRb.position;
+        directionToPlayer.y = 0f;
+
+        if (directionToPlayer.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer.normalized, Vector3.up);
+            ghostRb.MoveRotation(Quaternion.Slerp(ghostRb.rotation, targetRotation, 5f * Time.fixedDeltaTime));
+        }
     }
 
     private void Teletransport()
@@ -163,11 +183,11 @@ public class Ghost : Enemy
 
         int index = UnityEngine.Random.Range(0, teleportDistance.Length);
 
-        // NUEVA FEATURE: El Ghost aparece alrededor del jugador sin depender de su posición anterior
+        // NUEVA FEATURE: Aparece alrededor del jugador
         teletransportPosition = player.transform.position + directionToPlayer * teleportDistance[index];
 
-        // NUEVA FEATURE: Mantiene la altura del jugador para permitir apariciones en otros pisos
-        teletransportPosition.y = player.transform.position.y;
+        // NUEVA FEATURE: Usa la altura del Player más el offset del pivote del Ghost
+        teletransportPosition.y = player.transform.position.y + ghostHeightOffset;
 
         ghostRb.linearVelocity = Vector3.zero;
         ghostRb.angularVelocity = Vector3.zero;

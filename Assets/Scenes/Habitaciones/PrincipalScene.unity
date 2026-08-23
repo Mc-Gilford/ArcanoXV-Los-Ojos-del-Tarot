@@ -3351,6 +3351,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6360361193239751986, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 91.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360361193239751986, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 61.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6543978904587781337, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
       propertyPath: m_TagString
       value: Roof
@@ -4104,6 +4112,7 @@ MonoBehaviour:
   isInRoom: 0
   IsAngerActive: 0
   maxHealth: 0
+  ghostHeightOffset: 1
 --- !u!65 &1907560256
 BoxCollider:
   m_ObjectHideFlags: 0
