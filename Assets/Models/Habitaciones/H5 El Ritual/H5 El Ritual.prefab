@@ -223,6 +223,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a380d8c7b87ace49bd41b985a12a257, type: 3}
       insertIndex: -1
       addedObject: {fileID: 762656367846322451}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a380d8c7b87ace49bd41b985a12a257, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1745148477279904111}
   m_SourcePrefab: {fileID: 100100000, guid: 1a380d8c7b87ace49bd41b985a12a257, type: 3}
 --- !u!4 &2799204038901702825 stripped
 Transform:
@@ -255,6 +258,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08259423, y: 0.01617393, z: 0.12784831}
   m_Center: {x: -0.041109808, y: -0.0013592909, z: -0.0032405867}
+--- !u!114 &1745148477279904111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283992272275995155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a3e28b01d17c04ba0614d75c849692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door
+  detectionDistance: 2.5
+  openAngle: -90
+  speed: 3
+  closeDelay: 10
 --- !u!1001 &3088744182984895679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,6 +433,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: eb17ec5148a553e44ab031bc31f246d5, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 883d618e6c5ead34b856143f3819d840, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 979d59c816316154abc77502995be9e8, type: 2}
     - target: {fileID: -7511558181221131132, guid: 883d618e6c5ead34b856143f3819d840, type: 3}
       propertyPath: 'm_Materials.Array.data[3]'
       value: 

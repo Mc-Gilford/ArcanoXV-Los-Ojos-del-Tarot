@@ -1,0 +1,222 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2027234545720713434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2587462209183566646}
+  m_Layer: 0
+  m_Name: MetaCupboard3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2587462209183566646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027234545720713434}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 83.31506, y: -5.0593605, z: -79.05942}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2205856974220738960}
+  - {fileID: 7912478002616978978}
+  - {fileID: 726644647153927720}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3438531251648682568
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2587462209183566646}
+    m_Modifications:
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.84494
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.502853
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.729416
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210595597144015202, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_Name
+      value: MetalCupboard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+--- !u!4 &2205856974220738960 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+  m_PrefabInstance: {fileID: 3438531251648682568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4265284585650855408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2587462209183566646}
+    m_Modifications:
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.066162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.5028515
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.048416
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210595597144015202, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_Name
+      value: MetalCupboard (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+--- !u!4 &726644647153927720 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+  m_PrefabInstance: {fileID: 4265284585650855408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6695196908781327866
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2587462209183566646}
+    m_Modifications:
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.889389
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.502852
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.888916
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210595597144015202, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+      propertyPath: m_Name
+      value: MetalCupboard (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+--- !u!4 &7912478002616978978 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3541195792132316120, guid: 96b7caad73e72b743a1a2f1058bbd6f3, type: 3}
+  m_PrefabInstance: {fileID: 6695196908781327866}
+  m_PrefabAsset: {fileID: 0}
