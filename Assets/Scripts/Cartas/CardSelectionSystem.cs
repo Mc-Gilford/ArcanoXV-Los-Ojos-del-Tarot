@@ -59,6 +59,8 @@ public class CardSelectionSystem : MonoBehaviour
 
     // ------------------------------------------------------------------ vida
 
+    public bool showPowerUp = false;
+
     private void Awake()
     {
         if (cartas == null || cartas.Length == 0)
@@ -107,6 +109,7 @@ public class CardSelectionSystem : MonoBehaviour
 
     private void AbrirSeleccion()
     {
+        showPowerUp = false;
         _estado = Estado.Seleccionando;
         _cartaElegida = false;
         StartCoroutine(AnimacionAbrir());
@@ -303,12 +306,16 @@ public class CardSelectionSystem : MonoBehaviour
 
         switch (_estado)
         {
-            
+
             case Estado.Seleccionando:
-                _textoCooldown.text = "J/K/L elige  ·  Espacio: salir   ·  Tab: cerrar";
+                // NUEVA FEATURE: Las instrucciones se muestran debajo de las cartas
+                _instrucciones.text = "J / K / L para elegir   ·   Tab para cerrar";
+                _textoCooldown.text = "";
                 break;
             case Estado.EnCooldown:
-                _textoCooldown.text = "Recarga: " + Mathf.CeilToInt(_cooldownRestante) + " s";
+                showPowerUp = true;
+                _instrucciones.text = "";
+                _textoCooldown.text = "";
                 break;
         }
     }
@@ -332,15 +339,18 @@ public class CardSelectionSystem : MonoBehaviour
         RectTransform rootRT = (RectTransform)root.transform;
 
         _fondo = CrearImagenStretch(rootRT, "Fondo", new Color(0f, 0f, 0f, 0.35f));
+        // NUEVA FEATURE: Título más arriba para que no quede pegado a las cartas
         _titulo = CrearTexto(rootRT, "Titulo", "Elige tu carta", 40, Color.white,
-            new Vector2(0f, 260f), new Vector2(1000f, 60f), TextAnchor.MiddleCenter);
+            new Vector2(0f, 330f), new Vector2(1000f, 60f), TextAnchor.MiddleCenter);
 
-        _cartasRaiz = CrearRectangulo(rootRT, "Cartas", Vector2.zero, new Vector2(1160f, 500f));
+        // NUEVA FEATURE: Zona de cartas ligeramente más alta para dar aire arriba y abajo
+        _cartasRaiz = CrearRectangulo(rootRT, "Cartas", new Vector2(0f, 20f), new Vector2(1160f, 520f));
         for (int i = 0; i < 3; i++)
             CrearCarta(i, cartas[i]);
 
+        // NUEVA FEATURE: J/K/L queda claramente debajo de las cartas
         _instrucciones = CrearTexto(rootRT, "Instrucciones", "",
-            22, new Color(1f, 1f, 1f, 0.85f), new Vector2(0f, -240f), new Vector2(1400f, 40f), TextAnchor.MiddleCenter);
+            22, new Color(1f, 1f, 1f, 0.85f), new Vector2(0f, -310f), new Vector2(1400f, 50f), TextAnchor.MiddleCenter);
 
         // Resultado (oculto por defecto)
         RectTransform resRT = CrearRectangulo(rootRT, "Resultado", new Vector2(0f, -220f), new Vector2(900f, 180f));
@@ -367,7 +377,7 @@ public class CardSelectionSystem : MonoBehaviour
     {
         RectTransform raiz = CrearRectangulo(_cartasRaiz,
             "Carta_" + indice + "_" + def.nombre.Replace(" ", "_"),
-            new Vector2(-400f + indice * 400f, 60f),
+            new Vector2(-400f + indice * 400f, 0f),
             new Vector2(360f, 500f));
 
         Image borde = raiz.gameObject.AddComponent<Image>();
@@ -382,12 +392,14 @@ public class CardSelectionSystem : MonoBehaviour
             ? new Color(0.15f, 0.15f, 0.15f)   // carta blanca → texto oscuro
             : Color.white;
 
-        Image relleno = CrearImagen(raiz,"Relleno",Vector2.zero,new Vector2(352f, 492f),Color.white);
+        // NUEVA FEATURE: Margen interno para evitar que los bordes de la imagen se vean recortados
+        Image relleno = CrearImagen(raiz, "Relleno", Vector2.zero, new Vector2(336f, 468f), Color.white);
 
         if (def.imagen != null)
         {
             relleno.sprite = def.imagen;
-            relleno.preserveAspect = true;/*Commer*/
+            relleno.type = Image.Type.Simple;
+            relleno.preserveAspect = true;
         }
         //Image relleno = CrearImagen(raiz, "Relleno", Vector2.zero, new Vector2(352f, 492f), def.color);
         /* CrearTexto(relleno.rectTransform, "Nombre", def.nombre, 34, textoColor,
