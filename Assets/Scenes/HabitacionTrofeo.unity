@@ -869,8 +869,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -967,7 +969,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.55, g: 0.44, b: 0.3, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.54999995, g: 0.43999997, b: 0.29999998, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -2818,8 +2820,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -2916,7 +2920,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.08, g: 0.08, b: 0.1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.079999976, g: 0.079999976, b: 0.09999997, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -5367,6 +5371,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 469383575}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &471205684
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.8743477
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.000000051930442
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.597353
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029341874218045536, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216731071589653035, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
+      propertyPath: m_Name
+      value: CartaColeccionable_4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2bc1d550ae326534cbfa4063e07dce28, type: 3}
 --- !u!1 &489628988
 GameObject:
   m_ObjectHideFlags: 0
@@ -7275,8 +7336,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -7373,7 +7436,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.15, g: 0.2, b: 0.25, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.14999998, g: 0.19999996, b: 0.24999997, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -7482,6 +7545,67 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &693043388
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 318581037727118959, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1fa67ce6ee1ebdc41b5bb0bbf65074ec, type: 2}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.6769204
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564048522658510219, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878654235505585338, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
+      propertyPath: m_Name
+      value: Carta_01_El_Origen_del_Don
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72abca740724a534a9a21eedb390fc8f, type: 3}
 --- !u!1 &708527724
 GameObject:
   m_ObjectHideFlags: 0
@@ -7674,8 +7798,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -7772,7 +7898,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.85, g: 0.7, b: 0.35, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.85, g: 0.7, b: 0.34999996, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -10847,8 +10973,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -10945,7 +11073,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.5, g: 0.4, b: 0.3, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.5, g: 0.39999998, b: 0.29999998, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -15580,6 +15708,82 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!1 &1416080257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2627944424092730325, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+  m_PrefabInstance: {fileID: 1753352419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1416080259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416080257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f60718293a4b5c6d7e8f90a1b2c3d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DebugPlayerMover
+  moveSpeed: 5
+  sprintMultiplier: 2.2
+  lookSpeed: 0.1
+  cameraHeight: 1.6
+  lockMovement: 0
+  speedMultiplier: 1
+  canSprint: 1
+--- !u!114 &1416080260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416080257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3277fcdc7a2cf34cbb1ed02fc3264b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardSelectionSystem
+  cartas:
+  - nombre: Inversion Espectral
+    poderDesc: "Eres inmune al da\xF1o"
+    maldicionDesc: Tus controles se invierten
+    color: {r: 0.15, g: 0.55, b: 0.25, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 1.6
+    duracionPoder: 12
+    maldicionVelocidadMult: 1
+    maldicionSinSprint: 1
+    duracionMaldicion: 10
+  - nombre: Destruccion Espectral
+    poderDesc: Destruyes a los enemigos de la sala
+    maldicionDesc: Pierdes la mitad de tu vida
+    color: {r: 0.2, g: 0.45, b: 0.85, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 1.25
+    duracionPoder: 12
+    maldicionVelocidadMult: 0.7
+    maldicionSinSprint: 0
+    duracionMaldicion: 1
+  - nombre: Corazon Guia
+    poderDesc: Teletransporta al jugador a la zona segura
+    maldicionDesc: Pierdes todas las municiones que no esten dentro del cargador
+      de tu arma
+    color: {r: 0.92, g: 0.92, b: 0.92, a: 1}
+    imagen: {fileID: 0}
+    velocidadMult: 2
+    duracionPoder: 8
+    maldicionVelocidadMult: 0.5
+    maldicionSinSprint: 1
+    duracionMaldicion: 1
+  cooldownHabilidad: 45
+  tiempoAbrir: 0.4
+  tiempoAnimacionElegir: 0.5
+  tiempoResultado: 2.5
+  tiempoFlash: 0.4
+  bloquearMovimientoAlElegir: 1
+  gameManager: {fileID: 0}
+  showPowerUp: 0
 --- !u!1 &1457503900
 GameObject:
   m_ObjectHideFlags: 0
@@ -15694,6 +15898,67 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457503900}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1464058957
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 405143891711582402, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_Name
+      value: CartaIntro
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615372193174275911, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b546aceaa00135541af24fb8a4b2de75, type: 2}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8817655
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.79999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.2325263
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3349537433524856188, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0cc22d65093126f47a0fe13153e3113b, type: 3}
 --- !u!1 &1468171040
 GameObject:
   m_ObjectHideFlags: 0
@@ -18072,8 +18337,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -18170,7 +18437,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.4, g: 0.36, b: 0.3, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.39999998, g: 0.35999998, b: 0.29999998, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -18502,8 +18769,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -18600,7 +18869,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.55, g: 0.25, b: 0.25, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.54999995, g: 0.24999997, b: 0.24999997, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -18879,7 +19148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5465632942743037496, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.361
+      value: 5.56
       objectReference: {fileID: 0}
     - target: {fileID: 5465632942743037496, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18916,7 +19185,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2627944424092730325, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1416080260}
+    - targetCorrespondingSourceObject: {fileID: 2627944424092730325, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1416080259}
   m_SourcePrefab: {fileID: 100100000, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
 --- !u!4 &1753352420 stripped
 Transform:
@@ -19855,8 +20130,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -19953,7 +20230,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.8, g: 0.8, b: 0.75, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8, g: 0.8, b: 0.75, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -20909,8 +21186,10 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -21007,7 +21286,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.55, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.5, g: 0.5, b: 0.54999995, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -22419,3 +22698,6 @@ SceneRoots:
   - {fileID: 569089983}
   - {fileID: 1493726812}
   - {fileID: 1753352419}
+  - {fileID: 693043388}
+  - {fileID: 471205684}
+  - {fileID: 1464058957}

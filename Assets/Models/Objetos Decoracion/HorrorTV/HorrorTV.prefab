@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7605761100717553847
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.34
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.58
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -117.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ac773fa26ef6294a867abe150bb18a9, type: 2}
+    - target: {fileID: -7511558181221131132, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 93aa5bab91a77d24abb2bc926b0b6da1, type: 2}
+    - target: {fileID: 919132149155446097, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      propertyPath: m_Name
+      value: HorrorTV
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3754220621810603389}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7170178990145935932}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6806095130603721794}
+  m_SourcePrefab: {fileID: 100100000, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+--- !u!1 &7299348448066520550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a3625a3d6de1dd748a84c13f8a42d8e8, type: 3}
+  m_PrefabInstance: {fileID: 7605761100717553847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3754220621810603389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299348448066520550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 18.403282, y: 10.451752, z: 3.9694834}
+  m_Center: {x: 0.52674484, y: 1.5895004, z: 2.1114798}
+--- !u!114 &7170178990145935932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299348448066520550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491c5e74c5dd21d4ba624cea23f430c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectAmbience
+  clip: {fileID: 8300000, guid: c8e3d3c7ca1b4f943aeff2643349a7f3, type: 3}
+  audioCategory: 
+  baseVolume: 1
+  playDuration: 3
+  triggerRadius: 1.5
+--- !u!114 &6806095130603721794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299348448066520550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d4e5f60718293a4b5c6d7e8f90a1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HauntedObject
+  playerOverride: {fileID: 0}
+  playerTag: Player
+  proximityDistance: 5
+  nearSounds: []
+  farSounds: []
+  enableFarSounds: 1
+  scareAnywhere: 1
+  minIntervalScare: 15
+  maxIntervalScare: 40
+  scareChance: 0.4
+  scareVolume: 0.85
+  minIntervalNear: 3
+  maxIntervalNear: 8
+  minIntervalFar: 8
+  maxIntervalFar: 20
+  animator: {fileID: 0}
+  animationTriggers: []
+  proceduralShake: 1
+  shakeMagnitude: 10
+  shakeDuration: 0.35
+  roomRadiusFallback: 30
+  nearVolume: 1
+  farVolume: 0.55
