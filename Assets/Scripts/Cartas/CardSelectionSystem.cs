@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Habilidad activa de cartas del tarot (Tab): elige con J/K/L y sale con Tab.
-/// Cada carta activa un Power Up.
-/// La UI se construye por código.
+/// La UI se construye automáticamente por código.
 /// </summary>
 public class CardSelectionSystem : MonoBehaviour
 {
@@ -24,6 +23,9 @@ public class CardSelectionSystem : MonoBehaviour
     [Header("Comportamiento")]
     [Tooltip("Si true, al abrir la selección se congela el WASD.")]
     public bool bloquearMovimientoAlElegir = true;
+
+    [Header("Power Up HUD")]
+    [SerializeField] private Sprite powerUpSprite; // NUEVA FEATURE: Solo arrastras aquí tu PNG
 
     public GameManager gameManager;
 
@@ -62,12 +64,12 @@ public class CardSelectionSystem : MonoBehaviour
     private Text _textoCooldown;
     private Text _textoCartaActiva;
 
-    // NUEVA FEATURE: Imagen del Power Up activo
+    // NUEVA FEATURE: Indicador de disponibilidad del Power Up
     private Image _powerUpIcon;
     private RectTransform _powerUpIconRT;
     private Coroutine _powerUpAnimation;
 
-    public bool showPowerUp = false;
+    public bool showPowerUp = true;
 
     private void Awake()
     {
@@ -145,6 +147,17 @@ public class CardSelectionSystem : MonoBehaviour
             if (_cooldownRestante <= 0f)
             {
                 _estado = Estado.Idle;
+                showPowerUp = true;
+
+                // NUEVA FEATURE: El poder vuelve a estar disponible
+                _powerUpIcon.gameObject.SetActive(true);
+
+                if (_powerUpAnimation != null)
+                {
+                    StopCoroutine(_powerUpAnimation);
+                }
+
+                _powerUpAnimation = StartCoroutine(AnimarPowerUpIcon());
             }
         }
 
@@ -159,7 +172,6 @@ public class CardSelectionSystem : MonoBehaviour
 
     private void AbrirSeleccion()
     {
-        showPowerUp = false;
         _estado = Estado.Seleccionando;
         _cartaElegida = false;
 
@@ -182,20 +194,11 @@ public class CardSelectionSystem : MonoBehaviour
         _cartaElegida = true;
         _estado = Estado.Resolviendo;
 
-        _textoCartaActiva.text = "Carta activa: " + c.nombre;
+        _textoCartaActiva.text = "";
 
-        // NUEVA FEATURE: Muestra la imagen de la carta seleccionada como Power Up
-        _powerUpIcon.sprite = c.imagen;
-        _powerUpIcon.color = c.imagen != null ? Color.white : c.color;
-        _powerUpIcon.gameObject.SetActive(true);
-
-        // NUEVA FEATURE: Si había una animación anterior la reinicia
-        if (_powerUpAnimation != null)
-        {
-            StopCoroutine(_powerUpAnimation);
-        }
-
-        _powerUpAnimation = StartCoroutine(AnimarPowerUpIcon());
+        // NUEVA FEATURE: Se utilizó el poder y desaparece el indicador
+        showPowerUp = false;
+        _powerUpIcon.gameObject.SetActive(false);
 
         StartCoroutine(AnimacionElegir(indice));
 
@@ -360,28 +363,27 @@ public class CardSelectionSystem : MonoBehaviour
         rt.localScale = baseScale;
     }
 
-    // NUEVA FEATURE: Animación de aparición del Power Up
+    // NUEVA FEATURE: Hace un pequeño pulso cuando el Power Up vuelve a estar disponible
     private IEnumerator AnimarPowerUpIcon()
     {
         float t = 0f;
         float duration = 0.35f;
 
-        _powerUpIconRT.localScale = Vector3.zero;
+        _powerUpIconRT.localScale = new Vector3(0.7f, 0.7f, 1f);
 
         Color iconColor = _powerUpIcon.color;
         iconColor.a = 0f;
         _powerUpIcon.color = iconColor;
 
-        // NUEVA FEATURE: La carta aparece creciendo
         while (t < duration)
         {
             t += Time.deltaTime;
 
             float k = Mathf.Clamp01(t / duration);
 
-            _powerUpIconRT.localScale = Vector3.Lerp(Vector3.zero, new Vector3(1.2f, 1.2f, 1f), k);
+            _powerUpIconRT.localScale = Vector3.Lerp(new Vector3(0.7f, 0.7f, 1f), new Vector3(1.15f, 1.15f, 1f), k);
 
-            iconColor.a = k;
+            iconColor.a = Mathf.Lerp(0f, 0.75f, k);
             _powerUpIcon.color = iconColor;
 
             yield return null;
@@ -389,21 +391,19 @@ public class CardSelectionSystem : MonoBehaviour
 
         t = 0f;
 
-        // NUEVA FEATURE: Pequeño rebote al terminar
         while (t < 0.2f)
         {
             t += Time.deltaTime;
 
             float k = Mathf.Clamp01(t / 0.2f);
-
-            _powerUpIconRT.localScale = Vector3.Lerp(new Vector3(1.2f, 1.2f, 1f), Vector3.one, k);
+            _powerUpIconRT.localScale = Vector3.Lerp(new Vector3(1.15f, 1.15f, 1f), Vector3.one, k);
 
             yield return null;
         }
 
         _powerUpIconRT.localScale = Vector3.one;
 
-        iconColor.a = 1f;
+        iconColor.a = 0.75f;
         _powerUpIcon.color = iconColor;
 
         _powerUpAnimation = null;
@@ -492,7 +492,6 @@ public class CardSelectionSystem : MonoBehaviour
                 break;
 
             case Estado.EnCooldown:
-                showPowerUp = true;
                 _instrucciones.text = "";
                 _textoCooldown.text = "";
                 break;
@@ -521,10 +520,8 @@ public class CardSelectionSystem : MonoBehaviour
 
         _fondo = CrearImagenStretch(rootRT, "Fondo", new Color(0f, 0f, 0f, 0.35f));
 
-        // NUEVA FEATURE: Título más separado de las cartas
         _titulo = CrearTexto(rootRT, "Titulo", "Elige tu carta", 40, Color.white, new Vector2(0f, 330f), new Vector2(1000f, 60f), TextAnchor.MiddleCenter);
 
-        // NUEVA FEATURE: Zona de cartas
         _cartasRaiz = CrearRectangulo(rootRT, "Cartas", new Vector2(0f, 20f), new Vector2(1160f, 520f));
 
         for (int i = 0; i < 3; i++)
@@ -532,7 +529,6 @@ public class CardSelectionSystem : MonoBehaviour
             CrearCarta(i, cartas[i]);
         }
 
-        // NUEVA FEATURE: J/K/L debajo de las cartas
         _instrucciones = CrearTexto(rootRT, "Instrucciones", "", 22, new Color(1f, 1f, 1f, 0.85f), new Vector2(0f, -310f), new Vector2(1400f, 50f), TextAnchor.MiddleCenter);
 
         RectTransform resRT = CrearRectangulo(rootRT, "Resultado", new Vector2(0f, -220f), new Vector2(900f, 180f));
@@ -552,14 +548,45 @@ public class CardSelectionSystem : MonoBehaviour
 
         _textoCartaActiva = CrearTexto(rootRT, "CartaActiva", "", 20, new Color(1f, 1f, 1f, 0.9f), new Vector2(30f, 80f), new Vector2(600f, 40f), TextAnchor.LowerLeft);
 
-        // NUEVA FEATURE: Icono del Power Up activo
-        _powerUpIcon = CrearImagen(rootRT, "PowerUpIcon", new Vector2(820f, 410f), new Vector2(120f, 160f), Color.white);
-        _powerUpIcon.preserveAspect = true;
-        _powerUpIconRT = _powerUpIcon.rectTransform;
-        _powerUpIcon.gameObject.SetActive(false);
+        // NUEVA FEATURE: Crea automáticamente el icono del Power Up
+        CrearPowerUpIcon(rootRT);
 
         OcultarHUD();
         OcultarResultado();
+    }
+
+    // NUEVA FEATURE: Crea el indicador en la esquina superior derecha
+    private void CrearPowerUpIcon(RectTransform padre)
+    {
+        GameObject go = new GameObject("PowerUpIcon");
+        go.transform.SetParent(padre, false);
+
+        _powerUpIconRT = go.AddComponent<RectTransform>();
+
+        // NUEVA FEATURE: Anchor en esquina superior derecha
+        _powerUpIconRT.anchorMin = new Vector2(1f, 1f);
+        _powerUpIconRT.anchorMax = new Vector2(1f, 1f);
+        _powerUpIconRT.pivot = new Vector2(1f, 1f);
+
+        // NUEVA FEATURE: 30px de separación de la esquina
+        _powerUpIconRT.anchoredPosition = new Vector2(-30f, -30f);
+
+        // NUEVA FEATURE: Tamaño del icono
+        _powerUpIconRT.sizeDelta = new Vector2(150f, 150f);
+
+        _powerUpIcon = go.AddComponent<Image>();
+        _powerUpIcon.sprite = powerUpSprite;
+        _powerUpIcon.color = new Color(1f, 1f, 1f, 0.75f);
+        _powerUpIcon.preserveAspect = true;
+        _powerUpIcon.raycastTarget = false;
+
+        if (powerUpSprite == null)
+        {
+            _powerUpIcon.enabled = false;
+        }
+
+        // Al comenzar está disponible
+        _powerUpIcon.gameObject.SetActive(true);
     }
 
     private void CrearCarta(int indice, CardDef def)
@@ -575,7 +602,6 @@ public class CardSelectionSystem : MonoBehaviour
         _cartaRT[indice] = raiz;
         _cartaGrupo[indice] = grupo;
 
-        // NUEVA FEATURE: Margen para que la imagen no se vea recortada
         Image relleno = CrearImagen(raiz, "Relleno", Vector2.zero, new Vector2(336f, 468f), Color.white);
 
         if (def.imagen != null)
@@ -593,8 +619,8 @@ public class CardSelectionSystem : MonoBehaviour
         _cartasRaiz.gameObject.SetActive(false);
         _instrucciones.gameObject.SetActive(false);
 
-        // NUEVA FEATURE:
-        // NO apagamos _powerUpIcon porque debe quedarse visible durante el juego.
+        // IMPORTANTE: No apagamos _powerUpIcon aquí.
+        // Su estado depende de si el Power Up está disponible.
     }
 
     private void OcultarResultado()
