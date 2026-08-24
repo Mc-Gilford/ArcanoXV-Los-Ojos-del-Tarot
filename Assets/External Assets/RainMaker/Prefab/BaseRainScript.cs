@@ -1,4 +1,4 @@
-﻿//
+//
 // Rain Maker (c) 2015 Digital Ruby, LLC
 // http://www.digitalruby.com
 //
@@ -87,8 +87,10 @@ namespace DigitalRuby.RainMaker
                 WindZone.gameObject.SetActive(true);
                 if (FollowCamera)
                 {
+                    if (Camera == null) return; // Null-check: esperar a que la cámara esté disponible
                     WindZone.transform.position = Camera.transform.position;
                 }
+                if (Camera == null) return;
                 if (!Camera.orthographic)
                 {
                     WindZone.transform.Translate(0.0f, WindZone.radius, 0.0f);
@@ -274,6 +276,12 @@ namespace DigitalRuby.RainMaker
 
         protected virtual void Update()
         {
+            // Si la cámara sigue siendo null, intentar obtenerla dinámicamente
+            if (Camera == null)
+            {
+                Camera = Camera.main;
+                if (Camera == null) return; // Todavía no hay cámara, saltear este frame
+            }
 
 #if DEBUG
 

@@ -1,4 +1,4 @@
-﻿//
+//
 // Rain Maker (c) 2015 Digital Ruby, LLC
 // http://www.digitalruby.com
 //
@@ -26,6 +26,7 @@ namespace DigitalRuby.RainMaker
             {
                 if (FollowCamera)
                 {
+                    if (Camera == null) return; // null-check antes de acceder a Camera.transform
                     var s = RainFallParticleSystem.shape;
                     s.shapeType = ParticleSystemShapeType.ConeVolume;
                     RainFallParticleSystem.transform.position = Camera.transform.position;
@@ -66,7 +67,8 @@ namespace DigitalRuby.RainMaker
         {
             base.Update();
 
-            UpdateRain();
+            if (Camera != null) // Solo actualizar lluvia si hay cámara
+                UpdateRain();
         }
     }
 }
