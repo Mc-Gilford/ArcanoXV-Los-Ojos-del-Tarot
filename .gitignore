@@ -86,3 +86,6 @@ crashlytics-build.properties
 #############################
 
 Arcano-XV Los Ojos del Tarot/BlendOriginal/
+
+# Backups locales (fuera de Assets)
+Backup_Texturas/

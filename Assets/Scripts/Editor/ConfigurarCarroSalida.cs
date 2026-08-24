@@ -15,8 +15,10 @@ using UnityEngine.Rendering.Universal;
 public static class ConfigurarCarroSalidaTool
 {
     // Ajustes de la cámara primera persona (espacio local del carro)
-    private static readonly Vector3 PosicionAsiento = new Vector3(-0.35f, 0.72f, 0.20f);
+    // Ligeramente elevada y hacia el lado del conductor (encuadre cinematográfico)
+    private static readonly Vector3 PosicionAsiento = new Vector3(-0.38f, 0.80f, 0.22f);
     private const float NearClipPrimeraPersona = 0.02f;
+    private const float FOVCinematografico = 62f;
 
     [MenuItem("Tools/Arcano XV/Configurar Carro Salida (Primera Persona)")]
     public static void Configurar()
@@ -52,7 +54,12 @@ public static class ConfigurarCarroSalidaTool
         if (ctrl == null) ctrl = carro.AddComponent<CarroSalidaController>();
         Vector3 pos = carro.transform.position;
         ctrl.puntoInicio = pos;
-        ctrl.puntoFin = new Vector3(0f, pos.y, 0f);
+        // Recorrido MÁS LARGO: cruza el origen y sigue la misma línea hasta ~x=+36
+        // (la carretera cubre x ∈ [-64.75, +40.75]). El tiempo no cambia, así que
+        // velocidad = distancia / duracionTrayecto sube automáticamente.
+        Vector3 dirBase = new Vector3(0f, pos.y, 0f) - pos;
+        float largoNuevo = Mathf.Min(dirBase.magnitude * 1.55f, 100f);
+        ctrl.puntoFin = pos + dirBase.normalized * largoNuevo;
         ctrl.velocidadMovimiento = 8f;
         ctrl.teclasRequeridas = 10;
         ctrl.nombreEscenaSiguiente = "PrincipalScene";
@@ -142,7 +149,7 @@ public static class ConfigurarCarroSalidaTool
         Camera camComponente = camObj.GetComponent<Camera>();
         camComponente.nearClipPlane = NearClipPrimeraPersona;
         camComponente.farClipPlane = 1000f;
-        camComponente.fieldOfView = 70f;
+        camComponente.fieldOfView = FOVCinematografico;
         camComponente.clearFlags = CameraClearFlags.Skybox;
         camComponente.depth = 0;
 
@@ -153,52 +160,95 @@ public static class ConfigurarCarroSalidaTool
     private static Text BuscarOCrearHUD()
     {
         GameObject existente = GameObject.Find("Texto_Contador");
+        GameObject panelObj = null;
+        Text texto = null;
+
+        // Si ya existe el HUD, reutilizarlo (y reestilizarlo abajo)
         if (existente != null)
         {
-            Text t = existente.GetComponent<Text>();
-            if (t != null) return t;
+            texto = existente.GetComponent<Text>();
+            if (texto != null && existente.transform.parent != null)
+                panelObj = existente.transform.parent.gameObject;
         }
 
-        GameObject canvasObj = new GameObject("HUD_Canvas");
-        Undo.RegisterCreatedObjectUndo(canvasObj, "Crear HUD Contador");
-        Canvas canvas = canvasObj.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 100;
-        canvasObj.AddComponent<GraphicRaycaster>();
+        if (texto == null)
+        {
+            GameObject canvasObj = new GameObject("HUD_Canvas");
+            Undo.RegisterCreatedObjectUndo(canvasObj, "Crear HUD Contador");
+            Canvas canvas = canvasObj.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 100;
+            canvasObj.AddComponent<GraphicRaycaster>();
 
-        GameObject panelObj = new GameObject("Panel_Contador");
-        panelObj.transform.SetParent(canvasObj.transform, false);
-        RectTransform panelRect = panelObj.AddComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0.5f, 1f);
-        panelRect.anchorMax = new Vector2(0.5f, 1f);
-        panelRect.pivot = new Vector2(0.5f, 1f);
-        panelRect.anchoredPosition = new Vector2(0f, -30f);
-        panelRect.sizeDelta = new Vector2(300f, 60f);
-        Image panelImage = panelObj.AddComponent<Image>();
-        panelImage.color = new Color(0f, 0f, 0f, 0.6f);
-        panelImage.raycastTarget = false;
+            panelObj = new GameObject("Panel_Contador");
+            panelObj.transform.SetParent(canvasObj.transform, false);
+            RectTransform panelRect = panelObj.AddComponent<RectTransform>();
+            panelRect.anchorMin = new Vector2(0.5f, 1f);
+            panelRect.anchorMax = new Vector2(0.5f, 1f);
+            panelRect.pivot = new Vector2(0.5f, 1f);
+            panelRect.anchoredPosition = new Vector2(0f, -40f);
+            panelRect.sizeDelta = new Vector2(430f, 74f);
+            panelObj.AddComponent<Image>();
 
-        GameObject textoObj = new GameObject("Texto_Contador");
-        textoObj.transform.SetParent(panelObj.transform, false);
-        Text texto = textoObj.AddComponent<Text>();
-        texto.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        texto.fontSize = 36;
-        texto.fontStyle = FontStyle.Bold;
-        texto.alignment = TextAnchor.MiddleCenter;
-        texto.color = Color.white;
-        texto.text = "Presiona X: 0/10";
+            GameObject textoObj = new GameObject("Texto_Contador");
+            textoObj.transform.SetParent(panelObj.transform, false);
+            texto = textoObj.AddComponent<Text>();
 
-        RectTransform textoRect = textoObj.GetComponent<RectTransform>();
-        textoRect.anchorMin = Vector2.zero;
-        textoRect.anchorMax = Vector2.one;
-        textoRect.offsetMin = Vector2.zero;
-        textoRect.offsetMax = Vector2.zero;
+            RectTransform textoRect = textoObj.GetComponent<RectTransform>();
+            textoRect.anchorMin = Vector2.zero;
+            textoRect.anchorMax = Vector2.one;
+            textoRect.offsetMin = Vector2.zero;
+            textoRect.offsetMax = Vector2.zero;
+        }
 
-        Outline outline = textoObj.AddComponent<Outline>();
-        outline.effectColor = Color.black;
-        outline.effectDistance = new Vector2(2f, -2f);
+        AplicarEstiloMistico(panelObj, texto);
+
+        // Barra segmentada de 10 pips debajo del contador (solo visual, usa el evento existente)
+        if (panelObj != null && panelObj.GetComponent<HUDBarraSegmentada>() == null)
+            Undo.AddComponent<HUDBarraSegmentada>(panelObj);
 
         return texto;
+    }
+
+    /// <summary>
+    /// Estética arcana para el HUD: fondo oscuro redondeado semitransparente,
+    /// texto dorado grande con contorno y sombra suave.
+    /// </summary>
+    private static void AplicarEstiloMistico(GameObject panelObj, Text texto)
+    {
+        // ---- Fondo del panel ----
+        if (panelObj != null)
+        {
+            Image fondo = panelObj.GetComponent<Image>();
+            if (fondo != null)
+            {
+                // Totalmente transparente: solo se ven las letras
+                fondo.color = new Color(0.07f, 0.05f, 0.12f, 0f);
+                fondo.raycastTarget = false;
+            }
+        }
+
+        // ---- Texto ----
+        texto.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        texto.fontSize = 42;
+        texto.fontStyle = FontStyle.Bold;
+        texto.alignment = TextAnchor.MiddleCenter;
+        texto.color = new Color(0.96f, 0.83f, 0.45f); // dorado tenue
+        texto.horizontalOverflow = HorizontalWrapMode.Overflow;
+        texto.verticalOverflow = VerticalWrapMode.Overflow;
+        texto.raycastTarget = false;
+
+        // Contorno oscuro para legibilidad
+        Outline outline = texto.GetComponent<Outline>();
+        if (outline == null) outline = texto.gameObject.AddComponent<Outline>();
+        outline.effectColor = new Color(0f, 0f, 0f, 0.9f);
+        outline.effectDistance = new Vector2(2f, -2f);
+
+        // Sombra desplazada para profundidad
+        Shadow sombra = texto.GetComponent<Shadow>();
+        if (sombra == null) sombra = texto.gameObject.AddComponent<Shadow>();
+        sombra.effectColor = new Color(0f, 0f, 0f, 0.6f);
+        sombra.effectDistance = new Vector2(3f, -3f);
     }
 
     private static void ConfigurarAmbiente()
