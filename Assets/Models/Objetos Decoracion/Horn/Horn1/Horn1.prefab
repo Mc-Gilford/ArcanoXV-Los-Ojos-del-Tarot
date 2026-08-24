@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6936438694999164867
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 179.05252
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 63.403427
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 859.8901
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -760911652526220565, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bd443b9fee9762e42a0bc8dc518a457c, type: 2}
+    - target: {fileID: 919132149155446097, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: m_Name
+      value: Horn1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466071859486710985, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bd443b9fee9762e42a0bc8dc518a457c, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7303912877908412779}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3154033186284008166}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1896932509193842419}
+  m_SourcePrefab: {fileID: 100100000, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+--- !u!1 &7818890998678698642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a7f81f4c6cc491043841978787f38e84, type: 3}
+  m_PrefabInstance: {fileID: 6936438694999164867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7303912877908412779
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7818890998678698642}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.8204207, y: 4.6340175, z: 5.342504}
+  m_Center: {x: 0.4931558, y: 1.817008, z: 0.06218211}
+--- !u!114 &3154033186284008166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7818890998678698642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491c5e74c5dd21d4ba624cea23f430c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectAmbience
+  clip: {fileID: 8300000, guid: e9f352667d975f445a98124b987ec159, type: 3}
+  audioCategory: 
+  baseVolume: 1
+  playDuration: 3
+  triggerRadius: 1.5
+--- !u!114 &1896932509193842419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7818890998678698642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d4e5f60718293a4b5c6d7e8f90a1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HauntedObject
+  playerOverride: {fileID: 0}
+  playerTag: Player
+  proximityDistance: 5
+  nearSounds: []
+  farSounds: []
+  enableFarSounds: 1
+  scareAnywhere: 1
+  minIntervalScare: 15
+  maxIntervalScare: 40
+  scareChance: 0.4
+  scareVolume: 0.85
+  minIntervalNear: 3
+  maxIntervalNear: 8
+  minIntervalFar: 8
+  maxIntervalFar: 20
+  animator: {fileID: 0}
+  animationTriggers: []
+  proceduralShake: 1
+  shakeMagnitude: 10
+  shakeDuration: 0.35
+  roomRadiusFallback: 30
+  nearVolume: 1
+  farVolume: 0.55
