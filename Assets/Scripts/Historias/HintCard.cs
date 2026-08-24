@@ -165,7 +165,7 @@ public class HintCard : MonoBehaviour
         _rectTextoPista = rectTextoObj;
 
         _textoPistaUI = textoObj.AddComponent<Text>();
-        _textoPistaUI.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        _textoPistaUI.font = FuentesJuego.Principal;
         _textoPistaUI.fontSize = tamanoLetra;
         _textoPistaUI.fontStyle = FontStyle.Bold;
         _textoPistaUI.alignment = TextAnchor.UpperLeft;
@@ -193,11 +193,8 @@ public class HintCard : MonoBehaviour
         GameObject textoCtrlObj = new GameObject("TextoControles");
         textoCtrlObj.transform.SetParent(canvasControles.transform);
         _textoControles = textoCtrlObj.AddComponent<Text>();
-        _textoControles.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        _textoControles.fontSize = 22;
-        _textoControles.fontStyle = FontStyle.Bold;
+        FuentesJuego.Aplicar(_textoControles, 22, FuentesJuego.Dorado, true, true);
         _textoControles.alignment = TextAnchor.MiddleCenter;
-        _textoControles.color = Color.yellow;
         _textoControles.text = "";
 
         RectTransform textoCtrlRect = textoCtrlObj.GetComponent<RectTransform>();

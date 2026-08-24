@@ -379,8 +379,8 @@ public class Enemy : Character
              */
             if (isJumping && airTimeRemaining > 0f)
                 return;
-
-            FinishLanding();
+            if(!isJumping && !gameObject.CompareTag("Follower"))
+                FinishLanding();
         }
 
         if ((collision.gameObject.CompareTag("Wall") ||

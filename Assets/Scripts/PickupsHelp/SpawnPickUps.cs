@@ -79,7 +79,7 @@ public class SpawnPickups : MonoBehaviour
 
     private float getRandomInterval()
     {
-        return UnityEngine.Random.Range(30f, 70f);
+        return UnityEngine.Random.Range(20f, 40f);
     }
 
     private void activateSpawn()

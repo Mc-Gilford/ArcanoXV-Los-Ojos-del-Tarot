@@ -383,7 +383,7 @@ public class CarroYSalidaGenerator : EditorWindow
         textoObj.transform.SetParent(panelObj.transform, false);
 
         Text texto = textoObj.AddComponent<Text>();
-        texto.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+          texto.font = FuentesJuego.Principal;
         texto.fontSize = 36;
         texto.fontStyle = FontStyle.Bold;
         texto.alignment = TextAnchor.MiddleCenter;

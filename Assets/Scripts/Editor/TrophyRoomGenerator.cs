@@ -188,7 +188,6 @@ public static class TrophyRoomGenerator
 
     private static void CreateTrophyLabels(List<ObjectDefHolder> trophies)
     {
-        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         foreach (ObjectDefHolder t in trophies)
         {
             GameObject labelGO = new GameObject("Label_" + t.def.name);
@@ -197,7 +196,7 @@ public static class TrophyRoomGenerator
             labelGO.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
             TextMesh tm = labelGO.AddComponent<TextMesh>();
             tm.text = t.def.name;
-            tm.font = font;
+                tm.font = FuentesJuego.Principal;
             tm.fontSize = 36;
             tm.characterSize = 0.06f;
             tm.anchor = TextAnchor.MiddleCenter;

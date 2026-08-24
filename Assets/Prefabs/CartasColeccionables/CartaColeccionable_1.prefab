@@ -12,6 +12,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: CartaColeccionable_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1126307390709141337, guid: 6f37648ca970f0c42be0ac16355204bc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a43b5bd4ace59e4783413792d7ee6e5, type: 2}
+    - target: {fileID: 2774220344278030320, guid: 6f37648ca970f0c42be0ac16355204bc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774220344278030320, guid: 6f37648ca970f0c42be0ac16355204bc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774220344278030320, guid: 6f37648ca970f0c42be0ac16355204bc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 6f37648ca970f0c42be0ac16355204bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -50,6 +66,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774220344278030320, guid: 6f37648ca970f0c42be0ac16355204bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2774220344278030320, guid: 6f37648ca970f0c42be0ac16355204bc, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

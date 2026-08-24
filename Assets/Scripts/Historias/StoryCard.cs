@@ -156,13 +156,15 @@ public class StoryCard : MonoBehaviour
 
         Text texto = textoObj.AddComponent<Text>();
         texto.text = textoHistoria;
-        texto.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        texto.fontSize = 8;
-        texto.fontStyle = FontStyle.Normal;
+        FuentesJuego.Aplicar(texto, 8, FuentesJuego.TextoSecundario, false);
         texto.alignment = TextAnchor.MiddleCenter;
-        texto.color = new Color(0.9f, 0.85f, 0.75f);
         texto.verticalOverflow = VerticalWrapMode.Truncate;
         texto.horizontalOverflow = HorizontalWrapMode.Wrap;
+
+        // Sombra sutil para legibilidad sobre la imagen de la carta
+        Shadow sombra = textoObj.AddComponent<Shadow>();
+        sombra.effectColor = new Color(0f, 0f, 0f, 0.5f);
+        sombra.effectDistance = new Vector2(1f, -1f);
 
         RectTransform textoRect = textoObj.GetComponent<RectTransform>();
         textoRect.anchorMin = Vector2.zero;
