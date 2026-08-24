@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Develop.slnx"
+    "dotnet.defaultSolution": "ArcanoXV-Los-Ojos-del-Tarot.slnx"
 }
