@@ -3266,7 +3266,7 @@ MonoBehaviour:
   moodCarnage: 0
   enemyCountCarnage: 0
   card: {fileID: 1234162614}
-  timerCard: 600
+  timerCard: 60
   isPlayerInRoom: 0
 --- !u!1 &1355089776 stripped
 GameObject:
