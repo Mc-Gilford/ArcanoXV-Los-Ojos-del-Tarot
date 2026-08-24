@@ -42,7 +42,7 @@ public class Jugador : Character
     [SerializeField] private bool isTired= false;
     [SerializeField] private bool canDash = true;
     public bool isInsane { get; private set; }
-    [SerializeField] private bool isInsideSafeRoom = false;
+    public bool isInsideSafeRoom = false;
     [SerializeField] private float velocidad = 5f;
     [SerializeField] private float salto = 10f;
     [SerializeField] private float stamina = 10f;
@@ -72,7 +72,7 @@ public class Jugador : Character
     private const float _stopGrace = 0.3f;   // gracia para cortar el crujido al detenerse
 
 
-    
+    public GameObject safeRoomTP;
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -144,6 +144,13 @@ public class Jugador : Character
                 isInsane = true;
             }
         }
+        else if(isInsideSafeRoom)
+        {
+            if(sanityPoints <=3)
+            {
+                 StartCoroutine(RecoverSanity());
+            }
+        }
     }
 
     private void DecreaseSanity()
@@ -196,7 +203,9 @@ public class Jugador : Character
     {
         Debug.Log("Recobrando la cordura");
         yield return new WaitForSeconds(1);
-        cordura = 540f;
+        cordura = 600f;
+        sanityTimer = 0;
+        sanityPoints = 10;
         isInsane = false;
     }
 
@@ -523,8 +532,7 @@ public class Jugador : Character
     public void GoToSafeRoom()
     {
         //Definir un punto de teletransporte dentro de la habitacion segura
-        transform.position = new Vector3(-4.01225f,1.05f,-0.66555f);
-        isInsideSafeRoom=true;
+        transform.position = safeRoomTP.transform.position;
     }
 
     public void LoseHalfHP()
