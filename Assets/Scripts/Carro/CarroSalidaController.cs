@@ -443,10 +443,11 @@ public class TransicionEscenaRunner : MonoBehaviour
     private System.Collections.IEnumerator Secuencia()
     {
         // Fundido a negro
+        Debug.Log("[Transicion] Fundido a negro...");
         yield return Fundir(0f, 1f);
 
         // Pequeña pausa en negro para efecto cinematográfico
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
 
         // Cargar la escena destino de forma asíncrona
         AsyncOperation carga = SceneManager.LoadSceneAsync(_escenaDestino);
@@ -462,10 +463,12 @@ public class TransicionEscenaRunner : MonoBehaviour
         carga.allowSceneActivation = true;
         yield return carga;
         yield return null; // dejar renderizar un frame de la nueva escena detrás del negro
+        Debug.Log("[Transicion] Escena cargada, fundido de vuelta...");
 
         // Fundido de vuelta (de negro a transparente) ya dentro de la nueva escena
         yield return Fundir(1f, 0f);
 
+        Debug.Log("[Transicion] Completada.");
         Destroy(gameObject);
     }
 
@@ -477,7 +480,8 @@ public class TransicionEscenaRunner : MonoBehaviour
 
         while (tiempo < _duracionFade)
         {
-            tiempo += Time.deltaTime;
+            // unscaledDeltaTime: sigue funcionando aunque Time.timeScale sea 0
+            tiempo += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(tiempo / _duracionFade);
             // Curva suave (ease in-out)
             t = t * t * (3f - 2f * t);

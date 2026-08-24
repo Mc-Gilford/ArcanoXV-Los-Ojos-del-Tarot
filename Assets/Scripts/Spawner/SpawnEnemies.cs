@@ -22,7 +22,8 @@ public class SpawnEnemies : MonoBehaviour
     public bool isPlayerInRoom = false;
     void Start()
     {
-        card.SetActive(false);
+        // Evitar NullReference si la carta no fue asignada en el Inspector
+        if (card != null) card.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,7 +46,7 @@ public class SpawnEnemies : MonoBehaviour
     private void MoodTimerComplete()
     {
         timerCard -= Time.deltaTime;
-        if (timerCard < 0)
+        if (timerCard < 0 && card != null)
         {
             card.SetActive(true);
         }
@@ -53,7 +54,7 @@ public class SpawnEnemies : MonoBehaviour
 
     void MoodCarnageComplete()
     {
-        if (enemiesInRoom.Count==0 && enemyCountCarnage==limitEnemies)
+        if (enemiesInRoom.Count==0 && enemyCountCarnage==limitEnemies && card != null)
         {
             card.SetActive(true);
         }
