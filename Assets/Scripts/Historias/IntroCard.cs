@@ -216,11 +216,8 @@ public class IntroCard : MonoBehaviour
         textoObj.transform.SetParent(canvasControles.transform);
 
         _textoControles = textoObj.AddComponent<Text>();
-        _textoControles.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        _textoControles.fontSize = 20;
-        _textoControles.fontStyle = FontStyle.Bold;
+        FuentesJuego.Aplicar(_textoControles, 20, FuentesJuego.Dorado, true, true);
         _textoControles.alignment = TextAnchor.MiddleCenter;
-        _textoControles.color = Color.yellow;
         _textoControles.text = "";
 
         RectTransform textoRect = textoObj.GetComponent<RectTransform>();
