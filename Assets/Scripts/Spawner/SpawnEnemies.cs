@@ -94,9 +94,9 @@ public class SpawnEnemies : MonoBehaviour
     /**/
     private void OnTriggerStay(Collider collision)
     {
-        isPlayerInRoom = true;
         if (collision.gameObject.CompareTag("Player"))
         {
+            isPlayerInRoom = true;
             Debug.Log("Active Spawn");
             activateSpawn();
         }
