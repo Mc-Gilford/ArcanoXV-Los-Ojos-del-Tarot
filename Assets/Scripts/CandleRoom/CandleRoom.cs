@@ -14,7 +14,7 @@ public class CandleRoom : MonoBehaviour
 
     [SerializeField] private int indexPosition=0; //Con este se sabra a que posicion mover la vela
 
-    private int totalRounds = 3; //Esta para establecer la cantidad de luces en la habitación
+    private int totalRounds = 4; //Esta para establecer la cantidad de luces en la habitación
 
     [SerializeField] private bool isInsideCandleRoom = false; //Para validar que siga en la habitación de las luces
 
@@ -31,9 +31,9 @@ public class CandleRoom : MonoBehaviour
 
     void Start()
     {
-        round = 0;
+        round = 1;
         isInsideCandleRoom = false;
-        totalRounds = 3;
+        totalRounds = 4;
         indexPosition = 0;
         candleTimer = 20f; 
         candleTimeBeforeTP =0;
@@ -53,8 +53,9 @@ public class CandleRoom : MonoBehaviour
     {
         if(!roomCompleted)
         {
+            indexPosition = Random.Range(0, tpPoints.Count);
             candle.SetActive(true);
-            candle.transform.position = tpPoints[0].transform.position;
+            candle.transform.position = tpPoints[indexPosition].transform.position;
         }
         else
         {
@@ -70,23 +71,18 @@ public class CandleRoom : MonoBehaviour
             if(candleTimeBeforeTP >= candleTimer)
             {
                 canMove = false;
-                changePosition();
+                changePosition(indexPosition);
             }
         }
     }
 
-    public void changePosition()
+    public void changePosition(int currentPos)
     {
         if(!canMove)
         {
-        
-            if(indexPosition < tpPoints.Count - 1)
+            while(indexPosition == currentPos)
             {
-                indexPosition++;
-            }
-            else
-            {
-                indexPosition = 0;
+                indexPosition = Random.Range(0, tpPoints.Count);
             }
             candleTimeBeforeTP = 0;
             GameObject teleportPosition = tpPoints[indexPosition];
@@ -100,17 +96,9 @@ public class CandleRoom : MonoBehaviour
         if(isInsideCandleRoom && !roomCompleted)
         {
             round++;
-            if(indexPosition==0)
-            {
-                indexPosition = Random.Range(0, tpPoints.Count-1);
-            }
-            else
-            {
-                indexPosition = tpPoints.Count;
-            }
             canMove = false;
             candleTimer -=5f;
-            changePosition();
+            changePosition(indexPosition);
 
             if (round >= totalRounds)
             {
