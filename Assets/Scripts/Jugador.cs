@@ -259,6 +259,8 @@ public class Jugador : Character
             {
                 Debug.Log("Aqui entra");
                 rain.FollowCamera = false;
+                rain.RainIntensity = 0.2f;
+                rain.RainMistThreshold = 0.1f;
             }
             else
             {
@@ -274,6 +276,8 @@ public class Jugador : Character
             if (rain != null)
             {
                 rain.FollowCamera = true;
+                rain.RainIntensity = 1;
+                rain.RainMistThreshold = 0.7f;
             }
         }
     }

@@ -17,7 +17,7 @@ public class Ghost : Enemy
     private float randomTimeScare;
     private AudioSource scareAudio;
     private bool isHidden = true;
-    private float[] teleportDistance = { 2, 4, 6, 10 };
+    private float[] teleportDistance = { 7, 10, 15, 20 };
     private bool isGhostAlwaysActive;
 
     // NUEVA FEATURE: Ajusta la altura del Ghost respecto al Player
