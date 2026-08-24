@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Reproduce un video a pantalla completa (cutscene/intro) sobre un Canvas propio.
@@ -33,21 +34,33 @@ public class ReproductorVideo : MonoBehaviour
     // Se ejecuta una sola vez al abrir el juego (antes de la primera escena).
     // Busca SIEMPRE el clip en Resources/Videos/intro: para cambiar la intro
     // basta con reemplazar ese archivo .mp4 manteniendo el nombre.
+    // Si NO hay video o algo falla => salta directo a la escena del carro.
+    private const string EscenaSinVideo = "Carro y salida";
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void MontarIntroAutomatica()
     {
-        VideoClip intro = Resources.Load<VideoClip>("Videos/intro");
-        if (intro == null)
+        try
         {
-            Debug.LogWarning("[ReproductorVideo] No hay Assets/Resources/Videos/intro.mp4; se omite la intro.");
-            return;
-        }
+            VideoClip intro = Resources.Load<VideoClip>("Videos/intro");
+            if (intro == null)
+            {
+                Debug.LogWarning("[ReproductorVideo] No hay Assets/Resources/Videos/intro.mp4; saltando a '" + EscenaSinVideo + "'.");
+                SceneManager.LoadScene(EscenaSinVideo);
+                return;
+            }
 
-        GameObject go = new GameObject("VISUAL_IntroVideo");
-        Object.DontDestroyOnLoad(go);
-        ReproductorVideo reproductor = go.AddComponent<ReproductorVideo>();
-        reproductor.clip = intro;
-        reproductor.saltarConCualquierTecla = true;
+            GameObject go = new GameObject("VISUAL_IntroVideo");
+            Object.DontDestroyOnLoad(go);
+            ReproductorVideo reproductor = go.AddComponent<ReproductorVideo>();
+            reproductor.clip = intro;
+            reproductor.saltarConCualquierTecla = true;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("[ReproductorVideo] Error preparando la intro: " + e.Message + ". Saltando a '" + EscenaSinVideo + "'.");
+            SceneManager.LoadScene(EscenaSinVideo);
+        }
     }
 
     private VideoPlayer _player;
@@ -58,16 +71,20 @@ public class ReproductorVideo : MonoBehaviour
 
     private void Start()
     {
-        if (clip == null)
+        try
         {
-            Debug.LogError("[ReproductorVideo] Sin clip asignado. Arrastra un VideoClip al campo 'Clip'.");
-            alTerminar?.Invoke();
-            enabled = false;
-            return;
-        }
+            if (clip == null)
+                throw new System.Exception("Sin clip asignado");
 
-        ConstruirUI();
-        ConfigurarPlayer();
+            ConstruirUI();
+            ConfigurarPlayer();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("[ReproductorVideo] No se pudo reproducir el video: " + e.Message + ". Saltando a '" + EscenaSinVideo + "'.");
+            SceneManager.LoadScene(EscenaSinVideo);
+            Destroy(gameObject);
+        }
     }
 
     private void ConstruirUI()
