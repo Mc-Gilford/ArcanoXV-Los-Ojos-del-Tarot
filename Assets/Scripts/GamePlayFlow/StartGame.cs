@@ -5,6 +5,8 @@ public class StartGame : MonoBehaviour
 {
     public void StartGameScene()
     {
-        SceneManager.LoadScene(1);
+        // Iniciar con la escena del carro (trayecto hacia la mansión),
+        // que luego transiciona sola a PrincipalScene.
+        SceneManager.LoadScene("Carro y salida");
     }
 }
