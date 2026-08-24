@@ -1340,7 +1340,8 @@ PrefabInstance:
       value: ToyChest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5805925531360945235, guid: d911a03dc4012df4094f15ae5478725e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d911a03dc4012df4094f15ae5478725e, type: 3}
