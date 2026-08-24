@@ -17,13 +17,12 @@ public class SpawnEnemies : MonoBehaviour
     [SerializeField] private bool moodCarnage;
     public int enemyCountCarnage = 0;
     private HashSet<Enemy> enemiesInRoom = new HashSet<Enemy>();
-    [SerializeField] private GameObject card;
+    //[SerializeField] private GameObject card;
     [SerializeField] private float timerCard =600;
     public bool isPlayerInRoom = false;
     void Start()
     {
-        // Evitar NullReference si la carta no fue asignada en el Inspector
-        if (card != null) card.SetActive(false);
+        //card.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,17 +45,17 @@ public class SpawnEnemies : MonoBehaviour
     private void MoodTimerComplete()
     {
         timerCard -= Time.deltaTime;
-        if (timerCard < 0 && card != null)
+        if (timerCard < 0)
         {
-            card.SetActive(true);
+            //card.SetActive(true);
         }
     }
 
     void MoodCarnageComplete()
     {
-        if (enemiesInRoom.Count==0 && enemyCountCarnage==limitEnemies && card != null)
+        if (enemiesInRoom.Count==0 && enemyCountCarnage==limitEnemies)
         {
-            card.SetActive(true);
+            //card.SetActive(true);
         }
     }
 
