@@ -15,13 +15,19 @@ public class Lamp : MonoBehaviour
 
     private LightRoom lampManager;
 
+    public GameObject lightRoom;
+
+    public GameObject light;
+
     // Lampara que actualmente controla el texto
     private static Lamp activeLamp;
 
     void Start()
     {
+        detectionDistance = 6f;
+        light.SetActive(false);
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-	    lampManager = GameObject.Find("LightRoom").GetComponent<LightRoom>();
+	    lampManager = lightRoom.GetComponent<LightRoom>();
 
         if (playerObject != null)
         {
@@ -109,11 +115,13 @@ public class Lamp : MonoBehaviour
     {
 	    lampManager.TurnOnLight();
 	    isOn = true;
+        light.SetActive(true);
     }
 
     public void TurnOffLamp()
     {
 	    isOn = false;
+        light.SetActive(false);
     }
 
     public bool LampIsOn()
