@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class Enemy : Character
 {
@@ -42,6 +43,7 @@ public class Enemy : Character
 
     public int damage { get; set; }
 
+    private NavMeshAgent agent;
     private Rigidbody enemyrb;
     private Coroutine randomJumpCoroutine;
     private Vector3 surfaceNormal = Vector3.up;
@@ -50,10 +52,15 @@ public class Enemy : Character
 
     public float maxHealth;
 
+    // NUEVA FEATURE: Guarda la ruta calculada por NavMesh
+    private NavMeshPath navPath;
+
     void Start()
     {
         enemyrb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+        agent = GetComponent<NavMeshAgent>();
+        navPath = new NavMeshPath(); // NUEVA FEATURE
 
         if (player == null)
         {
@@ -61,7 +68,58 @@ public class Enemy : Character
         }
 
         initializeVariables();
+        if (agent != null)
+        {
+            agent.speed = speed * anger;
+            agent.stoppingDistance = stoppingDistance;
+            agent.acceleration = 12f;
+            agent.angularSpeed = 360f;
+        }
         StartCoroutine(WaitAnger());
+    }
+    // NUEVA FEATURE: Calcula hacia dónde debería ir la araña para rodear obstáculos
+    private Vector3 GetNavMeshDirection()
+    {
+        if (NavMesh.CalculatePath(transform.position, player.transform.position, NavMesh.AllAreas, navPath))
+        {
+            if (navPath.corners.Length > 1)
+            {
+                Vector3 direction = navPath.corners[1] - transform.position;
+                direction.y = 0f;
+
+                return direction.normalized;
+            }
+        }
+
+        // Si no existe una ruta usa la dirección normal al Player
+        Vector3 directionPlayer = player.transform.position - transform.position;
+        directionPlayer.y = 0f;
+
+        return directionPlayer.normalized;
+    }
+
+    private void EnableNavMesh()
+    {
+        if (agent == null)
+            return;
+
+        if (!agent.enabled)
+        {
+            agent.enabled = true;
+        }
+
+        enemyrb.isKinematic = true;
+        enemyrb.useGravity = false;
+    }
+
+    private void DisableNavMesh()
+    {
+        if (agent != null && agent.enabled)
+        {
+            agent.enabled = false;
+        }
+
+        enemyrb.isKinematic = false;
     }
 
     private void initializeVariables()
@@ -82,6 +140,21 @@ public class Enemy : Character
         {
             anger = anger + 0.01f;
         }
+    }
+    private void FollowPlayerNavMesh()
+    {
+        if (agent == null)
+            return;
+
+        EnableNavMesh();
+
+        if (!agent.isOnNavMesh)
+            return;
+
+        agent.speed = speed * anger;
+        agent.stoppingDistance = stoppingDistance;
+
+        agent.SetDestination(player.transform.position);
     }
 
     private void FixedUpdate()
@@ -149,7 +222,11 @@ public class Enemy : Character
         // Si no está en la pared, sigue al jugador
         else
         {
-            FollowPlayer(enemyrb);
+            //FollowPlayer(enemyrb);
+            if (agent != null && agent.enabled && agent.isOnNavMesh)
+                FollowPlayerNavMesh();
+            else
+                FollowPlayer(enemyrb);
         }
 
         // Al tocar el suelo continúa girando hasta quedar de pie
@@ -217,6 +294,7 @@ public class Enemy : Character
 
     private void jumpAttack()
     {
+        DisableNavMesh();
         bool jumpingFromWall = isOnWall;
 
         enemyrb.useGravity = true;
@@ -307,9 +385,10 @@ public class Enemy : Character
 
         if ((collision.gameObject.CompareTag("Wall") ||
              collision.gameObject.CompareTag("Roof")) &&
-            !isJumping)
+            !isJumping && !gameObject.CompareTag("Follower"))
         {
             isOnWall = true;
+            DisableNavMesh();
 
             // En una pared se cancela el salto aleatorio
             CancelRandomJump();
@@ -334,36 +413,48 @@ public class Enemy : Character
     {
         enemyRb.useGravity = true;
 
-        Vector3 directionToPlayer =
-            player.transform.position - enemyRb.position;
+        Vector3 directionToPlayer;
+        float distanceToPlayer;
+        Vector3 targetPosition;
 
-        // En el suelo solamente persigue horizontalmente
-        directionToPlayer.y = 0f;
+        if (gameObject.CompareTag("Follower"))
+        {
+            // FOLLOWER: conserva la lógica original
+            directionToPlayer = player.transform.position - enemyRb.position;
+            directionToPlayer.y = 0f;
 
-        float distanceToPlayer =
-            directionToPlayer.magnitude;
+            distanceToPlayer = directionToPlayer.magnitude;
 
-        /*
-         * Siempre intenta mirar al jugador, aunque ya
-         * se encuentre dentro de stoppingDistance.
-         */
+            targetPosition = player.transform.position;
+            targetPosition.y = enemyRb.position.y;
+        }
+        else
+        {
+            // NUEVA FEATURE: La araña usa NavMesh solamente como GPS
+            directionToPlayer = GetNavMeshDirection();
+            directionToPlayer.y = 0f;
+
+            // NUEVA FEATURE: Calcula la distancia horizontal real al Player
+            Vector3 distanceDirection = player.transform.position - enemyRb.position;
+            distanceDirection.y = 0f;
+            distanceToPlayer = distanceDirection.magnitude;
+
+            // NUEVA FEATURE: Se mueve hacia el siguiente punto sugerido por NavMesh
+            targetPosition = enemyRb.position + directionToPlayer;
+            targetPosition.y = enemyRb.position.y;
+        }
+
+        // Siempre intenta mirar hacia su dirección de movimiento
         if (directionToPlayer.sqrMagnitude > 0.01f)
         {
-            Vector3 lookDirection =
-                directionToPlayer.normalized;
-
-            RotateEnemy(
-                lookDirection,
-                Vector3.up,
-                enemyRb
-            );
+            Vector3 lookDirection = directionToPlayer.normalized;
+            RotateEnemy(lookDirection, Vector3.up, enemyRb);
         }
 
         // Si ya está cerca, se frena
         if (distanceToPlayer <= stoppingDistance)
         {
-            Vector3 velocity =
-                enemyRb.linearVelocity;
+            Vector3 velocity = enemyRb.linearVelocity;
 
             velocity.x = 0f;
             velocity.z = 0f;
@@ -373,36 +464,16 @@ public class Enemy : Character
             return;
         }
 
-        /*
-         * Reduce gradualmente la velocidad cuando
-         * comienza a acercarse al jugador.
-         */
-        float distanceFactor =
-            Mathf.InverseLerp(
-                stoppingDistance,
-                slowDistance,
-                distanceToPlayer
-            );
+        // Reduce gradualmente la velocidad cuando comienza a acercarse
+        float distanceFactor = Mathf.InverseLerp(stoppingDistance, slowDistance, distanceToPlayer);
 
-        float currentSpeed =
-            speed * anger * distanceFactor;
+        float currentSpeed = speed * anger * distanceFactor;
 
-        Vector3 targetPosition =
-            player.transform.position;
-
-        targetPosition.y =
-            enemyRb.position.y;
-
-        /*
-         * MoveTowards evita que el enemigo se pase
-         * de la posición del jugador.
-         */
-        Vector3 nextPosition =
-            Vector3.MoveTowards(
-                enemyRb.position,
-                targetPosition,
-                currentSpeed * Time.fixedDeltaTime
-            );
+        Vector3 nextPosition = Vector3.MoveTowards(
+            enemyRb.position,
+            targetPosition,
+            currentSpeed * Time.fixedDeltaTime
+        );
 
         enemyRb.MovePosition(nextPosition);
     }
@@ -649,6 +720,7 @@ public class Enemy : Character
             );
 
         enemyrb.MoveRotation(uprightRotation);
+        EnableNavMesh();
     }
 
     public bool isPlayerNear()
@@ -689,6 +761,9 @@ public class Enemy : Character
         bool isClimbableSurface =
             collision.gameObject.CompareTag("Wall") ||
             collision.gameObject.CompareTag("Roof");
+
+        if (gameObject.CompareTag("Follower"))
+            return;
 
         if (!isClimbableSurface)
             return;

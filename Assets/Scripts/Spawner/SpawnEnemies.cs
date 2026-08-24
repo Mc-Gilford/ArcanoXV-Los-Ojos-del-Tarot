@@ -14,19 +14,49 @@ public class SpawnEnemies : MonoBehaviour
     private int timerInterval = 0;
     private float timerCounter = 0f;
     public int enemyCount;
-    private bool moodCarnage;
+    [SerializeField] private bool moodCarnage;
     public int enemyCountCarnage = 0;
     private HashSet<Enemy> enemiesInRoom = new HashSet<Enemy>();
-
+    [SerializeField] private GameObject card;
+    [SerializeField] private float timerCard =600;
+    public bool isPlayerInRoom = false;
     void Start()
     {
-        spawnPosition = null;        
+        card.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         //enemyCount = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length-1;
+        if (isPlayerInRoom)
+        {
+            if (moodCarnage)
+            {
+                MoodCarnageComplete();
+            }
+            else
+            {
+
+                MoodTimerComplete();
+            }
+        }
+    }
+    private void MoodTimerComplete()
+    {
+        timerCard -= Time.deltaTime;
+        if (timerCard < 0)
+        {
+            card.SetActive(true);
+        }
+    }
+
+    void MoodCarnageComplete()
+    {
+        if (enemiesInRoom.Count==0 && enemyCountCarnage==limitEnemies)
+        {
+            card.SetActive(true);
+        }
     }
 
     private void createEnemy()
@@ -64,6 +94,7 @@ public class SpawnEnemies : MonoBehaviour
     /**/
     private void OnTriggerStay(Collider collision)
     {
+        isPlayerInRoom = true;
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Active Spawn");
@@ -79,6 +110,13 @@ public class SpawnEnemies : MonoBehaviour
             enemiesInRoom.Add(enemy);
             enemyCount = enemiesInRoom.Count;
             Debug.Log("Enemigos dentro "+enemyCount);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRoom = false;
         }
     }
     /*private void OnTriggerExit(Collider other)
