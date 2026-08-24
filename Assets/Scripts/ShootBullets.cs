@@ -30,6 +30,10 @@ public class ShootBullets : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip shootSound;
 
+    public string bulletsAmmoText;
+
+    public TextMeshProUGUI ammoMessage;
+
     [SerializeField] private float volume =1f;
     //Use of a textMeshPro for a shootpoint guide
     
@@ -37,10 +41,13 @@ public class ShootBullets : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         audioSource = GetComponent<AudioSource>();
         shootForce = 10f;
         magazine = 50;
         ammoClip = 10;
+        ammoMessage = GameObject.Find("BulletsText").GetComponent<TextMeshProUGUI>();
+        UpdateAmmo();
         CheckBullets();
     }
 
@@ -53,6 +60,12 @@ public class ShootBullets : MonoBehaviour
     private void LateUpdate()
     {
         
+    }
+
+    public void UpdateAmmo()
+    {
+        bulletsAmmoText = bulletsOnGun+" / "+bulletsLeft;
+        ammoMessage.text= bulletsAmmoText;
     }
 
     private void CheckBullets()
@@ -106,6 +119,7 @@ public class ShootBullets : MonoBehaviour
             bulletsLeft = 0;
             hasBulletsToShoot = true;
         }
+        UpdateAmmo();
     }
 
     public void GetAmmo(int ammo)
@@ -118,6 +132,7 @@ public class ShootBullets : MonoBehaviour
         {
             bulletsLeft = magazine;
         }
+        UpdateAmmo();
     }
 
     public void Shoot(InputAction.CallbackContext context)
@@ -137,12 +152,14 @@ public class ShootBullets : MonoBehaviour
 
             CheckBullets();
 
+            UpdateAmmo();
         }
     }
 
     public void EmptyBullets()
     {
         bulletsLeft = 0;
+        UpdateAmmo();
     }
 
     IEnumerator GunKnockback()
