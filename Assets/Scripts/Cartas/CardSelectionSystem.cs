@@ -63,7 +63,9 @@ public class CardSelectionSystem : MonoBehaviour
     private Text _textoCartaActiva;
 
     // NUEVA FEATURE: Imagen del Power Up activo
-    private Image _powerUpIcon;
+    [SerializeField] private Image _powerUpIcon;
+    [SerializeField] private Sprite powerUpSprite;
+
     private RectTransform _powerUpIconRT;
     private Coroutine _powerUpAnimation;
 
@@ -94,6 +96,11 @@ public class CardSelectionSystem : MonoBehaviour
         {
             Destroy(hud);
         }
+    }
+    private void Start()
+    {
+        _powerUpIcon.sprite = powerUpSprite;
+        _powerUpIcon.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -182,7 +189,9 @@ public class CardSelectionSystem : MonoBehaviour
         _cartaElegida = true;
         _estado = Estado.Resolviendo;
 
-        _textoCartaActiva.text = "Carta activa: " + c.nombre;
+        _textoCartaActiva.text = "";
+        _powerUpIcon.gameObject.SetActive(true);
+        _powerUpAnimation = StartCoroutine(AnimarPowerUpIcon());
 
         // NUEVA FEATURE: Muestra la imagen de la carta seleccionada como Power Up
         _powerUpIcon.sprite = c.imagen;
@@ -195,7 +204,10 @@ public class CardSelectionSystem : MonoBehaviour
             StopCoroutine(_powerUpAnimation);
         }
 
-        _powerUpAnimation = StartCoroutine(AnimarPowerUpIcon());
+        //_powerUpAnimation = StartCoroutine(AnimarPowerUpIcon());
+        _powerUpIcon.sprite = c.imagen;
+        _powerUpIcon.color = c.imagen != null ? Color.white : c.color;
+        _powerUpIcon.gameObject.SetActive(false);
 
         StartCoroutine(AnimacionElegir(indice));
 
@@ -553,10 +565,10 @@ public class CardSelectionSystem : MonoBehaviour
         _textoCartaActiva = CrearTexto(rootRT, "CartaActiva", "", 20, new Color(1f, 1f, 1f, 0.9f), new Vector2(30f, 80f), new Vector2(600f, 40f), TextAnchor.LowerLeft);
 
         // NUEVA FEATURE: Icono del Power Up activo
-        _powerUpIcon = CrearImagen(rootRT, "PowerUpIcon", new Vector2(820f, 410f), new Vector2(120f, 160f), Color.white);
+        /*_powerUpIcon = CrearImagen(rootRT, "PowerUpIcon", new Vector2(820f, 410f), new Vector2(120f, 160f), Color.white);
         _powerUpIcon.preserveAspect = true;
         _powerUpIconRT = _powerUpIcon.rectTransform;
-        _powerUpIcon.gameObject.SetActive(false);
+        _powerUpIcon.gameObject.SetActive(false);*/
 
         OcultarHUD();
         OcultarResultado();
