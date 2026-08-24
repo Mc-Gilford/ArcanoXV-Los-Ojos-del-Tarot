@@ -83,9 +83,6 @@ public class CardPickup : MonoBehaviour
         _etiquetaRaiz.rotation = Quaternion.LookRotation(_etiquetaRaiz.position - cam.transform.position);
     }
 
-    // Dorado del HUD (#F4C95D) para coherencia visual
-    private static readonly Color ColorE = new Color(0.957f, 0.788f, 0.365f);
-
     private Transform CrearEtiqueta()
     {
         GameObject raiz = new GameObject("EtiquetaE");
@@ -94,21 +91,19 @@ public class CardPickup : MonoBehaviour
 
         // Sombra negra desplazada (legibilidad sobre fondos claros)
         CrearTexto(raiz.transform, "SombraE", new Color(0f, 0f, 0f, 0.9f), new Vector3(-0.045f, -0.045f, 0.01f));
-        CrearTexto(raiz.transform, "TextoE", ColorE, Vector3.zero);
+        CrearTexto(raiz.transform, "TextoE", FuentesJuego.Dorado, Vector3.zero);
         return raiz.transform;
     }
 
     private void CrearTexto(Transform padre, string nombre, Color color, Vector3 posLocal)
     {
-        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-
         GameObject go = new GameObject(nombre);
         go.transform.SetParent(padre, false);
         go.transform.localPosition = posLocal;
 
         TextMesh tm = go.AddComponent<TextMesh>();
         tm.text = "E";
-        tm.font = font;
+        tm.font = FuentesJuego.Principal;
         tm.fontSize = 80;
         tm.characterSize = 0.075f; // antes 0.04 (se veía diminuto)
         tm.anchor = TextAnchor.MiddleCenter;

@@ -229,7 +229,7 @@ public static class ConfigurarCarroSalidaTool
         }
 
         // ---- Texto ----
-        texto.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        texto.font = FuentesJuego.Principal;
         texto.fontSize = 42;
         texto.fontStyle = FontStyle.Bold;
         texto.alignment = TextAnchor.MiddleCenter;
