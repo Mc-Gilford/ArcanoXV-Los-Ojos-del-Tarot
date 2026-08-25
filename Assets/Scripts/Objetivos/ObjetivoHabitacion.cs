@@ -22,6 +22,13 @@ public class ObjetivoHabitacion : MonoBehaviour
     [Header("Objetivo")]
     public TipoObjetivo tipoObjetivo = TipoObjetivo.BuscarTarjeta;
 
+    [Header("Parámetros")]
+    [Tooltip("Segundos que debe sobrevivir (solo Tipo 2)")]
+    public float tiempoSobrevivir = 240f;
+
+    [Tooltip("Enemigos a matar (solo Tipo 3)")]
+    public int cantidadEnemigos = 30;
+
     [Header("UI")]
     [Tooltip("Objeto pre-existente para activar/desactivar (estilo RelicRoom). Si está vacío, crea texto automático.")]
     public GameObject clueUI;
@@ -68,22 +75,10 @@ public class ObjetivoHabitacion : MonoBehaviour
                 return "Busca la tarjeta dentro de la habitación";
 
             case TipoObjetivo.SobrevivirTiempo:
-            {
-                // Leer de RoomTimer si existe
-                float tiempo = 240f;
-                RoomTimer rt = FindFirstObjectByType<RoomTimer>();
-                if (rt != null) tiempo = rt.tiempoNecesario;
-                return $"Sobrevive {tiempo:F0} segundos en la habitación";
-            }
+                return $"Sobrevive {tiempoSobrevivir:F0} segundos en la habitación";
 
             case TipoObjetivo.MatarEnemigos:
-            {
-                // Leer de SpawnEnemies si existe
-                int enemigos = 30;
-                SpawnEnemies sp = FindFirstObjectByType<SpawnEnemies>();
-                if (sp != null) enemigos = sp.limitEnemies;
-                return $"Mata {enemigos} enemigos";
-            }
+                return $"Mata {cantidadEnemigos} enemigos";
 
             case TipoObjetivo.AtrapaVelas:
                 return "Atrapa las velas";
