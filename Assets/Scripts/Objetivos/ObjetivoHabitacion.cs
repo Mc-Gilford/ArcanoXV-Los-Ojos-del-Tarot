@@ -1,13 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using TMPro;
 
 /// <summary>
 /// Muestra un objetivo/alerta al entrar a la habitación.
 /// Estilo RoomClue: textoMeshPro simple que aparece/desaparece.
-/// Si clueUI está asignado, solo lo activa/desactiva (estilo RelicRoom).
-/// Si no, crea un TMP texto estilo RoomClue automáticamente.
+/// Arrastra el prefab al scene, selecciona el tipo desde el inspector.
 /// </summary>
 public class ObjetivoHabitacion : MonoBehaviour
 {
@@ -24,19 +22,19 @@ public class ObjetivoHabitacion : MonoBehaviour
     [Header("Objetivo")]
     public TipoObjetivo tipoObjetivo = TipoObjetivo.BuscarTarjeta;
 
+    [Header("Parámetros (según el tipo)")]
+    [Tooltip("Segundos que debe sobrevivir (solo Tipo 2)")]
+    public float tiempoSobrevivir = 240f;
+
+    [Tooltip("Enemigos a matar (solo Tipo 3)")]
+    public int cantidadEnemigos = 30;
+
     [Header("UI")]
-    [Tooltip("Si asignas un GameObject, se activa/desactiva como RoomClue. Si lo dejas vacío, crea el texto automáticamente.")]
+    [Tooltip("Objeto pre-existente para activar/desactivar (estilo RelicRoom). Si está vacío, crea texto automático.")]
     public GameObject clueUI;
 
-    [Tooltip("Fuente TMP para el estilo RoomClue (Old Horror Films). Se asigna automáticamente con la tool.")]
+    [Tooltip("Fuente TMP (se auto-busca si está vacío)")]
     public TMP_FontAsset fuenteObjetivo;
-
-    [Header("Parámetros")]
-    [Tooltip("Tiempo en segundos (Tipo 2)")]
-    public float tiempoSobrevivir = 30f;
-
-    [Tooltip("Cantidad de enemigos (Tipo 3)")]
-    public int cantidadEnemigos = 5;
 
     [Header("Alerta")]
     public float duracionAlerta = 5f;
@@ -90,11 +88,6 @@ public class ObjetivoHabitacion : MonoBehaviour
         }
     }
 
-    private Color ObtenerColorTipo()
-    {
-        return new Color(0.396f, 0f, 0f); // rojo oscuro, igual que RoomClue
-    }
-
     private IEnumerator MostrarAlerta()
     {
         yield return new WaitForSeconds(delayInicial);
@@ -115,7 +108,6 @@ public class ObjetivoHabitacion : MonoBehaviour
 
             yield return new WaitForSeconds(duracionAlerta);
 
-            // Fade out
             float t = 0f;
             while (t < 0.5f)
             {
@@ -128,9 +120,6 @@ public class ObjetivoHabitacion : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Crea UI estilo RoomClue: un TextMeshProUGUI simple, centro-arriba, sin panel.
-    /// </summary>
     private void CrearUITexto()
     {
         GameObject canvasGo = new GameObject("HUD_Objetivo_" + tipoObjetivo);
@@ -144,15 +133,15 @@ public class ObjetivoHabitacion : MonoBehaviour
         canvasGo.AddComponent<GraphicRaycaster>();
         _grupoCanvas = canvasGo.AddComponent<CanvasGroup>();
 
-        // Texto TMP estilo RoomClue
         GameObject textoGo = new GameObject("TextoObjetivo");
         textoGo.transform.SetParent(canvasGo.transform, false);
         _tmp = textoGo.AddComponent<TextMeshProUGUI>();
+
+        // Auto-buscar fuente Old Horror Films
         if (fuenteObjetivo != null)
             _tmp.font = fuenteObjetivo;
         else
         {
-            // Buscar "Old Horror Films" automáticamente si no está asignada
             TMP_FontAsset[] fuentes = Resources.FindObjectsOfTypeAll<TMP_FontAsset>();
             foreach (TMP_FontAsset f in fuentes)
             {
@@ -163,16 +152,16 @@ public class ObjetivoHabitacion : MonoBehaviour
                 }
             }
         }
+
         _tmp.text = ObtenerTextoObjetivo();
         _tmp.fontSize = 40;
         _tmp.fontStyle = FontStyles.Bold;
-        _tmp.color = ObtenerColorTipo();
+        _tmp.color = new Color(0.396f, 0f, 0f); // rojo oscuro, igual que RoomClue
         _tmp.alignment = TextAlignmentOptions.Center;
         _tmp.enableWordWrapping = true;
         _tmp.overflowMode = TextOverflowModes.Ellipsis;
         _tmp.richText = true;
 
-        // Posición estilo RoomClue: centro-arriba
         RectTransform rt = textoGo.GetComponent<RectTransform>();
         rt.anchorMin = new Vector2(0.5f, 0.5f);
         rt.anchorMax = new Vector2(0.5f, 0.5f);

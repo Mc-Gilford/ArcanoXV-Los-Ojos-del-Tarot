@@ -68,6 +68,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
   tipoObjetivo: 2
   tiempoSobrevivir: 30
-  cantidadEnemigos: 0
-  duracionAlerta: 6
+  cantidadEnemigos: 30
+  duracionAlerta: 5
   delayInicial: 1
