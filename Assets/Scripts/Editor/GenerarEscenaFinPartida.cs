@@ -56,7 +56,7 @@ public static class GenerarEscenaFinPartida
         CrearTexto(canvasGo.transform, "TextoTiempoLabel", "Tu tiempo:",
             32, new Color(0.8f, 0.75f, 0.65f), new Vector2(0.5f, 0.72f), FontStyle.Normal);
 
-        GameObject valorTiempo = CrearTexto(canvasGo.transform, "TextoTiempoValor", "00:00.00",
+        Text valorTiempo = CrearTexto(canvasGo.transform, "TextoTiempoValor", "00:00.00",
             56, new Color(0.957f, 0.788f, 0.365f), new Vector2(0.5f, 0.65f), FontStyle.Bold);
 
         // ---- Campo nombre ----
