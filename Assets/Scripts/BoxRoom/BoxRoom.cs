@@ -8,13 +8,12 @@ public class BoxRoom : MonoBehaviour
 
     public List<GameObject> boxPoints;
 
-    public GameObject boxCard;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isInsideBoxRoom = false;
         hasEntered = false;
+        MoveCardInsideBox();
     }
 
     // Update is called once per frame
@@ -25,8 +24,11 @@ public class BoxRoom : MonoBehaviour
 
     void MoveCardInsideBox()
     {
+        
         int boxindex = Random.Range(0, boxPoints.Count);
-        boxCard.transform.position = boxPoints[boxindex].transform.position;
+        Debug.Log("Moviendo Carta a caja del indice: "+boxindex+" y posicion: "+boxPoints[boxindex].transform.position);
+        boxPoints[boxindex].SetActive(true);
+        //boxCard.transform.position = boxPoints[boxindex].transform.position;
     }
 
     void OnTriggerStay(Collider other)
@@ -34,12 +36,6 @@ public class BoxRoom : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             isInsideBoxRoom = true;
-            
-            if(!hasEntered)
-            {
-                MoveCardInsideBox();
-                hasEntered = true;
-            }
             
         }
     }
