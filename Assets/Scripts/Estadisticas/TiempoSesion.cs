@@ -32,6 +32,15 @@ public class TiempoSesion : MonoBehaviour
     {
         if (_contando)
             TiempoJugado += Time.deltaTime;
+
+        // SOLO EN EDITOR: F1 en PrincipalScene para probar sin jugar toda la partida
+        #if UNITY_EDITOR
+        if (_contando && Input.GetKeyDown(KeyCode.F1))
+        {
+            Debug.Log("[TiempoSesion] F1 detectado -> TerminarPartida (prueba)");
+            TerminarPartida.IrAFinPartida();
+        }
+        #endif
     }
 
     public void Detener()
