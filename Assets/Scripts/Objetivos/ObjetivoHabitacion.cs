@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 /// <summary>
 /// Muestra un objetivo/alerta al entrar a la habitación.
-/// Se coloca en un GameObject con BoxCollider (isTrigger).
-/// Selecciona el tipo de objetivo desde el inspector y ajusta los parámetros.
+/// Estilo RoomClue: textoMeshPro simple que aparece/desaparece.
+/// Si clueUI está asignado, solo lo activa/desactiva (estilo RelicRoom).
+/// Si no, crea un TMP texto estilo RoomClue automáticamente.
 /// </summary>
 public class ObjetivoHabitacion : MonoBehaviour
 {
@@ -22,33 +24,40 @@ public class ObjetivoHabitacion : MonoBehaviour
     [Header("Objetivo")]
     public TipoObjetivo tipoObjetivo = TipoObjetivo.BuscarTarjeta;
 
-    [Header("Parámetros (solo se usan según el tipo)")]
-    [Tooltip("Tiempo en segundos que debe sobrevivir (Tipo 2)")]
+    [Header("UI")]
+    [Tooltip("Si asignas un GameObject, se activa/desactiva como RoomClue. Si lo dejas vacío, crea el texto automáticamente.")]
+    public GameObject clueUI;
+
+    [Tooltip("Fuente TMP para el estilo RoomClue (Old Horror Films). Se asigna automáticamente con la tool.")]
+    public TMP_FontAsset fuenteObjetivo;
+
+    [Header("Parámetros")]
+    [Tooltip("Tiempo en segundos (Tipo 2)")]
     public float tiempoSobrevivir = 30f;
 
-    [Tooltip("Cantidad de enemigos a matar (Tipo 3)")]
+    [Tooltip("Cantidad de enemigos (Tipo 3)")]
     public int cantidadEnemigos = 5;
 
     [Header("Alerta")]
-    [Tooltip("Duración que se muestra el mensaje (segundos)")]
-    public float duracionAlerta = 6f;
-
-    [Tooltip("Segundos antes de mostrar la alerta al entrar")]
+    public float duracionAlerta = 5f;
     public float delayInicial = 1f;
 
-    private Canvas _canvas;
-    private Text _textoObjetivo;
-    private Text _textoTipo;
-    private CanvasGroup _grupoCanvas;
     private bool _mostrado;
-
-    private const float ANCHO_PANEL = 600f;
-    private const float ALTO_PANEL = 120f;
+    private TextMeshProUGUI _tmp;
+    private Canvas _canvas;
+    private CanvasGroup _grupoCanvas;
 
     private void Start()
     {
-        CrearUI();
-        _canvas.gameObject.SetActive(false);
+        if (clueUI != null)
+        {
+            clueUI.SetActive(false);
+        }
+        else
+        {
+            CrearUITexto();
+            _canvas.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,7 +65,6 @@ public class ObjetivoHabitacion : MonoBehaviour
         if (other.CompareTag("Player") && !_mostrado)
         {
             _mostrado = true;
-            ActualizarTexto();
             StartCoroutine(MostrarAlerta());
         }
     }
@@ -82,80 +90,58 @@ public class ObjetivoHabitacion : MonoBehaviour
         }
     }
 
-    private string ObtenerEtiquetaTipo()
-    {
-        switch (tipoObjetivo)
-        {
-            case TipoObjetivo.BuscarTarjeta:    return "OBJETIVO";
-            case TipoObjetivo.SobrevivirTiempo:  return "TIEMPO";
-            case TipoObjetivo.MatarEnemigos:     return "COMBATE";
-            case TipoObjetivo.AtrapaVelas:       return "VELAS";
-            case TipoObjetivo.PrendeLinternas:   return "LINTERNA";
-            case TipoObjetivo.DestruyeCajas:     return "DESTRUCCIÓN";
-            default:                             return "OBJETIVO";
-        }
-    }
-
     private Color ObtenerColorTipo()
     {
         switch (tipoObjetivo)
         {
             case TipoObjetivo.BuscarTarjeta:    return new Color(0.957f, 0.788f, 0.365f); // dorado
-            case TipoObjetivo.SobrevivirTiempo:  return new Color(0.3f, 0.8f, 0.9f);      // azul claro
-            case TipoObjetivo.MatarEnemigos:     return new Color(0.9f, 0.3f, 0.3f);      // rojo
+            case TipoObjetivo.SobrevivirTiempo:  return new Color(0.3f, 0.8f, 0.9f);      // azul
+            case TipoObjetivo.MatarEnemigos:     return new Color(0.396f, 0f, 0f);        // rojo oscuro (RoomClue style)
             case TipoObjetivo.AtrapaVelas:       return new Color(1f, 0.6f, 0.2f);        // naranja
             case TipoObjetivo.PrendeLinternas:   return new Color(0.9f, 0.9f, 0.4f);      // amarillo
             case TipoObjetivo.DestruyeCajas:     return new Color(0.8f, 0.5f, 0.2f);      // marrón
-            default:                             return FuentesJuego.Dorado;
+            default:                             return new Color(0.396f, 0f, 0f);
         }
-    }
-
-    private void ActualizarTexto()
-    {
-        if (_textoTipo != null)
-        {
-            _textoTipo.text = ObtenerEtiquetaTipo();
-            _textoTipo.color = ObtenerColorTipo();
-        }
-        if (_textoObjetivo != null)
-            _textoObjetivo.text = ObtenerTextoObjetivo();
     }
 
     private IEnumerator MostrarAlerta()
     {
         yield return new WaitForSeconds(delayInicial);
 
-        _canvas.gameObject.SetActive(true);
-        _grupoCanvas.alpha = 0f;
-
-        // Fade in
-        float t = 0f;
-        while (t < 0.4f)
+        if (clueUI != null)
         {
-            t += Time.deltaTime;
-            _grupoCanvas.alpha = Mathf.Lerp(0f, 1f, t / 0.4f);
-            yield return null;
+            clueUI.SetActive(true);
+            yield return new WaitForSeconds(duracionAlerta);
+            clueUI.SetActive(false);
         }
-        _grupoCanvas.alpha = 1f;
-
-        // Esperar
-        yield return new WaitForSeconds(duracionAlerta);
-
-        // Fade out
-        t = 0f;
-        while (t < 0.5f)
+        else
         {
-            t += Time.deltaTime;
-            _grupoCanvas.alpha = Mathf.Lerp(1f, 0f, t / 0.5f);
-            yield return null;
+            if (_tmp != null)
+                _tmp.text = ObtenerTextoObjetivo();
+
+            _canvas.gameObject.SetActive(true);
+            _grupoCanvas.alpha = 1f;
+
+            yield return new WaitForSeconds(duracionAlerta);
+
+            // Fade out
+            float t = 0f;
+            while (t < 0.5f)
+            {
+                t += Time.deltaTime;
+                _grupoCanvas.alpha = Mathf.Lerp(1f, 0f, t / 0.5f);
+                yield return null;
+            }
+            _grupoCanvas.alpha = 0f;
+            _canvas.gameObject.SetActive(false);
         }
-        _grupoCanvas.alpha = 0f;
-        _canvas.gameObject.SetActive(false);
     }
 
-    private void CrearUI()
+    /// <summary>
+    /// Crea UI estilo RoomClue: un TextMeshProUGUI simple, centro-arriba, sin panel.
+    /// </summary>
+    private void CrearUITexto()
     {
-        // Canvas
         GameObject canvasGo = new GameObject("HUD_Objetivo_" + tipoObjetivo);
         _canvas = canvasGo.AddComponent<Canvas>();
         _canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -163,58 +149,30 @@ public class ObjetivoHabitacion : MonoBehaviour
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.matchWidthOrHeight = 0.5f;
         canvasGo.AddComponent<GraphicRaycaster>();
         _grupoCanvas = canvasGo.AddComponent<CanvasGroup>();
 
-        // Panel principal (parte superior centrada)
-        GameObject panelGo = CrearRect("PanelObjetivo", canvasGo.transform);
-        RectTransform panelRect = panelGo.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0.5f, 1f);
-        panelRect.anchorMax = new Vector2(0.5f, 1f);
-        panelRect.anchoredPosition = new Vector2(0, -60);
-        panelRect.sizeDelta = new Vector2(ANCHO_PANEL, ALTO_PANEL);
-        Image panelImg = panelGo.AddComponent<Image>();
-        panelImg.color = new Color(0.05f, 0.04f, 0.08f, 0.92f);
+        // Texto TMP estilo RoomClue
+        GameObject textoGo = new GameObject("TextoObjetivo");
+        textoGo.transform.SetParent(canvasGo.transform, false);
+        _tmp = textoGo.AddComponent<TextMeshProUGUI>();
+        if (fuenteObjetivo != null)
+            _tmp.font = fuenteObjetivo;
+        _tmp.text = ObtenerTextoObjetivo();
+        _tmp.fontSize = 40;
+        _tmp.fontStyle = FontStyles.Bold;
+        _tmp.color = ObtenerColorTipo();
+        _tmp.alignment = TextAlignmentOptions.Center;
+        _tmp.enableWordWrapping = true;
+        _tmp.overflowMode = TextOverflowModes.Ellipsis;
+        _tmp.richText = true;
 
-        // Borde dorado
-        Outline borde = panelGo.AddComponent<Outline>();
-        borde.effectColor = new Color(0.957f, 0.788f, 0.365f, 0.6f);
-        borde.effectDistance = new Vector2(2, -2);
-
-        // Texto tipo (etiqueta arriba)
-        GameObject tipoGo = CrearRect("TextoTipo", panelGo.transform);
-        RectTransform tipoRect = tipoGo.GetComponent<RectTransform>();
-        tipoRect.anchorMin = new Vector2(0.05f, 0.55f);
-        tipoRect.anchorMax = new Vector2(0.95f, 0.95f);
-        tipoRect.offsetMin = Vector2.zero;
-        tipoRect.offsetMax = Vector2.zero;
-        _textoTipo = tipoGo.AddComponent<Text>();
-        FuentesJuego.Aplicar(_textoTipo, 20, ObtenerColorTipo(), true, true);
-        _textoTipo.alignment = TextAnchor.MiddleCenter;
-        _textoTipo.text = ObtenerEtiquetaTipo();
-
-        // Texto objetivo (descripción abajo)
-        GameObject objGo = CrearRect("TextoObjetivo", panelGo.transform);
-        RectTransform objRect = objGo.GetComponent<RectTransform>();
-        objRect.anchorMin = new Vector2(0.05f, 0.05f);
-        objRect.anchorMax = new Vector2(0.95f, 0.55f);
-        objRect.offsetMin = Vector2.zero;
-        objRect.offsetMax = Vector2.zero;
-        _textoObjetivo = objGo.AddComponent<Text>();
-        FuentesJuego.Aplicar(_textoObjetivo, 28, FuentesJuego.TextoSecundario, false, false);
-        _textoObjetivo.alignment = TextAnchor.MiddleCenter;
-        _textoObjetivo.text = ObtenerTextoObjetivo();
-    }
-
-    private GameObject CrearRect(string nombre, Transform padre)
-    {
-        GameObject go = new GameObject(nombre);
-        go.transform.SetParent(padre, false);
-        RectTransform rt = go.AddComponent<RectTransform>();
-        rt.anchorMin = Vector2.zero;
-        rt.anchorMax = Vector2.one;
-        rt.offsetMin = Vector2.zero;
-        rt.offsetMax = Vector2.zero;
-        return go;
+        // Posición estilo RoomClue: centro-arriba
+        RectTransform rt = textoGo.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.5f, 0.5f);
+        rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = new Vector2(0, 69);
+        rt.sizeDelta = new Vector2(800, 60);
     }
 }
