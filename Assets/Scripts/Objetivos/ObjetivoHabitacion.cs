@@ -159,6 +159,19 @@ public class ObjetivoHabitacion : MonoBehaviour
         _tmp = textoGo.AddComponent<TextMeshProUGUI>();
         if (fuenteObjetivo != null)
             _tmp.font = fuenteObjetivo;
+        else
+        {
+            // Buscar "Old Horror Films" automáticamente si no está asignada
+            TMP_FontAsset[] fuentes = Resources.FindObjectsOfTypeAll<TMP_FontAsset>();
+            foreach (TMP_FontAsset f in fuentes)
+            {
+                if (f.name.Contains("Old Horror Films"))
+                {
+                    _tmp.font = f;
+                    break;
+                }
+            }
+        }
         _tmp.text = ObtenerTextoObjetivo();
         _tmp.fontSize = 40;
         _tmp.fontStyle = FontStyles.Bold;
