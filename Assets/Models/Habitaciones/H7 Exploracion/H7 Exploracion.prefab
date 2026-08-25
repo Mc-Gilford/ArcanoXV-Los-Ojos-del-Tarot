@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &299462310044488835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6677275569396213529}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6677275569396213529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299462310044488835}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -94.41, y: 48.77, z: -10.693}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2806517185725646856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3060840420529456312
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,6 +73,7 @@ GameObject:
   - component: {fileID: 2806517185725646856}
   - component: {fileID: 566807021358590738}
   - component: {fileID: 8262176588850351722}
+  - component: {fileID: 3045101925045912648}
   m_Layer: 0
   m_Name: H7 Exploracion
   m_TagString: Untagged
@@ -95,6 +127,7 @@ Transform:
   - {fileID: 5404377471156599225}
   - {fileID: 8196333840046682572}
   - {fileID: 4013177289866778314}
+  - {fileID: 6677275569396213529}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &566807021358590738
@@ -142,6 +175,23 @@ MonoBehaviour:
   card: {fileID: 3610317786641276033}
   timerCard: 600
   isPlayerInRoom: 0
+--- !u!114 &3045101925045912648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622103162110882479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce576d11920f3834a80e8241f3608d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnPickups
+  pickups:
+  - {fileID: 5440886498291499466, guid: c7beb17aefdf3be409971e157685cbff, type: 3}
+  - {fileID: 6077979518521914030, guid: c4a63abef926fcc43bae97bdb091cff7, type: 3}
+  positions:
+  - {fileID: 299462310044488835}
 --- !u!1 &5812554437431664866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,6 +1129,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1633a103edce74c4685aaec5de54f853, type: 3}
       propertyPath: m_Name
       value: H7 Escaleras
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1633a103edce74c4685aaec5de54f853, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
