@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private bool gameFinished = false;
 
+    [SerializeField] private int totalKeyCards;
+
+    [SerializeField] private bool hasAllKeyCards = false;
+
+    public GameObject finalCardBox;
+
+    public GameObject finalMessage;
+
     public string timeWithFormat;
 
     public Jugador playerScript;
@@ -43,6 +51,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //keyCardCollection = GameObject.Find("CardPickup").GetComponent<CardPickup>();
+        totalKeyCards = 11;
+        hasAllKeyCards = false;
+        finalCardBox.SetActive(false);
+        finalMessage.SetActive(false);
         timeWithFormat="";
         timeMessage = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
         TimeFormat();
@@ -97,6 +109,23 @@ public class GameManager : MonoBehaviour
             // Aqui va la funcion para hacer que el acosador se mantenga activo apartir de este momento
 
         }
+
+        if(keyCards >= totalKeyCards && !hasAllKeyCards)
+        {
+            hasAllKeyCards = true;
+            finalCardBox.SetActive(true);
+            StartCoroutine(FinalSign()); 
+        }
+        else if(keyCards>=totalKeyCards)
+        {
+            gameFinished = true;
+            FinishGame();
+        }
+    }
+
+    private void FinishGame()
+    {
+        Debug.Log("Juego terminado!");
     }
 
     public void SpectralDestruction()
@@ -150,6 +179,13 @@ public class GameManager : MonoBehaviour
                 gunScript.EmptyBullets();
                 break;
         }
+    }
+
+    IEnumerator FinalSign()
+    {
+        finalMessage.SetActive(true);
+        yield return new WaitForSeconds(5);
+        finalMessage.SetActive(false);
     }
 
     public void GameOver()
