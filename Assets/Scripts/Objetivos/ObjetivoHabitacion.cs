@@ -92,16 +92,7 @@ public class ObjetivoHabitacion : MonoBehaviour
 
     private Color ObtenerColorTipo()
     {
-        switch (tipoObjetivo)
-        {
-            case TipoObjetivo.BuscarTarjeta:    return new Color(0.957f, 0.788f, 0.365f); // dorado
-            case TipoObjetivo.SobrevivirTiempo:  return new Color(0.3f, 0.8f, 0.9f);      // azul
-            case TipoObjetivo.MatarEnemigos:     return new Color(0.396f, 0f, 0f);        // rojo oscuro (RoomClue style)
-            case TipoObjetivo.AtrapaVelas:       return new Color(1f, 0.6f, 0.2f);        // naranja
-            case TipoObjetivo.PrendeLinternas:   return new Color(0.9f, 0.9f, 0.4f);      // amarillo
-            case TipoObjetivo.DestruyeCajas:     return new Color(0.8f, 0.5f, 0.2f);      // marrón
-            default:                             return new Color(0.396f, 0f, 0f);
-        }
+        return new Color(0.396f, 0f, 0f); // rojo oscuro, igual que RoomClue
     }
 
     private IEnumerator MostrarAlerta()
