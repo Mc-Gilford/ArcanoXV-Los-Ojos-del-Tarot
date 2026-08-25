@@ -11,6 +11,7 @@ public class Door : MonoBehaviour
 
     private Transform player;
     private TextMeshProUGUI doorText;
+
     private bool isOpen = false;
     private bool wasNear = false;
 
@@ -21,11 +22,7 @@ public class Door : MonoBehaviour
     private static Door activeDoor;
 
     private CardCollector cardCollector;
-
-    // H13
-    private const float h13RequiredTime = 120f;
-    private static float h13Timer = 0f;
-    private static bool h13TimerActive = false;
+    private RoomTimer roomTimer;
 
     void Start()
     {
@@ -50,18 +47,14 @@ public class Door : MonoBehaviour
 
         cardCollector = CardCollector.Instance != null ? CardCollector.Instance : FindFirstObjectByType<CardCollector>();
 
+        roomTimer = RoomTimer.Instance != null ? RoomTimer.Instance : FindFirstObjectByType<RoomTimer>();
+
         closedRotation = transform.localRotation;
         openRotation = closedRotation * Quaternion.Euler(0, 0, openAngle);
     }
 
     void Update()
     {
-        // Empieza a contar después de abrir la entrada de H13
-        if (h13TimerActive && h13Timer < h13RequiredTime)
-        {
-            h13Timer += Time.deltaTime;
-        }
-
         OpenDoorAction();
     }
 
@@ -82,7 +75,7 @@ public class Door : MonoBehaviour
                 wasNear = true;
             }
 
-            // Revisa si esta puerta tiene algún requisito especial
+            // Revisa si la puerta tiene alguna condición especial
             if (!SpecialDoors())
             {
                 doorText.enabled = true;
@@ -95,16 +88,6 @@ public class Door : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X))
             {
                 doorText.enabled = false;
-
-                // Al abrir la entrada de H13 comienza el tiempo
-                if (gameObject.name == "H13 Puerta Entrada" && !h13TimerActive)
-                {
-                    h13Timer = 0f;
-                    h13TimerActive = true;
-
-                    Debug.Log("Jugador entró a H13. Comienza el temporizador de 2 minutos.");
-                }
-
                 StartCoroutine(OpenDoor());
             }
         }
@@ -115,7 +98,6 @@ public class Door : MonoBehaviour
                 wasNear = false;
             }
 
-            // Solo esta puerta puede ocultar el texto que estaba usando
             if (activeDoor == this)
             {
                 doorText.enabled = false;
@@ -130,8 +112,10 @@ public class Door : MonoBehaviour
 
     private bool SpecialDoors()
     {
-        // H13 ENTRADA
-        // Necesita tener todas las cartas
+        // =========================
+        // H13 PUERTA ENTRADA
+        // =========================
+
         if (gameObject.name == "H13 Puerta Entrada")
         {
             if (cardCollector == null || !cardCollector.TodasRecogidas)
@@ -143,19 +127,22 @@ public class Door : MonoBehaviour
             return true;
         }
 
+        // =========================
         // H13 SALIDA
-        // Necesita permanecer 2 minutos en H13
+        // =========================
+
         if (gameObject.name == "H13 Salida")
         {
-            if (!h13TimerActive)
+            if (roomTimer == null)
             {
                 doorText.text = "No puedes salir todavía";
                 return false;
             }
 
-            if (h13Timer < h13RequiredTime)
+            if (!roomTimer.TiempoCompletado)
             {
-                float remainingTime = h13RequiredTime - h13Timer;
+                float remainingTime = roomTimer.tiempoNecesario - roomTimer.TiempoDentro;
+
                 int seconds = Mathf.CeilToInt(remainingTime);
                 int minutes = seconds / 60;
                 int remainingSeconds = seconds % 60;
@@ -168,7 +155,10 @@ public class Door : MonoBehaviour
             return true;
         }
 
-        // Todas las demás puertas funcionan normalmente
+        // =========================
+        // PUERTAS NORMALES
+        // =========================
+
         return true;
     }
 
@@ -184,6 +174,7 @@ public class Door : MonoBehaviour
         while (Quaternion.Angle(transform.localRotation, openRotation) > 0.5f)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, openRotation, speed * Time.deltaTime);
+
             yield return null;
         }
 
@@ -194,6 +185,7 @@ public class Door : MonoBehaviour
         while (Quaternion.Angle(transform.localRotation, closedRotation) > 0.5f)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, closedRotation, speed * Time.deltaTime);
+
             yield return null;
         }
 
