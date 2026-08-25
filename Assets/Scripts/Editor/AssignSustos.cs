@@ -11,7 +11,6 @@ public static class AssignSustos
 {
     private const string PrefabPath = "Assets/Prefabs/Ambience/HauntedFurniture.prefab";
 
-    [MenuItem("Tools/Arcano XV/Asignar sonidos de susto al prefab")]
     public static void Assign()
     {
         GameObject root = PrefabUtility.LoadPrefabContents(PrefabPath);

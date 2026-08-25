@@ -22,7 +22,10 @@ public class SpawnEnemies : MonoBehaviour
     public bool isPlayerInRoom = false;
     void Start()
     {
-        card.SetActive(false);
+        if (card != null)
+            card.SetActive(false);
+        else
+            Debug.Log("Falta objeto");
     }
 
     // Update is called once per frame
@@ -44,18 +47,24 @@ public class SpawnEnemies : MonoBehaviour
     }
     private void MoodTimerComplete()
     {
-        timerCard -= Time.deltaTime;
-        if (timerCard < 0)
-        {
-            card.SetActive(true);
+        if(card!=null){
+            timerCard -= Time.deltaTime;
+            if (timerCard < 0)
+            {
+                card.SetActive(true);
+            }
         }
+        
     }
 
     void MoodCarnageComplete()
     {
-        if (enemiesInRoom.Count==0 && enemyCountCarnage==limitEnemies)
+        if (card != null)
         {
-            card.SetActive(true);
+            if (enemiesInRoom.Count == 0 && enemyCountCarnage == limitEnemies)
+            {
+                card.SetActive(true);
+            }
         }
     }
 

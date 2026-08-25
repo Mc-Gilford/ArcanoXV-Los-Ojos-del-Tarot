@@ -114,7 +114,7 @@ MonoBehaviour:
   - {fileID: 3924049033243244452, guid: 4c92b88df3b148344947a2e1a5167db2, type: 3}
   positions:
   - {fileID: 0}
-  limitEnemies: 5
+  limitEnemies: 2
   enemyCount: 0
   moodCarnage: 1
   enemyCountCarnage: 0

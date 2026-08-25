@@ -547,7 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011d2ecd91aa6b34089ce4a6c213f4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardCollector
-  cartasNecesarias: 7
+  cartasNecesarias: 11
   gameManager: {fileID: 0}
 --- !u!1001 &7998459649548614576
 PrefabInstance:
@@ -737,8 +737,8 @@ MonoBehaviour:
   canShoot: 1
   hasBulletsToShoot: 1
   magazine: 0
-  bulletsLeft: 0
-  bulletsOnGun: 11
+  bulletsLeft: 20
+  bulletsOnGun: 30
   playerCamera: {fileID: 546039420350685711}
   attackPoint: {fileID: 8470287873173394347}
   ammoClip: 0

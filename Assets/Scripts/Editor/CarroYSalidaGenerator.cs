@@ -16,7 +16,6 @@ using UnityEngine.Rendering.Universal;
 /// </summary>
 public class CarroYSalidaGenerator : EditorWindow
 {
-    [MenuItem("Tools/Arcano XV/Generar Escena Carro y Salida")]
     public static void GenerarEscenaCarroYSalida()
     {
         // Crear carpeta de escenas si no existe
