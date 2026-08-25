@@ -114,7 +114,7 @@ MonoBehaviour:
   positions:
   - {fileID: 9109504671047921187}
   - {fileID: 5953593229214612840}
-  limitEnemies: 20
+  limitEnemies: 15
   enemyCount: 0
   moodCarnage: 1
   enemyCountCarnage: 0

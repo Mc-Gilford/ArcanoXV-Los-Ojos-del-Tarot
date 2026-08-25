@@ -1428,9 +1428,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2863534278145076184}
-    - targetCorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3497847073500387688}
   m_SourcePrefab: {fileID: 100100000, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
 --- !u!4 &2725104887140880726 stripped
 Transform:
@@ -1443,22 +1440,6 @@ GameObject:
   m_PrefabInstance: {fileID: 4623993757829983960}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2863534278145076184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3358089760978947052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98915d1743c4746b31a9a38bbff151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lamp
-  detectionDistance: 2
-  isOn: 0
-  lightRoom: {fileID: 4263420368895483512}
-  light: {fileID: 4543949237149439654}
---- !u!114 &3497847073500387688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
