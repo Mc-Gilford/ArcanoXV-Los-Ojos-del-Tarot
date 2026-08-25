@@ -22,31 +22,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 40.310394
+      value: -169.38347
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.81
+      value: 34.041756
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 363.87204
+      value: 371.60748
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -210,7 +210,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   player: {fileID: 0}
   rotationSpeed: 8
-  anger: 0.9
+  anger: 2
   nearDistance: 25
   slowDistance: 10
   stoppingDistance: 1
