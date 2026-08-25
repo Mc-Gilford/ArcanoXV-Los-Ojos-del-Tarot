@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,16 +23,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool canUseCard=false;
     [SerializeField] private string cardSelected="";
 
+    [SerializeField] private float timeInGame = 0f;
+
+    [SerializeField] private bool isDead = false;
+
+    [SerializeField] private bool gameFinished = false;
+
+    public string timeWithFormat;
+
     public Jugador playerScript;
     public ShootBullets gunScript;
 
    // public GameObject gameOvermenu;
     private GameObject gameOverPanel;
+
+    public TextMeshProUGUI timeMessage;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //keyCardCollection = GameObject.Find("CardPickup").GetComponent<CardPickup>();
+        timeWithFormat="";
+        timeMessage = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
+        TimeFormat();
+        isDead = false;
+        gameFinished = false;
+        timeInGame = 0f;
         cardsBeforeStalker = 5;
         cardCooldown = 5;
         playerScript = GameObject.Find("Player").GetComponent<Jugador>();
@@ -47,7 +64,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!gameFinished && !isDead)
+        {
+            timeInGame+=Time.deltaTime;
+        }
+
+        TimeFormat();
+    }
+
+    private void TimeFormat()
+    {
+        int hours = Mathf.FloorToInt(timeInGame / 3600);
+        int minutes = Mathf.FloorToInt((timeInGame % 3600) / 60);
+        int seconds = Mathf.FloorToInt(timeInGame % 60);
+
+        timeWithFormat = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+        timeMessage.text = "Time in game: "+timeWithFormat;
     }
 
     public void GetKeyCard()
@@ -119,7 +151,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Ya me mori");
         gameOverPanel.SetActive(true);
-        
+        isDead = false;
         //referenciaALaMira.SetActive(false);
     }
 
