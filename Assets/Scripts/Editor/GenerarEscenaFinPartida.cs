@@ -32,6 +32,17 @@ public static class GenerarEscenaFinPartida
         esGo.AddComponent<EventSystem>();
         esGo.AddComponent<StandaloneInputModule>();
 
+        // ---- Cámara (necesaria para evitar "Display cameras rendering") ----
+        GameObject camGo = new GameObject("Main Camera");
+        camGo.tag = "MainCamera";
+        Camera cam = camGo.AddComponent<Camera>();
+        cam.clearFlags = CameraClearFlags.SolidColor;
+        cam.backgroundColor = new Color(0.04f, 0.03f, 0.07f);
+        cam.orthographic = true;
+        cam.orthographicSize = 5;
+        cam.cullingMask = 0;
+        cam.depth = -100;
+
         // ---- Canvas ----
         GameObject canvasGo = new GameObject("Canvas_FinPartida");
         Canvas canvas = canvasGo.AddComponent<Canvas>();
