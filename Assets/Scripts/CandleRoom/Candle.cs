@@ -8,7 +8,7 @@ public class Candle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        candleRoom = GameObject.Find("CandleRoom").GetComponent<CandleRoom>();
+        candleRoom = GameObject.Find("H5 El Ritual").GetComponent<CandleRoom>();
     }
 
     // Update is called once per frame

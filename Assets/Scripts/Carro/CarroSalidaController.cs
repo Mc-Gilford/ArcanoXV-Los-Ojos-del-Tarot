@@ -373,9 +373,13 @@ public class CarroSalidaController : MonoBehaviour
     {
         if (textoContador != null)
         {
-            textoContador.text = $"Frenar (X): {_teclasPresionadas}/{teclasRequeridas}";
+            textoContador.text = $"Presiona X: {_teclasPresionadas}/{teclasRequeridas}";
         }
+        OnProgresoX?.Invoke(_teclasPresionadas, teclasRequeridas);
     }
+
+    // Evento para elementos visuales del HUD (barra segmentada). No afecta la lógica.
+    public static event System.Action<int, int> OnProgresoX;
 
     private void CompletarSalida()
     {

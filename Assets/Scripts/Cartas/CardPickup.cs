@@ -18,13 +18,13 @@ public class CardPickup : MonoBehaviour
 
     private bool _recogida;
     private Vector3 _basePos;
-    private TextMesh _etiqueta;
+    private Transform _etiquetaRaiz;
 
     private void Start()
     {
         _basePos = transform.position;
-        _etiqueta = CrearEtiqueta();
-        _etiqueta.gameObject.SetActive(false);
+        _etiquetaRaiz = CrearEtiqueta();
+        _etiquetaRaiz.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -39,13 +39,17 @@ public class CardPickup : MonoBehaviour
         GameObject jugador = GameObject.FindGameObjectWithTag("Player");
         if (jugador == null)
         {
-            _etiqueta.gameObject.SetActive(false);
+            _etiquetaRaiz.gameObject.SetActive(false);
             return;
         }
 
         bool cerca = Vector3.Distance(jugador.transform.position, transform.position) <= radioInteraccion;
-        _etiqueta.gameObject.SetActive(cerca);
+        _etiquetaRaiz.gameObject.SetActive(cerca);
         ApuntarEtiqueta();
+
+        // Pulso sutil de escala para llamar la atención
+        float pulso = 1f + Mathf.Sin(Time.time * 4f) * 0.08f;
+        _etiquetaRaiz.localScale = Vector3.one * pulso;
 
         if (cerca && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
             Recoger();
@@ -54,7 +58,7 @@ public class CardPickup : MonoBehaviour
     private void Recoger()
     {
         _recogida = true;
-        _etiqueta.gameObject.SetActive(false);
+        _etiquetaRaiz.gameObject.SetActive(false);
         CardCollector.Instance?.RecogerCarta();
         StartCoroutine(AnimacionRecogida());
     }
@@ -76,24 +80,35 @@ public class CardPickup : MonoBehaviour
     {
         Camera cam = Camera.main;
         if (cam == null) return;
-        _etiqueta.transform.rotation = Quaternion.LookRotation(_etiqueta.transform.position - cam.transform.position);
+        _etiquetaRaiz.rotation = Quaternion.LookRotation(_etiquetaRaiz.position - cam.transform.position);
     }
 
-    private TextMesh CrearEtiqueta()
+    private Transform CrearEtiqueta()
     {
-        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        GameObject raiz = new GameObject("EtiquetaE");
+        raiz.transform.SetParent(transform, false);
+        raiz.transform.localPosition = Vector3.up * 1.25f;
 
-        GameObject go = new GameObject("EtiquetaE");
-        go.transform.SetParent(transform, false);
-        go.transform.localPosition = Vector3.up * 1.1f;
+        // Sombra negra desplazada (legibilidad sobre fondos claros)
+        CrearTexto(raiz.transform, "SombraE", new Color(0f, 0f, 0f, 0.9f), new Vector3(-0.045f, -0.045f, 0.01f));
+        CrearTexto(raiz.transform, "TextoE", FuentesJuego.Dorado, Vector3.zero);
+        return raiz.transform;
+    }
+
+    private void CrearTexto(Transform padre, string nombre, Color color, Vector3 posLocal)
+    {
+        GameObject go = new GameObject(nombre);
+        go.transform.SetParent(padre, false);
+        go.transform.localPosition = posLocal;
 
         TextMesh tm = go.AddComponent<TextMesh>();
         tm.text = "E";
-        tm.font = font;
+        tm.font = FuentesJuego.Principal;
         tm.fontSize = 80;
-        tm.characterSize = 0.04f;
+        tm.characterSize = 0.075f; // antes 0.04 (se veía diminuto)
         tm.anchor = TextAnchor.MiddleCenter;
-        tm.color = Color.white;
-        return tm;
+        tm.alignment = TextAlignment.Center;
+        tm.color = color;
+        go.GetComponent<MeshRenderer>().sortingOrder = nombre == "SombraE" ? 0 : 1;
     }
 }
