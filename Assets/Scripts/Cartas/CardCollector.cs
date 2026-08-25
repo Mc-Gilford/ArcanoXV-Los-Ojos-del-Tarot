@@ -12,7 +12,7 @@ public class CardCollector : MonoBehaviour
     public static CardCollector Instance { get; private set; }
 
     [Tooltip("Cuántas cartas hay que recoger para abrir la puerta del jefe final.")]
-    public int cartasNecesarias = 9;
+    public int cartasNecesarias = 11;
 
     public int CartasObtenidas { get; private set; }
     public bool TodasRecogidas => CartasObtenidas >= cartasNecesarias;
