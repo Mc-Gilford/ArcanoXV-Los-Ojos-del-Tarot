@@ -25,12 +25,15 @@ public class CandleRoom : MonoBehaviour
     
     public List<GameObject> tpPoints;
 
-    [SerializeField] private bool canMove; 
+    [SerializeField] private bool canMove;
+
+    [SerializeField] private bool hasStarterd; 
 
     public GameObject candle;
 
     void Start()
     {
+        hasStarterd=false;
         round = 1;
         isInsideCandleRoom = false;
         totalRounds = 4;
@@ -119,7 +122,13 @@ public class CandleRoom : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             isInsideCandleRoom = true;
-            InitialPos();
+            
+            if(!hasStarterd && !roomCompleted)
+            {
+                InitialPos();
+                hasStarterd = true;
+            }
+            
         }
     }
 
