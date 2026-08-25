@@ -45,7 +45,7 @@ public class ShootBullets : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         shootForce = 10f;
         magazine = 50;
-        ammoClip = 10;
+        ammoClip = 25;
         ammoMessage = GameObject.Find("BulletsText").GetComponent<TextMeshProUGUI>();
         UpdateAmmo();
         CheckBullets();

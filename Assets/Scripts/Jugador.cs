@@ -59,6 +59,7 @@ public class Jugador : Character
 
     private GameObject rainPrefab;
     private RainScript rain;
+    public bool playerGetsInroom = false;
 
     //Variables para la reproduccion de audio
 
@@ -265,7 +266,7 @@ public class Jugador : Character
 
         if (collider.CompareTag("Home"))
         {
-            Debug.Log("The tags is right");
+            playerGetsInroom = true;
 
             if (rain != null)
             {
