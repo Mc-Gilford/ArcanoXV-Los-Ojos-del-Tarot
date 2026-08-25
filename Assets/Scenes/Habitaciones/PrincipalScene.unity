@@ -2059,6 +2059,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562724881}
     m_Modifications:
+    - target: {fileID: 925138118848456660, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
+      propertyPath: card
+      value: 
+      objectReference: {fileID: 1276185216}
     - target: {fileID: 949270257592150615, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
       propertyPath: m_LocalPosition.x
       value: -98.18253
@@ -2105,9 +2109,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 949270257592150615, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
+      insertIndex: 21
+      addedObject: {fileID: 1276185215}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
+--- !u!1001 &1276185214
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 665218500}
+    m_Modifications:
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.306648
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 178.02097
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 304.33966
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463285150228100053, guid: d415d9f6e549ef04086550212be90888, type: 3}
+      propertyPath: m_Name
+      value: CartaColeccionable_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d415d9f6e549ef04086550212be90888, type: 3}
+--- !u!4 &1276185215 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4060841340784916894, guid: d415d9f6e549ef04086550212be90888, type: 3}
+  m_PrefabInstance: {fileID: 1276185214}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1276185216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4463285150228100053, guid: d415d9f6e549ef04086550212be90888, type: 3}
+  m_PrefabInstance: {fileID: 1276185214}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1283168648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6216818030273614563, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
