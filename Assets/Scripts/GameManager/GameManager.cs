@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
 
             //Debug.Log("Ella esta aqui OnO");
             isAwaked = true;
-            ghostScript.isGhostAlwaysActive = true;
+            ghostScript.hasAlmostAllKeys = true;
             // Aqui va la funcion para hacer que el acosador se mantenga activo apartir de este momento
 
         }

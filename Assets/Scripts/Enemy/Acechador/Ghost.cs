@@ -11,7 +11,7 @@ public class Ghost : Enemy
     private bool isTeletransported = false;
     private bool freezeGhost;
     private Jugador playerScript;
-    private bool hasAlmostAllKeys = false;
+    public bool hasAlmostAllKeys = false;
     private Renderer ghostRenderer;
     private Collider ghostCollider;
     private float randomTimeScare;

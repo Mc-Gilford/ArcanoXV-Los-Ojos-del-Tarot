@@ -279,7 +279,7 @@ MonoBehaviour:
   - {fileID: 4471733796978187023}
   - {fileID: 7838976549638641462}
   - {fileID: 5972224229151562374}
-  limitEnemies: 3
+  limitEnemies: 6
   enemyCount: 0
   moodCarnage: 1
   enemyCountCarnage: 0
