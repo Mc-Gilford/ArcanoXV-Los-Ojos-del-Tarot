@@ -28,6 +28,9 @@ public class ObjetivoHabitacion : MonoBehaviour
     [Tooltip("Si asignas un GameObject, se activa/desactiva como RoomClue. Si lo dejas vacío, crea el texto automáticamente.")]
     public GameObject clueUI;
 
+    [Tooltip("Fuente TMP para el estilo RoomClue (Old Horror Films). Se asigna automáticamente con la tool.")]
+    public TMP_FontAsset fuenteObjetivo;
+
     [Header("Parámetros")]
     [Tooltip("Tiempo en segundos (Tipo 2)")]
     public float tiempoSobrevivir = 30f;
@@ -154,6 +157,8 @@ public class ObjetivoHabitacion : MonoBehaviour
         GameObject textoGo = new GameObject("TextoObjetivo");
         textoGo.transform.SetParent(canvasGo.transform, false);
         _tmp = textoGo.AddComponent<TextMeshProUGUI>();
+        if (fuenteObjetivo != null)
+            _tmp.font = fuenteObjetivo;
         _tmp.text = ObtenerTextoObjetivo();
         _tmp.fontSize = 40;
         _tmp.fontStyle = FontStyles.Bold;

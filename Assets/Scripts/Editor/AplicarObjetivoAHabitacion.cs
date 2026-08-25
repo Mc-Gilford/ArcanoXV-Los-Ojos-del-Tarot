@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using TMPro;
 
 /// <summary>
 /// Ventana para agregar ObjetivoHabitacion a un prefab de habitación existente.
@@ -11,7 +12,10 @@ public class AplicarObjetivoAHabitacion : EditorWindow
     private ObjetivoHabitacion.TipoObjetivo tipoSeleccionado = ObjetivoHabitacion.TipoObjetivo.BuscarTarjeta;
     private float tiempoSobrevivir = 30f;
     private int cantidadEnemigos = 5;
-    private float duracionAlerta = 6f;
+    private float duracionAlerta = 5f;
+
+    // GUID de "Old Horror Films 1-0 SDF.asset"
+    private const string FUENTE_HORROR_GUID = "88cb6dacb7ce2754ea4cc3c20c5b9da6";
 
     [MenuItem("Tools/Arcano XV/Aplicar Objetivo a Habitación")]
     private static void Abrir()
@@ -26,48 +30,36 @@ public class AplicarObjetivoAHabitacion : EditorWindow
         GUILayout.Label("Agregar Objetivo a Habitación", EditorStyles.boldLabel);
         EditorGUILayout.Space(8);
 
-        // Prefab
         prefabHabitacion = (GameObject)EditorGUILayout.ObjectField(
             "Prefab de habitación", prefabHabitacion, typeof(GameObject), false);
 
         EditorGUILayout.Space(5);
 
-        // Tipo de objetivo
         tipoSeleccionado = (ObjetivoHabitacion.TipoObjetivo)EditorGUILayout.EnumPopup(
             "Tipo de objetivo", tipoSeleccionado);
 
-        // Parámetros según tipo
         EditorGUILayout.Space(5);
         if (tipoSeleccionado == ObjetivoHabitacion.TipoObjetivo.SobrevivirTiempo)
-        {
             tiempoSobrevivir = EditorGUILayout.FloatField("Tiempo (segundos)", tiempoSobrevivir);
-        }
         else if (tipoSeleccionado == ObjetivoHabitacion.TipoObjetivo.MatarEnemigos)
-        {
             cantidadEnemigos = EditorGUILayout.IntField("Cantidad de enemigos", cantidadEnemigos);
-        }
 
         duracionAlerta = EditorGUILayout.FloatField("Duración alerta (seg)", duracionAlerta);
 
         EditorGUILayout.Space(10);
 
-        // Botón aplicar
         GUI.enabled = prefabHabitacion != null;
         if (GUILayout.Button("Aplicar", GUILayout.Height(32)))
-        {
             AplicarObjetivo();
-        }
         GUI.enabled = true;
 
         EditorGUILayout.Space(10);
 
-        // Instrucciones
         EditorGUILayout.HelpBox(
-            "1. Arrastra el prefab de la habitación (ej: H1 El Olvido)\n" +
+            "1. Arrastra el prefab (ej: H1 El Olvido)\n" +
             "2. Selecciona el tipo de objetivo\n" +
-            "3. Ajusta los parámetros si es necesario\n" +
-            "4. Click 'Aplicar'\n" +
-            "5. Prueba en Unity: Play → entra a la habitación",
+            "3. Click 'Aplicar'\n" +
+            "4. Play → entra a la habitación",
             MessageType.Info);
     }
 
@@ -80,7 +72,6 @@ public class AplicarObjetivoAHabitacion : EditorWindow
             return;
         }
 
-        // Cargar prefab como editable
         GameObject prefab = PrefabUtility.LoadPrefabContents(ruta);
         if (prefab == null)
         {
@@ -88,7 +79,10 @@ public class AplicarObjetivoAHabitacion : EditorWindow
             return;
         }
 
-        // Verificar si ya tiene ObjetivoHabitacion
+        // Buscar fuente Old Horror Films
+        TMP_FontAsset fuente = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(
+            AssetDatabase.GUIDToAssetPath(FUENTE_HORROR_GUID));
+
         ObjetivoHabitacion existente = prefab.GetComponent<ObjetivoHabitacion>();
         if (existente != null)
         {
@@ -97,6 +91,7 @@ public class AplicarObjetivoAHabitacion : EditorWindow
             existente.tiempoSobrevivir = tiempoSobrevivir;
             existente.cantidadEnemigos = cantidadEnemigos;
             existente.duracionAlerta = duracionAlerta;
+            if (fuente != null) existente.fuenteObjetivo = fuente;
             EditorUtility.SetDirty(existente);
         }
         else
@@ -107,10 +102,10 @@ public class AplicarObjetivoAHabitacion : EditorWindow
             obj.tiempoSobrevivir = tiempoSobrevivir;
             obj.cantidadEnemigos = cantidadEnemigos;
             obj.duracionAlerta = duracionAlerta;
+            if (fuente != null) obj.fuenteObjetivo = fuente;
             EditorUtility.SetDirty(prefab);
         }
 
-        // Guardar
         PrefabUtility.SaveAsPrefabAsset(prefab, ruta);
         PrefabUtility.UnloadPrefabContents(prefab);
 
@@ -118,9 +113,10 @@ public class AplicarObjetivoAHabitacion : EditorWindow
         AssetDatabase.Refresh();
 
         string nombre = prefabHabitacion.name;
-        Debug.Log($"[Arcano XV] Objetivo '{tipoSeleccionado}' aplicado a '{nombre}' ({duracionAlerta}s alerta)");
+        string fuenteMsg = fuente != null ? " (fuente Old Horror Films)" : " (fuente por defecto)";
+        Debug.Log($"[Arcano XV] Objetivo '{tipoSeleccionado}' aplicado a '{nombre}'{fuenteMsg}");
         EditorUtility.DisplayDialog("Listo",
-            $"Objetivo '{tipoSeleccionado}' aplicado a '{nombre}'.\nPrueba en Unity: Play → entra a la habitación.",
+            $"Objetivo '{tipoSeleccionado}' aplicado a '{nombre}'.{fuenteMsg}\nPlay → entra a la habitación.",
             "OK");
     }
 }
