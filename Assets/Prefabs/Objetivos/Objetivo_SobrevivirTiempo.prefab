@@ -67,7 +67,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
   tipoObjetivo: 2
-  
-  
   duracionAlerta: 5
   delayInicial: 1
