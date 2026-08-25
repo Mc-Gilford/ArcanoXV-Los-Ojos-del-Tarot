@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 /// Controlador de la escena FinPartida:
 /// muestra el tiempo jugado, permite escribir un nombre,
 /// guarda en el ranking y lista los mejores tiempos.
-/// Se auto-construye si se llama CrearUI() o espera los objetos de la escena.
+/// Conecta los botones automáticamente al iniciar.
 /// </summary>
 public class MostrarTiempo : MonoBehaviour
 {
@@ -14,40 +14,66 @@ public class MostrarTiempo : MonoBehaviour
     private Text _textoTiempo;
     private Text _textoRanking;
     private Text _textoEstado;
-    private GameObject _panelGuardar;
-    private GameObject _panelRanking;
     private bool _guardado;
 
     private void Start()
     {
-        // Si los objetos vienen de la escena (creados por la herramienta), buscar por nombre
-        if (_textoTiempo == null) BuscarObjetosEscena();
+        BuscarObjetos();
+        ConectarBotones();
 
         float tiempo = TerminarPartida.UltimoTiempo;
-        _textoTiempo.text = TiempoSesion.FormatearTiempo(tiempo);
+        if (_textoTiempo != null)
+            _textoTiempo.text = TiempoSesion.FormatearTiempo(tiempo);
 
         MostrarRanking();
     }
 
-    private void BuscarObjetosEscena()
+    private void BuscarObjetos()
     {
-        // La herramienta crea estos GameObjects con nombres específicos
-        GameObject campo = GameObject.Find("CampoNombre");
-        if (campo != null) _campoNombre = campo.GetComponent<InputField>();
+        if (_campoNombre == null)
+        {
+            GameObject campo = GameObject.Find("CampoNombre");
+            if (campo != null) _campoNombre = campo.GetComponent<InputField>();
+        }
 
-        GameObject tiempo = GameObject.Find("TextoTiempoValor");
-        if (tiempo != null) _textoTiempo = tiempo.GetComponent<Text>();
+        if (_textoTiempo == null)
+        {
+            GameObject t = GameObject.Find("TextoTiempoValor");
+            if (t != null) _textoTiempo = t.GetComponent<Text>();
+        }
 
-        GameObject ranking = GameObject.Find("TextoRanking");
-        if (ranking != null) _textoRanking = ranking.GetComponent<Text>();
+        if (_textoRanking == null)
+        {
+            GameObject r = GameObject.Find("TextoRanking");
+            if (r != null) _textoRanking = r.GetComponent<Text>();
+        }
 
-        GameObject estado = GameObject.Find("TextoEstado");
-        if (estado != null) _textoEstado = estado.GetComponent<Text>();
+        if (_textoEstado == null)
+        {
+            GameObject e = GameObject.Find("TextoEstado");
+            if (e != null) _textoEstado = e.GetComponent<Text>();
+        }
+    }
 
+    private void ConectarBotones()
+    {
+        // Botón Guardar
         GameObject btnGuardar = GameObject.Find("BotonGuardar");
-        if (btnGuardar != null) _panelGuardar = btnGuardar;
+        if (btnGuardar != null)
+        {
+            Button btn = btnGuardar.GetComponent<Button>();
+            if (btn != null)
+                btn.onClick.AddListener(GuardarNombre);
+        }
 
-        _panelRanking = GameObject.Find("PanelRanking");
+        // Botón Volver al Menú
+        GameObject btnVolver = GameObject.Find("BotonVolver");
+        if (btnVolver != null)
+        {
+            Button btn = btnVolver.GetComponent<Button>();
+            if (btn != null)
+                btn.onClick.AddListener(VolverAlMenu);
+        }
     }
 
     public void GuardarNombre()
@@ -82,7 +108,6 @@ public class MostrarTiempo : MonoBehaviour
         for (int i = 0; i < lista.entradas.Count; i++)
         {
             string linea = Ranking.FormatearEntrada(i + 1, lista.entradas[i]);
-            // Resaltar el tiempo actual si coincide
             if (Mathf.Approximately(lista.entradas[i].tiempoSegundos, miTiempo) && !_guardado)
                 linea += "  <-- ¡TÚ!";
             bloque += linea + "\n";
