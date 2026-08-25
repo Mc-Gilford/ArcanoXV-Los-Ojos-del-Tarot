@@ -17,7 +17,8 @@ public class ObjetivoHabitacion : MonoBehaviour
         MatarEnemigos = 3,
         AtrapaVelas = 4,
         PrendeLinternas = 5,
-        DestruyeCajas = 6
+        DestruyeCajas = 6,
+        SobrevivirRosario = 7
     }
 
     [Header("Objetivo")]
@@ -38,7 +39,7 @@ public class ObjetivoHabitacion : MonoBehaviour
     public TMP_FontAsset fuenteObjetivo;
 
     [Header("Alerta")]
-    public float duracionAlerta = 5f;
+    public float duracionAlerta = 3f;
     public float delayInicial = 1f;
 
     private bool _mostrado;
@@ -89,6 +90,9 @@ public class ObjetivoHabitacion : MonoBehaviour
 
             case TipoObjetivo.DestruyeCajas:
                 return "Destruye las cajas y encuentra la carta";
+
+            case TipoObjetivo.SobrevivirRosario:
+                return "Sobrevive a Rosario";
 
             default:
                 return "Objetivo desconocido";
