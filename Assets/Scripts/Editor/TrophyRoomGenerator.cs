@@ -29,7 +29,6 @@ public static class TrophyRoomGenerator
     /// sustos, carpetas de audio, prefabs de objetos y jugador, y la habitación trofeo
     /// (con sonidos y pasos ya asignados). Es el ÚNICO menú bajo Tools > Arcano XV.
     /// </summary>
-    [MenuItem("Tools/Arcano XV/Generar TODO")]
     public static void GenerateAll()
     {
         AmbiencePrefabGenerator.GenerateAll(); // prefabs del sistema de sustos (HauntedObject)

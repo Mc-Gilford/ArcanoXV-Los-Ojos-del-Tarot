@@ -20,7 +20,6 @@ public static class ConfigurarCarroSalidaTool
     private const float NearClipPrimeraPersona = 0.02f;
     private const float FOVCinematografico = 62f;
 
-    [MenuItem("Tools/Arcano XV/Configurar Carro Salida (Primera Persona)")]
     public static void Configurar()
     {
         // 1. Encontrar el carro RAÍZ por nombre (nunca ruedas ni hijos)

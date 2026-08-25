@@ -21,7 +21,6 @@ public static class GenerarEscenaFinPartida
     private const string NombreEscena = "FinPartida";
     private const string RutaEscena = "Assets/Scenes/" + NombreEscena + ".unity";
 
-    [MenuItem("Tools/Arcano XV/Generar Escena Fin Partida")]
     public static void Generar()
     {
         // Crear escena vacía

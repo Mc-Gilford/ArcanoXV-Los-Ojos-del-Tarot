@@ -21,7 +21,6 @@ public static class RoomsGenerator
     private const string RoomsFolder = "Assets/Scenes/Habitaciones";
     private const float DoorWidth = 2.2f;
 
-    [MenuItem("Tools/Arcano XV/Generar habitaciones")]
     public static void GenerateAllRooms()
     {
         if (!Directory.Exists(RoomsFolder))
