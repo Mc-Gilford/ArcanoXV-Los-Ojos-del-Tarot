@@ -4,7 +4,7 @@ using TMPro;
 
 /// <summary>
 /// Muestra un objetivo/alerta al entrar a la habitación.
-/// Estilo RoomClue: textoMeshPro simple que aparece/desaparece.
+/// Lee los valores de RoomTimer y SpawnEnemies que ya existen en la escena.
 /// Arrastra el prefab al scene, selecciona el tipo desde el inspector.
 /// </summary>
 public class ObjetivoHabitacion : MonoBehaviour
@@ -21,13 +21,6 @@ public class ObjetivoHabitacion : MonoBehaviour
 
     [Header("Objetivo")]
     public TipoObjetivo tipoObjetivo = TipoObjetivo.BuscarTarjeta;
-
-    [Header("Parámetros (según el tipo)")]
-    [Tooltip("Segundos que debe sobrevivir (solo Tipo 2)")]
-    public float tiempoSobrevivir = 240f;
-
-    [Tooltip("Enemigos a matar (solo Tipo 3)")]
-    public int cantidadEnemigos = 30;
 
     [Header("UI")]
     [Tooltip("Objeto pre-existente para activar/desactivar (estilo RelicRoom). Si está vacío, crea texto automático.")]
@@ -73,16 +66,34 @@ public class ObjetivoHabitacion : MonoBehaviour
         {
             case TipoObjetivo.BuscarTarjeta:
                 return "Busca la tarjeta dentro de la habitación";
+
             case TipoObjetivo.SobrevivirTiempo:
-                return $"Sobrevive {tiempoSobrevivir:F0} segundos en la habitación";
+            {
+                // Leer de RoomTimer si existe
+                float tiempo = 240f;
+                RoomTimer rt = FindFirstObjectByType<RoomTimer>();
+                if (rt != null) tiempo = rt.tiempoNecesario;
+                return $"Sobrevive {tiempo:F0} segundos en la habitación";
+            }
+
             case TipoObjetivo.MatarEnemigos:
-                return $"Mata {cantidadEnemigos} enemigos";
+            {
+                // Leer de SpawnEnemies si existe
+                int enemigos = 30;
+                SpawnEnemies sp = FindFirstObjectByType<SpawnEnemies>();
+                if (sp != null) enemigos = sp.limitEnemies;
+                return $"Mata {enemigos} enemigos";
+            }
+
             case TipoObjetivo.AtrapaVelas:
                 return "Atrapa las velas";
+
             case TipoObjetivo.PrendeLinternas:
                 return "Prende las linternas";
+
             case TipoObjetivo.DestruyeCajas:
                 return "Destruye las cajas y encuentra la carta";
+
             default:
                 return "Objetivo desconocido";
         }
@@ -137,7 +148,6 @@ public class ObjetivoHabitacion : MonoBehaviour
         textoGo.transform.SetParent(canvasGo.transform, false);
         _tmp = textoGo.AddComponent<TextMeshProUGUI>();
 
-        // Auto-buscar fuente Old Horror Films
         if (fuenteObjetivo != null)
             _tmp.font = fuenteObjetivo;
         else
@@ -156,7 +166,7 @@ public class ObjetivoHabitacion : MonoBehaviour
         _tmp.text = ObtenerTextoObjetivo();
         _tmp.fontSize = 40;
         _tmp.fontStyle = FontStyles.Bold;
-        _tmp.color = new Color(0.396f, 0f, 0f); // rojo oscuro, igual que RoomClue
+        _tmp.color = new Color(0.396f, 0f, 0f);
         _tmp.alignment = TextAlignmentOptions.Center;
         _tmp.enableWordWrapping = true;
         _tmp.overflowMode = TextOverflowModes.Ellipsis;
