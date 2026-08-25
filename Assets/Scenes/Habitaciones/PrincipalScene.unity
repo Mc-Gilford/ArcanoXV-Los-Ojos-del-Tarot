@@ -517,6 +517,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7026564163920172631, guid: 456ee4267e1c90e48a8d479c6d26847f, type: 3}
   m_PrefabInstance: {fileID: 743403495}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &348596775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2437787197199238851, guid: 569d91ce824c283468e375a5b82c38ca, type: 3}
+  m_PrefabInstance: {fileID: 577181057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &348596776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348596775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d882efbccc7de9643b0cd59804ed7d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTimer
+  tiempoNecesario: 240
 --- !u!1 &350116561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,7 +1166,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2437787197199238851, guid: 569d91ce824c283468e375a5b82c38ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 348596776}
   m_SourcePrefab: {fileID: 100100000, guid: 569d91ce824c283468e375a5b82c38ca, type: 3}
 --- !u!1 &577181058 stripped
 GameObject:
@@ -2210,18 +2231,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 562724881}
     m_Modifications:
-    - target: {fileID: 925138118848456660, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
-      propertyPath: timerCard
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 925138118848456660, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
-      propertyPath: moodCarnage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 925138118848456660, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
-      propertyPath: limitEnemies
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 949270257592150615, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
       propertyPath: m_LocalPosition.x
       value: -98.18253
@@ -3485,6 +3494,7 @@ MonoBehaviour:
   isInRoom: 0
   IsAngerActive: 0
   maxHealth: 1000
+  hasAlmostAllKeys: 0
   ghostHeightOffset: 1
 --- !u!65 &1907560256
 BoxCollider:
@@ -3733,14 +3743,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1355931894810117372, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: bulletsLeft
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355931894810117372, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
+      propertyPath: bulletsOnGun
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2627944424092730325, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_Name
       value: PlayerSet
       objectReference: {fileID: 0}
-    - target: {fileID: 3005519907971355130, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
-      propertyPath: powerUpSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6e3f67a988a6ea64dabe841684f34a16, type: 3}
     - target: {fileID: 5465632942743037496, guid: 0ec227acb56369941ad75e6bf77b18e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -112.59

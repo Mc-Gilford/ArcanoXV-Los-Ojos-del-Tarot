@@ -5,9 +5,8 @@ using TMPro;
 
 /// <summary>
 /// Muestra un objetivo/alerta al entrar a la habitación.
-/// Estilo RoomClue: textoMeshPro simple que aparece/desaparece.
-/// Si clueUI está asignado, solo lo activa/desactiva (estilo RelicRoom).
-/// Si no, crea un TMP texto estilo RoomClue automáticamente.
+/// Lee los valores de RoomTimer y SpawnEnemies que ya existen en la escena.
+/// Arrastra el prefab al scene, selecciona el tipo desde el inspector.
 /// </summary>
 public class ObjetivoHabitacion : MonoBehaviour
 {
@@ -18,25 +17,29 @@ public class ObjetivoHabitacion : MonoBehaviour
         MatarEnemigos = 3,
         AtrapaVelas = 4,
         PrendeLinternas = 5,
-        DestruyeCajas = 6
+        DestruyeCajas = 6,
+        SobrevivirRosario = 7
     }
 
     [Header("Objetivo")]
     public TipoObjetivo tipoObjetivo = TipoObjetivo.BuscarTarjeta;
 
+    [Header("Parámetros")]
+    [Tooltip("Segundos que debe sobrevivir (solo Tipo 2)")]
+    public float tiempoSobrevivir = 240f;
+
+    [Tooltip("Enemigos a matar (solo Tipo 3)")]
+    public int cantidadEnemigos = 30;
+
     [Header("UI")]
-    [Tooltip("Si asignas un GameObject, se activa/desactiva como RoomClue. Si lo dejas vacío, crea el texto automáticamente.")]
+    [Tooltip("Objeto pre-existente para activar/desactivar (estilo RelicRoom). Si está vacío, crea texto automático.")]
     public GameObject clueUI;
 
-    [Header("Parámetros")]
-    [Tooltip("Tiempo en segundos (Tipo 2)")]
-    public float tiempoSobrevivir = 30f;
-
-    [Tooltip("Cantidad de enemigos (Tipo 3)")]
-    public int cantidadEnemigos = 5;
+    [Tooltip("Fuente TMP (se auto-busca si está vacío)")]
+    public TMP_FontAsset fuenteObjetivo;
 
     [Header("Alerta")]
-    public float duracionAlerta = 5f;
+    public float duracionAlerta = 3f;
     public float delayInicial = 1f;
 
     private bool _mostrado;
@@ -72,32 +75,27 @@ public class ObjetivoHabitacion : MonoBehaviour
         {
             case TipoObjetivo.BuscarTarjeta:
                 return "Busca la tarjeta dentro de la habitación";
+
             case TipoObjetivo.SobrevivirTiempo:
                 return $"Sobrevive {tiempoSobrevivir:F0} segundos en la habitación";
+
             case TipoObjetivo.MatarEnemigos:
                 return $"Mata {cantidadEnemigos} enemigos";
+
             case TipoObjetivo.AtrapaVelas:
                 return "Atrapa las velas";
+
             case TipoObjetivo.PrendeLinternas:
                 return "Prende las linternas";
+
             case TipoObjetivo.DestruyeCajas:
                 return "Destruye las cajas y encuentra la carta";
+
+            case TipoObjetivo.SobrevivirRosario:
+                return "Sobrevive a Rosario";
+
             default:
                 return "Objetivo desconocido";
-        }
-    }
-
-    private Color ObtenerColorTipo()
-    {
-        switch (tipoObjetivo)
-        {
-            case TipoObjetivo.BuscarTarjeta:    return new Color(0.957f, 0.788f, 0.365f); // dorado
-            case TipoObjetivo.SobrevivirTiempo:  return new Color(0.3f, 0.8f, 0.9f);      // azul
-            case TipoObjetivo.MatarEnemigos:     return new Color(0.396f, 0f, 0f);        // rojo oscuro (RoomClue style)
-            case TipoObjetivo.AtrapaVelas:       return new Color(1f, 0.6f, 0.2f);        // naranja
-            case TipoObjetivo.PrendeLinternas:   return new Color(0.9f, 0.9f, 0.4f);      // amarillo
-            case TipoObjetivo.DestruyeCajas:     return new Color(0.8f, 0.5f, 0.2f);      // marrón
-            default:                             return new Color(0.396f, 0f, 0f);
         }
     }
 
@@ -121,7 +119,6 @@ public class ObjetivoHabitacion : MonoBehaviour
 
             yield return new WaitForSeconds(duracionAlerta);
 
-            // Fade out
             float t = 0f;
             while (t < 0.5f)
             {
@@ -134,9 +131,6 @@ public class ObjetivoHabitacion : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Crea UI estilo RoomClue: un TextMeshProUGUI simple, centro-arriba, sin panel.
-    /// </summary>
     private void CrearUITexto()
     {
         GameObject canvasGo = new GameObject("HUD_Objetivo_" + tipoObjetivo);
@@ -150,20 +144,34 @@ public class ObjetivoHabitacion : MonoBehaviour
         canvasGo.AddComponent<GraphicRaycaster>();
         _grupoCanvas = canvasGo.AddComponent<CanvasGroup>();
 
-        // Texto TMP estilo RoomClue
         GameObject textoGo = new GameObject("TextoObjetivo");
         textoGo.transform.SetParent(canvasGo.transform, false);
         _tmp = textoGo.AddComponent<TextMeshProUGUI>();
+
+        if (fuenteObjetivo != null)
+            _tmp.font = fuenteObjetivo;
+        else
+        {
+            TMP_FontAsset[] fuentes = Resources.FindObjectsOfTypeAll<TMP_FontAsset>();
+            foreach (TMP_FontAsset f in fuentes)
+            {
+                if (f.name.Contains("Old Horror Films"))
+                {
+                    _tmp.font = f;
+                    break;
+                }
+            }
+        }
+
         _tmp.text = ObtenerTextoObjetivo();
         _tmp.fontSize = 40;
         _tmp.fontStyle = FontStyles.Bold;
-        _tmp.color = ObtenerColorTipo();
+        _tmp.color = new Color(0.396f, 0f, 0f);
         _tmp.alignment = TextAlignmentOptions.Center;
         _tmp.enableWordWrapping = true;
         _tmp.overflowMode = TextOverflowModes.Ellipsis;
         _tmp.richText = true;
 
-        // Posición estilo RoomClue: centro-arriba
         RectTransform rt = textoGo.GetComponent<RectTransform>();
         rt.anchorMin = new Vector2(0.5f, 0.5f);
         rt.anchorMax = new Vector2(0.5f, 0.5f);

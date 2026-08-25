@@ -26,7 +26,6 @@ public static class MejoraVisualEscenaTool
 
     private const float FOVCine = 62f;
 
-    [MenuItem("Tools/Arcano XV/Mejora Visual Cine (Thriller Nocturno)")]
     public static void Aplicar()
     {
         ConfigurarLuna();
