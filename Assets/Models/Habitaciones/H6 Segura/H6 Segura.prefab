@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9195810146155846473}
   - component: {fileID: 2347398678497127589}
+  - component: {fileID: 3829814473595906897}
   m_Layer: 0
   m_Name: H6 Segura
   m_TagString: Untagged
@@ -58,6 +59,7 @@ Transform:
   - {fileID: 8291052933242731292}
   - {fileID: 2387862796518937342}
   - {fileID: 4371554243208405811}
+  - {fileID: 8557757226478585227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2347398678497127589
@@ -81,6 +83,49 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 74.31177, y: 29.670334, z: 84.68884}
   m_Center: {x: 169.55338, y: 77.299095, z: 854.0661}
+--- !u!114 &3829814473595906897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560492958270049845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88dd6b4f79267e141bab2908205a998f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SafeRoom
+--- !u!1 &8521316623314581040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8557757226478585227}
+  m_Layer: 0
+  m_Name: TeleportSafeRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8557757226478585227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8521316623314581040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 174.28, y: 67.38, z: 862.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9195810146155846473}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &152068608927267767
 PrefabInstance:
   m_ObjectHideFlags: 0

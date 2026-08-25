@@ -55,6 +55,8 @@ public class Jugador : Character
     [SerializeField] private bool isDrunk = false;
     [SerializeField] private int drunkShield = 1;
 
+    [SerializeField] private int maxhealth;
+
     private GameObject rainPrefab;
     private RainScript rain;
 
@@ -98,7 +100,8 @@ public class Jugador : Character
         cordura = 600f;
         puedeSaltar = true;
         isInsane = false;
-        health = 4;
+        maxhealth = 10;
+        health = 10;
         inputJugador = GetComponent<PlayerInput>();
         accionMovimiento = inputJugador.actions.FindAction("Movimiento");
         accionSalto = inputJugador.actions.FindAction("Saltar");
@@ -120,7 +123,7 @@ public class Jugador : Character
 
     public float getCordura()
     {
-        return cordura;
+        return sanityPoints;
     }
 
     // Update is called once per frame
@@ -521,7 +524,10 @@ public class Jugador : Character
     public void HealHP()
     {
         Debug.Log("Salud curada");
-        this.health += 1;
+        if(health < maxhealth)
+        {
+            health++;
+        }
     }
 
     public void LetsDrink()
