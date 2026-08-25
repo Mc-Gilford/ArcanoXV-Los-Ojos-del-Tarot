@@ -3450,7 +3450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a3e28b01d17c04ba0614d75c849692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  detectionDistance: 20
+  detectionDistance: 15
   openAngle: -90
   speed: 3
   closeDelay: 10
