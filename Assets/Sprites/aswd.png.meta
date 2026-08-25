@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d8327f4d8b39ae241aa1d5d54f4183e4
+guid: 00466591857938141a384a412bc29fa5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ButtonHigh_0
+      name: aswd_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 600
-        height: 120
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36d997dc6fbec3b4d86317635a6d13b3
-      internalID: 1903713365
+      spriteID: fce8c8582794cdd4aa2725f3e170d1d2
+      internalID: -286793163
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 502d4885bd068d74ea369386c4bea0a2
+    spriteID: f691352f452290c489c326c24b815c81
     internalID: 0
     vertices: []
     indices: 
@@ -171,9 +171,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":600.0,"y":120.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      ButtonHigh_0: 1903713365
+      aswd_0: -286793163
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

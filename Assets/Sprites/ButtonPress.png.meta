@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 892d6db0bac0d214da969639d1231f48
+guid: a3e7de303a6596149bba4d67421f1f20
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ButtonDefault2_0
+      name: ButtonPress_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 3
         width: 600
-        height: 120
+        height: 114
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4283c8c36e8eb64bba5023469c8569c
-      internalID: 914616372
+      spriteID: 3ac15907df0ef6249953ee5e6950323a
+      internalID: -334984071
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5650d292a243dd54db8e53982973c949
+    spriteID: 6a4b166d945adce4dbd98d04f1afb3cc
     internalID: 0
     vertices: []
     indices: 
@@ -171,9 +171,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":600.0,"y":120.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      ButtonDefault2_0: 914616372
+      ButtonPress_0: -334984071
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
