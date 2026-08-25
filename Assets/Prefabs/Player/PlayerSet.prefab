@@ -460,13 +460,17 @@ PrefabInstance:
       propertyPath: cordura
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4146120901487361454, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2585345408030216492}
+    - targetCorrespondingSourceObject: {fileID: 5614349743589103814, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6173357052400755763}
   m_SourcePrefab: {fileID: 100100000, guid: 00261b3f3edb3f34babf42bfa892e341, type: 3}
 --- !u!4 &4057296353023997633 stripped
 Transform:
@@ -528,6 +532,22 @@ MonoBehaviour:
   tiempoResultado: 2.5
   tiempoFlash: 0.4
   bloquearMovimientoAlElegir: 1
+  powerUpSprite: {fileID: 0}
+  gameManager: {fileID: 0}
+  showPowerUp: 1
+--- !u!114 &6173357052400755763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6761618042471953554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011d2ecd91aa6b34089ce4a6c213f4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardCollector
+  cartasNecesarias: 7
   gameManager: {fileID: 0}
 --- !u!1001 &7998459649548614576
 PrefabInstance:
@@ -723,6 +743,8 @@ MonoBehaviour:
   attackPoint: {fileID: 8470287873173394347}
   ammoClip: 0
   shootSound: {fileID: 8300000, guid: 9c7f91de099484b4697fc9f75a0af1a9, type: 3}
+  bulletsAmmoText: 
+  ammoMessage: {fileID: 0}
   volume: 1
 --- !u!82 &3649776494724644341
 AudioSource:

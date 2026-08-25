@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         isDead = false;
         gameFinished = false;
         timeInGame = 0f;
-        cardsBeforeStalker = 5;
+        cardsBeforeStalker = 7;
         cardCooldown = 5;
         playerScript = GameObject.Find("Player").GetComponent<Jugador>();
         gunScript = GameObject.Find("Gun").GetComponent<ShootBullets>();
@@ -86,9 +86,14 @@ public class GameManager : MonoBehaviour
     {
         keyCards++;
         if(keyCards >= cardsBeforeStalker && !isAwaked)
-        {   
-            Debug.Log("Ella esta aqui OnO");
+        {
+            GameObject ghostObjet = GameObject.FindGameObjectWithTag("Follower");
+            Ghost ghostScript = ghostObjet.GetComponent<Ghost>();
+
+
+            //Debug.Log("Ella esta aqui OnO");
             isAwaked = true;
+            ghostScript.isGhostAlwaysActive = true;
             // Aqui va la funcion para hacer que el acosador se mantenga activo apartir de este momento
 
         }

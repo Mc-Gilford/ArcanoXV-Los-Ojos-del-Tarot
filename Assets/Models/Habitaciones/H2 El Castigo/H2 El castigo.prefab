@@ -1388,7 +1388,7 @@ PrefabInstance:
       addedObject: {fileID: 5155677554858711538}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a3870db88e198514c959399a9c844255, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6851922774763293190}
+      addedObject: {fileID: 4207967852195496746}
   m_SourcePrefab: {fileID: 100100000, guid: a3870db88e198514c959399a9c844255, type: 3}
 --- !u!4 &3901109384321751557 stripped
 Transform:
@@ -1415,13 +1415,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.01617399, y: 0.0825942, z: 0.12784833}
   m_Center: {x: 0.00028203797, y: -0.04129686, z: -0.0031022048}
---- !u!114 &6851922774763293190
+--- !u!114 &4207967852195496746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3432,7 +3432,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3450,7 +3450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a3e28b01d17c04ba0614d75c849692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  detectionDistance: 8.5
+  detectionDistance: 20
   openAngle: -90
   speed: 3
   closeDelay: 10
