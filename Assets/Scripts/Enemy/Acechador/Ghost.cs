@@ -55,39 +55,42 @@ public class Ghost : Enemy
     {
         if (player != null && playerScript != null)
         {
-            // NUEVA FEATURE: isInsane debe ser true cuando la cordura sea menor a 3
-            bool corduraPlayer = playerScript.isInsane;
-
-            // Aquí posteriormente puedes actualizar hasAlmostAllKeys con las tarjetas del jugador
-            // hasAlmostAllKeys = playerScript...
-
-            // NUEVA FEATURE: Cordura < 3 O casi todas las tarjetas = Ghost siempre activo
-            if ((corduraPlayer || hasAlmostAllKeys) && !isTeletransported)
+            if (playerScript.playerGetsInroom)
             {
-                Debug.Log("Ghost always active");
+                // NUEVA FEATURE: isInsane debe ser true cuando la cordura sea menor a 3
+                bool corduraPlayer = playerScript.isInsane;
 
-                isGhostAlwaysActive = true;
-                isTeletransported = true;
+                // Aquí posteriormente puedes actualizar hasAlmostAllKeys con las tarjetas del jugador
+                // hasAlmostAllKeys = playerScript...
 
-                if (isHidden)
+                // NUEVA FEATURE: Cordura < 3 O casi todas las tarjetas = Ghost siempre activo
+                if ((corduraPlayer || hasAlmostAllKeys) && !isTeletransported)
                 {
-                    ShowGhost();
+                    Debug.Log("Ghost always active");
+
+                    isGhostAlwaysActive = true;
+                    isTeletransported = true;
+
+                    if (isHidden)
+                    {
+                        ShowGhost();
+                    }
+
+                    // NUEVA FEATURE: Estando activo puede teletransportarse nuevamente cada 60-90 segundos
+                    randomTimeScare = UnityEngine.Random.Range(60, 90);
+                    StartCoroutine(WaitAction(randomTimeScare, ScarePlayer));
                 }
+                // NUEVA FEATURE: Cordura >= 3 Y sin casi todas las tarjetas = apariciones cortas
+                else if ((!corduraPlayer && !hasAlmostAllKeys) && !isTeletransported)
+                {
+                    Debug.Log("Ghost scare mode");
 
-                // NUEVA FEATURE: Estando activo puede teletransportarse nuevamente cada 60-90 segundos
-                randomTimeScare = UnityEngine.Random.Range(60, 90);
-                StartCoroutine(WaitAction(randomTimeScare, ScarePlayer));
-            }
-            // NUEVA FEATURE: Cordura >= 3 Y sin casi todas las tarjetas = apariciones cortas
-            else if ((!corduraPlayer && !hasAlmostAllKeys) && !isTeletransported)
-            {
-                Debug.Log("Ghost scare mode");
+                    isGhostAlwaysActive = false;
+                    isTeletransported = true;
 
-                isGhostAlwaysActive = false;
-                isTeletransported = true;
-
-                randomTimeScare = UnityEngine.Random.Range(10, 20);
-                StartCoroutine(WaitAction(randomTimeScare, ScarePlayer));
+                    randomTimeScare = UnityEngine.Random.Range(10, 20);
+                    StartCoroutine(WaitAction(randomTimeScare, ScarePlayer));
+                }
             }
         }
     }
