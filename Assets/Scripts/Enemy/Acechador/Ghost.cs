@@ -15,10 +15,13 @@ public class Ghost : Enemy
     private Renderer ghostRenderer;
     private Collider ghostCollider;
     private float randomTimeScare;
-    private AudioSource scareAudio;
     private bool isHidden = true;
     private float[] teleportDistance = { 7, 10, 15, 20 };
     public bool isGhostAlwaysActive { get; set; }
+
+    public AudioClip audioClip;
+
+    [SerializeField] private float volume=1f;
 
     // NUEVA FEATURE: Ajusta la altura del Ghost respecto al Player
     [SerializeField] private float ghostHeightOffset = 1.0f;
@@ -37,6 +40,11 @@ public class Ghost : Enemy
         else
         {
             playerScript = player.GetComponent<Jugador>();
+        }
+
+        if(audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
         }
 
         HideGhost();
@@ -213,6 +221,7 @@ public class Ghost : Enemy
     private void ScarePlayer()
     {
         Debug.Log("Scare Player");
+        audioSource.PlayOneShot(audioClip, volume);
         Teletransport();
     }
 

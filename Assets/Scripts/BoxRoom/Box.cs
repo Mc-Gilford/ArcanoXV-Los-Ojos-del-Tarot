@@ -33,7 +33,7 @@ public class Box : MonoBehaviour
         if(collision.gameObject.CompareTag("Bullet"))
         {
             audioSource.PlayOneShot(audioClip, volume);
-            Destroy(gameObject,0.2f);
+            Destroy(gameObject,0.5f);
         }
     }
 }
