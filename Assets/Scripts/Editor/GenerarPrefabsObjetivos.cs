@@ -7,7 +7,6 @@ using UnityEditor;
 /// </summary>
 public class GenerarPrefabsObjetivos : EditorWindow
 {
-    [MenuItem("Tools/Arcano XV/Generar Prefabs Objetivos")]
     private static void Generar()
     {
         string carpeta = "Assets/Prefabs/Objetivos";
