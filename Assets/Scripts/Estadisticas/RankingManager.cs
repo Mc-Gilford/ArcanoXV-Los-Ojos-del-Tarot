@@ -11,6 +11,8 @@ public class RankingManager : MonoBehaviour
     [SerializeField] private Text textoEstado;
     [SerializeField] private Text textoRanking;
 
+    public GameObject panelFinPartida;
+
     private float tiempoFinal;
 
     void Start()
@@ -20,6 +22,8 @@ public class RankingManager : MonoBehaviour
         textoEstado.text = "";
 
         MostrarRanking();
+
+        panelFinPartida.SetActive(false);
     }
 
     // GameManager manda el tiempo aqui
@@ -77,6 +81,8 @@ public class RankingManager : MonoBehaviour
 
         textoEstado.text = "";
         botonGuardar.interactable = true;
+
+        panelFinPartida.SetActive(true);
 
         MostrarRanking();
     }
