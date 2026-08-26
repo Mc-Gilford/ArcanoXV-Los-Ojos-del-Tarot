@@ -30,6 +30,8 @@ public class ShootBullets : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip shootSound;
 
+    public AudioClip reloadSound;
+
     public string bulletsAmmoText;
 
     public TextMeshProUGUI ammoMessage;
@@ -112,12 +114,14 @@ public class ShootBullets : MonoBehaviour
             bulletsLeft-=bulletsToReload;
             bulletsOnGun += bulletsToReload;
             hasBulletsToShoot = true;
+            audioSource.PlayOneShot(reloadSound, volume);
         }
         else if(bulletsLeft > 0)
         {
             bulletsOnGun += bulletsLeft;
             bulletsLeft = 0;
             hasBulletsToShoot = true;
+            audioSource.PlayOneShot(reloadSound, volume);
         }
         UpdateAmmo();
     }
