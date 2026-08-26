@@ -101,8 +101,8 @@ public class Jugador : Character
         cordura = 600f;
         puedeSaltar = true;
         isInsane = false;
-        maxhealth = 10;
-        health = 10;
+        maxhealth = 50;
+        health = 50;
         inputJugador = GetComponent<PlayerInput>();
         accionMovimiento = inputJugador.actions.FindAction("Movimiento");
         accionSalto = inputJugador.actions.FindAction("Saltar");
