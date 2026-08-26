@@ -60,6 +60,7 @@ public class Jugador : Character
 
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider sanitySlider;
+    [SerializeField] private Slider staminaSlider;
 
     private GameObject rainPrefab;
     private RainScript rain;
@@ -136,6 +137,11 @@ public class Jugador : Character
             sanitySlider.maxValue = 10;
             sanitySlider.value = sanityPoints;
         }
+        if (staminaSlider != null)
+        {
+            staminaSlider.maxValue = 10;
+            staminaSlider.value = stamina;
+        }
     }
 
     public float getCordura()
@@ -162,6 +168,10 @@ public class Jugador : Character
         if (sanitySlider != null)
         {
             sanitySlider.value = sanityPoints;
+        }
+        if (staminaSlider != null)
+        {
+            staminaSlider.value = stamina;
         }
     }
     private void ValidateSanity()
