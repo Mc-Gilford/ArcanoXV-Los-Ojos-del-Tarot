@@ -252,6 +252,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6028342404570034315}
     m_Modifications:
+    - target: {fileID: 564131597460351131, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
+    - target: {fileID: 5948969392352250073, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
     - target: {fileID: 7348253525293596558, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 115.44
@@ -296,66 +304,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallLamp (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      propertyPath: m_TagString
-      value: Lamp
-      objectReference: {fileID: 0}
+    - target: {fileID: 8751889707216031376, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5331495074561135842}
-    - targetCorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8438730615721245911}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
 --- !u!4 &6944064209745275858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7348253525293596558, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 406582071939306588}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7716237600527135080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 406582071939306588}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5331495074561135842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7716237600527135080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98915d1743c4746b31a9a38bbff151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lamp
-  detectionDistance: 2
-  isOn: 0
-  lightRoom: {fileID: 4263420368895483512}
-  light: {fileID: 8827222597266271266}
---- !u!114 &8438730615721245911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7716237600527135080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98915d1743c4746b31a9a38bbff151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lamp
-  detectionDistance: 2
-  isOn: 0
-  lightRoom: {fileID: 4263420368895483512}
-  light: {fileID: 8827222597266271266}
---- !u!1 &8827222597266271266 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9161693916312336510, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
   m_PrefabInstance: {fileID: 406582071939306588}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &491747134138947947
@@ -761,44 +721,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallLamp (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      propertyPath: m_TagString
-      value: Lamp
-      objectReference: {fileID: 0}
+    - target: {fileID: 8635190610728697270, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
+    - target: {fileID: 8751889707216031376, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1552723605041380262}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
---- !u!1 &7215886675353746593 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9161693916312336510, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 1947554639856026847}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8482239261026476523 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 1947554639856026847}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1552723605041380262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8482239261026476523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98915d1743c4746b31a9a38bbff151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lamp
-  detectionDistance: 2
-  isOn: 0
-  lightRoom: {fileID: 4263420368895483512}
-  light: {fileID: 7215886675353746593}
 --- !u!4 &9150512926219221841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7348253525293596558, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
@@ -1373,6 +1308,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6028342404570034315}
     m_Modifications:
+    - target: {fileID: 564131597460351131, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
     - target: {fileID: 7348253525293596558, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 47.121555
@@ -1417,47 +1356,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallLamp
       objectReference: {fileID: 0}
-    - target: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      propertyPath: m_TagString
-      value: Lamp
-      objectReference: {fileID: 0}
+    - target: {fileID: 8751889707216031376, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2863534278145076184}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
 --- !u!4 &2725104887140880726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7348253525293596558, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 4623993757829983960}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3358089760978947052 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 4623993757829983960}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2863534278145076184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3358089760978947052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98915d1743c4746b31a9a38bbff151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lamp
-  detectionDistance: 2
-  isOn: 0
-  lightRoom: {fileID: 4263420368895483512}
-  light: {fileID: 4543949237149439654}
---- !u!1 &4543949237149439654 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9161693916312336510, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
   m_PrefabInstance: {fileID: 4623993757829983960}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5184050356484384064
@@ -1512,47 +1422,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallLamp (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      propertyPath: m_TagString
-      value: Lamp
-      objectReference: {fileID: 0}
+    - target: {fileID: 8751889707216031376, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
+      propertyPath: lightRoom
+      value: 
+      objectReference: {fileID: 4263420368895483512}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2101716812664404664}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
 --- !u!4 &2453142328158706382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7348253525293596558, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 5184050356484384064}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2972550987252727924 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7976417044873782580, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
-  m_PrefabInstance: {fileID: 5184050356484384064}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2101716812664404664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2972550987252727924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a98915d1743c4746b31a9a38bbff151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Lamp
-  detectionDistance: 2
-  isOn: 0
-  lightRoom: {fileID: 4263420368895483512}
-  light: {fileID: 4095340266672250174}
---- !u!1 &4095340266672250174 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9161693916312336510, guid: fe826d33330e62b4c8de5c5572cf4ba5, type: 3}
   m_PrefabInstance: {fileID: 5184050356484384064}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5264066053890660837

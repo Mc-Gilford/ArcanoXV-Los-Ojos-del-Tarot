@@ -20,7 +20,7 @@ public class AmmoPackage : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        amountAmmo = 5;
+        amountAmmo = 20;
         pickupTime = 10f;
         rotationSpeed = 40f;
     }
