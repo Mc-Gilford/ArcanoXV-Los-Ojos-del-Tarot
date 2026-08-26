@@ -97,7 +97,7 @@ public class Jugador : Character
     public void DefinePlayerData()
     {
         dashForce = 20f;
-        salto = 10f;
+        salto = 12f;
         cordura = 600f;
         puedeSaltar = true;
         isInsane = false;
