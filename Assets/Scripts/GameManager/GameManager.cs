@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         // NUEVA FEATURE:
         // Si por alguna razon no encuentra RankingManager,
         // muestra directamente el Game Over.
-        ShowGameOverPanel();
+        //ShowGameOverPanel();
     }
 
     // NUEVA FEATURE:
