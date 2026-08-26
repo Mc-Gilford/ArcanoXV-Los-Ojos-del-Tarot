@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -2407164424958951316, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: af218a0d215c1ff4d9d9bfe390897eb7, type: 2}
+      objectReference: {fileID: 2100000, guid: 877b87f52da437b4f9018f596248cf10, type: 2}
     - target: {fileID: 919132149155446097, guid: da830a6a192b80b40807369cd7f21b7c, type: 3}
       propertyPath: m_Name
       value: SpiderEnemyPrefabRoof
