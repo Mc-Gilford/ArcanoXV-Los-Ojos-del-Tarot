@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using DigitalRuby.RainMaker;
+using UnityEngine.UI;
 
 public class Jugador : Character
 {
@@ -57,6 +58,9 @@ public class Jugador : Character
 
     [SerializeField] private int maxhealth;
 
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Slider sanitySlider;
+
     private GameObject rainPrefab;
     private RainScript rain;
     public bool playerGetsInroom = false;
@@ -97,7 +101,7 @@ public class Jugador : Character
     public void DefinePlayerData()
     {
         dashForce = 20f;
-        salto = 10f;
+        salto = 12f;
         cordura = 600f;
         puedeSaltar = true;
         isInsane = false;
@@ -120,6 +124,18 @@ public class Jugador : Character
         sprintAction.canceled += ctx => StopRunning();
         rb = GetComponent<Rigidbody>();
         //StartCoroutine(GetDrunk());
+
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxhealth;
+            healthSlider.value = health;
+        }
+
+        if (sanitySlider != null)
+        {
+            sanitySlider.maxValue = 10;
+            sanitySlider.value = sanityPoints;
+        }
     }
 
     public float getCordura()
@@ -133,8 +149,21 @@ public class Jugador : Character
         MoverJugador();
         ValidateStamina();
         ValidateSanity();
+        UpdateUI();
     }
 
+    private void UpdateUI()
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = health;
+        }
+
+        if (sanitySlider != null)
+        {
+            sanitySlider.value = sanityPoints;
+        }
+    }
     private void ValidateSanity()
     {
         if(cordura >= 0 && !isInsideSafeRoom)
