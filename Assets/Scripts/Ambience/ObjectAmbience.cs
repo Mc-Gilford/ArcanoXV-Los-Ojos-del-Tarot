@@ -1,96 +1,136 @@
 using UnityEngine;
 
-/// <summary>
-/// Sonido de susto por contacto: al TOCAR el objeto (entrar en su área de ~1.5 m)
-/// reproduce su clip durante `playDuration` segundos (por defecto 3 s) y se apaga.
-///
-/// - Al inicio NO suena nada: solo arranca cuando el jugador toca el objeto.
-/// - Aunque te alejes a mitad, termina los 3 segundos y luego se apaga.
-/// - Para oírlo otra vez: sal del área y vuelve a tocarlo.
-///
-/// Así el objeto queda en silencio hasta que lo tocas → asusta de un momento a otro.
-/// La categoría de audio (`audioCategory`) la usa el editor para buscar el clip en
-/// Assets/Audio/Objetos/<audioCategory>/ y asignarlo automáticamente.
-/// </summary>
 public class ObjectAmbience : MonoBehaviour
 {
     [Header("Sónico")]
-    [Tooltip("Clip que suena al tocar el objeto. Vacío = silencioso (mesa, silla).")]
     public AudioClip clip;
-    [Tooltip("Se usa en el editor para buscar el clip en Assets/Audio/Objetos/<audioCategory>/.")]
     public string audioCategory = "";
-    [Tooltip("Volumen del sonido.")]
     [Range(0f, 1f)] public float baseVolume = 1f;
-    [Tooltip("Segundos que suena desde que tocas el objeto, aunque te alejes.")]
     public float playDuration = 3f;
-    [Tooltip("Radio (m) del área de contacto: al entrar, reproduce el sonido.")]
     public float triggerRadius = 1.5f;
+    public float minAudioDistance = 2f;
+    public float maxAudioDistance = 15f;
 
+    private Collider _solidCollider;
+    private Transform _player;
+    private Transform _audioEmitter;
     private AudioSource _source;
     private float _playTimer;
+    private bool _yaSono;
+    private bool _debugLogged;
 
     private void Awake()
     {
-        // Área de contacto: cuando entra el jugador, dispara el sonido.
-        // Se agrega SIEMPRE un trigger nuevo, sin tocar el collider sólido del objeto.
-        SphereCollider trigger = gameObject.AddComponent<SphereCollider>();
-        trigger.isTrigger = true;
-        trigger.radius = Mathf.Max(0.1f, triggerRadius);
+        _solidCollider = GetComponent<Collider>();
+        if (_solidCollider == null)
+            _solidCollider = GetComponentInChildren<Collider>();
 
-        // AudioSource PROPIO (siempre nuevo): no se comparte con HauntedObject,
-        // que también crea el suyo. Si se compartieran, bajar el volumen a 0 al
-        // terminar el sonido de contacto callaría los sustos aleatorios.
-        _source = gameObject.AddComponent<AudioSource>();
+        GameObject emitterGo = new GameObject("AudioEmitter");
+        emitterGo.transform.SetParent(transform, false);
+        _audioEmitter = emitterGo.transform;
 
+        _source = emitterGo.AddComponent<AudioSource>();
         _source.playOnAwake = false;
-        _source.loop = false;          // un disparo de playDuration, no bucle continuo
-        _source.spatialBlend = 1f;     // audio posicional: sale del propio objeto
+        _source.loop = false;
+        _source.spatialBlend = 1f;
         _source.rolloffMode = AudioRolloffMode.Logarithmic;
-        _source.minDistance = 0.5f;
-        _source.maxDistance = 15f;
+        _source.minDistance = minAudioDistance;
+        _source.maxDistance = maxAudioDistance;
         _source.volume = 0f;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (!IsPlayer(other)) return;
-        PlayOnce();
-    }
+        _player = FindPlayer();
 
-    // OnTriggerExit a propósito NO corta el sonido: si te alejas
-    // a mitad, los 3 segundos terminan y luego se apaga.
+        if (!_debugLogged)
+        {
+            _debugLogged = true;
+            Debug.Log($"[ObjectAmbience] {gameObject.name} | clip={(clip != null ? clip.name : "NULL")} | player={(_player != null ? _player.name : "NULL")} | radius={triggerRadius} | collider={(_solidCollider != null ? _solidCollider.GetType().Name : "NULL")}");
+        }
+    }
 
     private void Update()
     {
         if (clip == null) return;
 
-        // Corta el sonido al cumplirse los playDuration segundos.
         if (_source.isPlaying)
         {
+            if (_player != null)
+                UpdateEmitterPosition();
+
             _playTimer -= Time.deltaTime;
             if (_playTimer <= 0f)
             {
                 _source.Stop();
                 _source.volume = 0f;
             }
+            return;
         }
+
+        if (_player == null)
+        {
+            _player = FindPlayer();
+            if (_player == null) return;
+        }
+
+        float dist = GetDistanceToPlayer();
+
+        if (dist <= triggerRadius && !_yaSono)
+        {
+            _yaSono = true;
+            Debug.Log($"[ObjectAmbience] {gameObject.name} SONANDO (dist={dist:F2})");
+            PlayOnce();
+        }
+        else if (dist > triggerRadius)
+        {
+            _yaSono = false;
+        }
+    }
+
+    private Transform FindPlayer()
+    {
+        if (RoomTracker.Instance != null && RoomTracker.Instance.Player != null)
+            return RoomTracker.Instance.Player;
+
+        GameObject go = GameObject.FindGameObjectWithTag("Player");
+        if (go != null) return go.transform;
+
+        if (Camera.main != null)
+            return Camera.main.transform.root;
+
+        return null;
+    }
+
+    private float GetDistanceToPlayer()
+    {
+        if (_solidCollider != null)
+        {
+            Vector3 closest = _solidCollider.ClosestPoint(_player.position);
+            return Vector3.Distance(closest, _player.position);
+        }
+        return Vector3.Distance(transform.position, _player.position);
+    }
+
+    private void UpdateEmitterPosition()
+    {
+        if (_solidCollider != null)
+            _audioEmitter.position = _solidCollider.ClosestPoint(_player.position);
+        else
+            _audioEmitter.position = transform.position;
     }
 
     private void PlayOnce()
     {
         if (clip == null) return;
+
+        UpdateEmitterPosition();
+
         _source.clip = clip;
         _source.volume = baseVolume;
+        _source.minDistance = minAudioDistance;
+        _source.maxDistance = maxAudioDistance;
         _playTimer = playDuration;
         _source.Play();
-    }
-
-    private bool IsPlayer(Collider other)
-    {
-        if (other.CompareTag("Player")) return true;
-
-        RoomTracker tracker = RoomTracker.Instance;
-        return tracker != null && tracker.playerOverride != null
-            && other.transform.root == tracker.playerOverride.root;
     }
 }
