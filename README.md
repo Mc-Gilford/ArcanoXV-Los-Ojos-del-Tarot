@@ -166,7 +166,7 @@ Assets/
 
 - **Plataforma:** Juego Web (Unity WebGL)
 - **Audiencia:** Fans del terror y shooters, +12 años
-- **Progreso actual:** 20%
+- **Progreso actual:** 100% - demo
 - **Fecha de lanzamiento estimada:** 28/08/2026
 - **Modelo de monetización:** Pago único de $10 USD por copia
 
