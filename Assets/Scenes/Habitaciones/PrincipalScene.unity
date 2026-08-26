@@ -1135,7 +1135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3088871794517726610, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6065280636131685021, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
       propertyPath: panelFinPartida
@@ -1233,7 +1233,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6065280636131685021, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1243,6 +1244,61 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7018385065633958349, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
   m_PrefabInstance: {fileID: 487901935}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &487901937 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5657103216388396812, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+  m_PrefabInstance: {fileID: 487901935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+--- !u!114 &487901938 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 607935425179919328, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+  m_PrefabInstance: {fileID: 487901935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+--- !u!114 &487901939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7327118751414362377, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+  m_PrefabInstance: {fileID: 487901935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!114 &487901940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3251371079846802606, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+  m_PrefabInstance: {fileID: 487901935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.InputField
+--- !u!114 &487901941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 504177341559525494, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+  m_PrefabInstance: {fileID: 487901935}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
 --- !u!1001 &488977272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4111,6 +4167,7 @@ GameObject:
   - component: {fileID: 1369213146}
   - component: {fileID: 1369213145}
   - component: {fileID: 1369213144}
+  - component: {fileID: 1369213148}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4213,6 +4270,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1369213148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369213143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0c079fb80344640bfc8e387014f9fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RankingManager
+  textoTiempoValor: {fileID: 487901941}
+  campoNombre: {fileID: 487901940}
+  botonGuardar: {fileID: 487901939}
+  textoEstado: {fileID: 487901938}
+  textoRanking: {fileID: 487901937}
+  panelFinPartida: {fileID: 126329001}
 --- !u!1 &1546011287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5184600696654720302, guid: e65381a7560309042a43de6dfc544d5b, type: 3}
