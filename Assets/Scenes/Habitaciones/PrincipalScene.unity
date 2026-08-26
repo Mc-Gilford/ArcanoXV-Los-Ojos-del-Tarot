@@ -365,6 +365,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 677067291119652185, guid: c06b392fc6c5f7b4d9f15cdb51b2f334, type: 3}
   m_PrefabInstance: {fileID: 1823523850}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &203922242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1026622060333806960, guid: 456ee4267e1c90e48a8d479c6d26847f, type: 3}
+  m_PrefabInstance: {fileID: 743403495}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &270342317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2551363516903477626, guid: 569d91ce824c283468e375a5b82c38ca, type: 3}
@@ -374,6 +379,30 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7026564163920172631, guid: 456ee4267e1c90e48a8d479c6d26847f, type: 3}
   m_PrefabInstance: {fileID: 743403495}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &310660881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203922242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 3
+  tiempoSobrevivir: 240
+  cantidadEnemigos: 15
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
+--- !u!1 &321612004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7106867096730822038, guid: 867072c6d7321c2459bc4e07309003f8, type: 3}
+  m_PrefabInstance: {fileID: 1114478873}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &348596775 stripped
 GameObject:
@@ -393,6 +422,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomTimer
   tiempoNecesario: 240
+--- !u!114 &348596778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348596775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 1
+  tiempoSobrevivir: 480
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1 &350116561
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +727,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8914831136968346656, guid: 96134f10889fdac47bfd952b06981e51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 794130647}
   m_SourcePrefab: {fileID: 100100000, guid: 96134f10889fdac47bfd952b06981e51, type: 3}
 --- !u!1 &520987126
 GameObject:
@@ -869,7 +920,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5622103162110882479, guid: bdf547ef830756445b6e289284eb0fe6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1991465605}
   m_SourcePrefab: {fileID: 100100000, guid: bdf547ef830756445b6e289284eb0fe6, type: 3}
 --- !u!1 &556902784
 GameObject:
@@ -994,6 +1048,7 @@ GameObject:
   - component: {fileID: 562724881}
   - component: {fileID: 562724884}
   - component: {fileID: 562724885}
+  - component: {fileID: 562724886}
   m_Layer: 0
   m_Name: Home
   m_TagString: Home
@@ -1102,6 +1157,103 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 278.91815, y: 174.12065, z: 248.17973}
   m_Center: {x: -10.551453, y: 43.93055, z: 44.211433}
+--- !u!82 &562724886
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562724880}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 139a18e714b43de47ab96ed5f4af76fa, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &577181057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1161,6 +1313,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2437787197199238851, guid: 569d91ce824c283468e375a5b82c38ca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 348596776}
+    - targetCorrespondingSourceObject: {fileID: 2437787197199238851, guid: 569d91ce824c283468e375a5b82c38ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 348596778}
   m_SourcePrefab: {fileID: 100100000, guid: 569d91ce824c283468e375a5b82c38ca, type: 3}
 --- !u!1 &577181058 stripped
 GameObject:
@@ -1172,6 +1327,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1973328878886915062, guid: 867072c6d7321c2459bc4e07309003f8, type: 3}
   m_PrefabInstance: {fileID: 1114478873}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &586869315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321612004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 3
+  tiempoSobrevivir: 0
+  cantidadEnemigos: 6
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1 &607328973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,8 +1904,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1026622060333806960, guid: 456ee4267e1c90e48a8d479c6d26847f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 310660881}
   m_SourcePrefab: {fileID: 100100000, guid: 456ee4267e1c90e48a8d479c6d26847f, type: 3}
+--- !u!1 &744852761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8914831136968346656, guid: 96134f10889fdac47bfd952b06981e51, type: 3}
+  m_PrefabInstance: {fileID: 488977272}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &757156520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1787,7 +1969,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6264863653109718113, guid: 0f441de9592b25440b709299853b8138, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2091091397}
   m_SourcePrefab: {fileID: 100100000, guid: 0f441de9592b25440b709299853b8138, type: 3}
 --- !u!1001 &784660603
 PrefabInstance:
@@ -1844,13 +2029,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5184600696654720302, guid: e65381a7560309042a43de6dfc544d5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1546011290}
   m_SourcePrefab: {fileID: 100100000, guid: e65381a7560309042a43de6dfc544d5b, type: 3}
 --- !u!4 &794130644 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7761594019654892135, guid: 96134f10889fdac47bfd952b06981e51, type: 3}
   m_PrefabInstance: {fileID: 488977272}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &794130647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744852761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 6
+  tiempoSobrevivir: 240
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1 &831636660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2252,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1598110520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &862580691 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5874259438134176335, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
+  m_PrefabInstance: {fileID: 1256309118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &862580695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862580691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 2
+  tiempoSobrevivir: 120
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1001 &916369320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2100,7 +2331,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8003535734669290513, guid: 6e733d9210b13b84da6123a25d371aac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1130379728}
   m_SourcePrefab: {fileID: 100100000, guid: 6e733d9210b13b84da6123a25d371aac, type: 3}
 --- !u!1 &968117330 stripped
 GameObject:
@@ -2391,6 +2625,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4221304659191635129, guid: 6e733d9210b13b84da6123a25d371aac, type: 3}
   m_PrefabInstance: {fileID: 916369320}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1109719953 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5556241005176882293, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
+  m_PrefabInstance: {fileID: 1698623478}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1114478873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2446,8 +2685,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7106867096730822038, guid: 867072c6d7321c2459bc4e07309003f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 586869315}
   m_SourcePrefab: {fileID: 100100000, guid: 867072c6d7321c2459bc4e07309003f8, type: 3}
+--- !u!1 &1130379726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8003535734669290513, guid: 6e733d9210b13b84da6123a25d371aac, type: 3}
+  m_PrefabInstance: {fileID: 916369320}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1130379728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130379726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 1
+  tiempoSobrevivir: 240
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1 &1186951680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2799,13 +3065,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5874259438134176335, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 862580695}
   m_SourcePrefab: {fileID: 100100000, guid: 56d97ec6045758b4085fa76acd7ba275, type: 3}
 --- !u!4 &1283168648 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6216818030273614563, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
   m_PrefabInstance: {fileID: 1698623478}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1283168654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109719953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 2
+  tiempoSobrevivir: 60
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1 &1291789768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,6 +3454,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1546011287 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5184600696654720302, guid: e65381a7560309042a43de6dfc544d5b, type: 3}
+  m_PrefabInstance: {fileID: 784660603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1546011290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546011287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 1
+  tiempoSobrevivir: 240
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1001 &1550573990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3511,7 +3823,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5556241005176882293, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1283168654}
   m_SourcePrefab: {fileID: 100100000, guid: 0a86b69d1c1ba0c469e4d1eac32a6e44, type: 3}
 --- !u!1 &1708516235
 GameObject:
@@ -3969,7 +4284,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4263420368895483512, guid: 506cc37884b8b084eb47ad85b333058b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1914737013}
   m_SourcePrefab: {fileID: 100100000, guid: 506cc37884b8b084eb47ad85b333058b, type: 3}
 --- !u!1 &1876007859
 GameObject:
@@ -4480,11 +4798,59 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1914737009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4263420368895483512, guid: 506cc37884b8b084eb47ad85b333058b, type: 3}
+  m_PrefabInstance: {fileID: 1853621081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1914737013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914737009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 5
+  tiempoSobrevivir: 240
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!4 &1970506841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2806517185725646856, guid: bdf547ef830756445b6e289284eb0fe6, type: 3}
   m_PrefabInstance: {fileID: 533460588}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1991465601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5622103162110882479, guid: bdf547ef830756445b6e289284eb0fe6, type: 3}
+  m_PrefabInstance: {fileID: 533460588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1991465605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991465601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 3
+  tiempoSobrevivir: 240
+  cantidadEnemigos: 12
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1 &2021543052
 GameObject:
   m_ObjectHideFlags: 0
@@ -4759,6 +5125,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086842826}
   m_CullTransparentMesh: 1
+--- !u!1 &2091091393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6264863653109718113, guid: 0f441de9592b25440b709299853b8138, type: 3}
+  m_PrefabInstance: {fileID: 757156520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2091091397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091091393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad5f50ed8b630d43b7955ebf410eb29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjetivoHabitacion
+  tipoObjetivo: 4
+  tiempoSobrevivir: 240
+  cantidadEnemigos: 30
+  clueUI: {fileID: 0}
+  fuenteObjetivo: {fileID: 0}
+  duracionAlerta: 3
+  delayInicial: 1
 --- !u!1 &2125383795
 GameObject:
   m_ObjectHideFlags: 0

@@ -96,7 +96,7 @@ public class Jugador : Character
 
     public void DefinePlayerData()
     {
-        dashForce = 8f;
+        dashForce = 20f;
         salto = 10f;
         cordura = 600f;
         puedeSaltar = true;
@@ -525,9 +525,14 @@ public class Jugador : Character
     public void HealHP()
     {
         Debug.Log("Salud curada");
-        if(health < maxhealth)
+        int hpToRestore = health + 10;
+        if(hpToRestore >= maxhealth)
         {
-            health++;
+            health=maxhealth;
+        }
+        else
+        {
+            health=hpToRestore;
         }
     }
 
