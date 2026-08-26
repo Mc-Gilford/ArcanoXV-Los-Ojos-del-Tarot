@@ -27,7 +27,7 @@ public class Lamp : MonoBehaviour
         detectionDistance = 6f;
         light.SetActive(false);
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-	    lampManager = lightRoom.GetComponent<LightRoom>();
+	    lampManager = GameObject.Find("H3 Exploracion").GetComponent<LightRoom>();
 
         if (playerObject != null)
         {
