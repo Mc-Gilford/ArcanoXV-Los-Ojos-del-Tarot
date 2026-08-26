@@ -1129,6 +1129,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1369213147}
     m_Modifications:
+    - target: {fileID: 1925139285947358040, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925139285947358040, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925139285947358040, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1369213148}
+    - target: {fileID: 1925139285947358040, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925139285947358040, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925139285947358040, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RankingManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925139285947358040, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2650761331518707913, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 18.811035
+      objectReference: {fileID: 0}
     - target: {fileID: 3088871794517726610, guid: 38e6966a44412c844a3517f3540a4eab, type: 3}
       propertyPath: m_Name
       value: PanelFinPartida
@@ -2290,7 +2322,7 @@ PrefabInstance:
       objectReference: {fileID: 1876007860}
     - target: {fileID: 7712242595573733975, guid: 316315831f227374da7d176dff51cf2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMainMenu
+      value: CloseTutorial
       objectReference: {fileID: 0}
     - target: {fileID: 7712242595573733975, guid: 316315831f227374da7d176dff51cf2c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

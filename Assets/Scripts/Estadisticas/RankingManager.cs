@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class RankingManager : MonoBehaviour
 {
@@ -150,6 +151,12 @@ public class RankingManager : MonoBehaviour
         records.Sort((a, b) => a.tiempo.CompareTo(b.tiempo));
 
         return records;
+    }
+
+    public void ReturnToMenu()
+    {
+        panelFinPartida.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 }
 
